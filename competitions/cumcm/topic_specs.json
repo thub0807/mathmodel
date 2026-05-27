@@ -1,7 +1,7 @@
-{
-  "_doc": "CUMCM 国赛题号体系 + 题型 → dim 权重映射 hint。stage 1 选题时加载, score_artifact.py 用 task_type 字段查 config/dim_weights.json。",
+﻿{
+  "_doc": "Legacy competition-structure reference only. Keep for optional Stage 2, Stage 8, and Stage 9 context. It is not an active startup selector, does not control subproblem decomposition, and does not require dim_weights in v1.2-alpha.",
   "competition": "cumcm",
-  "official_name": "全国大学生数学建模竞赛",
+  "official_name": "鍏ㄥ浗澶у鐢熸暟瀛﹀缓妯＄珵璧?,
   "duration_h": 72,
   "team_size": 3,
   "language": "zh-CN",
@@ -10,52 +10,53 @@
   "subproblem_count_iqr": [3, 5],
   "topics": {
     "A": {
-      "label": "A 题",
-      "category": "本科组-理工",
+      "label": "A 棰?,
+      "category": "鏈缁?鐞嗗伐",
       "primary_type": "optimization",
       "task_type_key": "A_optimization",
-      "typical_problems": ["物理建模", "工程优化", "连续系统"],
+      "typical_problems": ["鐗╃悊寤烘ā", "宸ョ▼浼樺寲", "杩炵画绯荤粺"],
       "expected_subproblem_count": [3, 5]
     },
     "B": {
-      "label": "B 题",
-      "category": "本科组-理工",
+      "label": "B 棰?,
+      "category": "鏈缁?鐞嗗伐",
       "primary_type": "evaluation",
       "task_type_key": "B_evaluation",
-      "typical_problems": ["评价指标体系", "AHP/熵权/TOPSIS", "组合赋权"],
+      "typical_problems": ["璇勪环鎸囨爣浣撶郴", "AHP/鐔垫潈/TOPSIS", "缁勫悎璧嬫潈"],
       "expected_subproblem_count": [3, 5]
     },
     "C": {
-      "label": "C 题",
-      "category": "本科组-数据/统计",
+      "label": "C 棰?,
+      "category": "鏈缁?鏁版嵁/缁熻",
       "primary_type": "data_analysis",
       "task_type_key": "C_data",
-      "typical_problems": ["数据预处理", "回归/时序/聚类", "异常检测"],
+      "typical_problems": ["鏁版嵁棰勫鐞?, "鍥炲綊/鏃跺簭/鑱氱被", "寮傚父妫€娴?],
       "expected_subproblem_count": [4, 6]
     },
     "D": {
-      "label": "D 题",
-      "category": "专科组-工程",
+      "label": "D 棰?,
+      "category": "涓撶缁?宸ョ▼",
       "primary_type": "industrial",
       "task_type_key": "D_industrial",
-      "typical_problems": ["工业流程", "调度", "控制系统"],
+      "typical_problems": ["宸ヤ笟娴佺▼", "璋冨害", "鎺у埗绯荤粺"],
       "expected_subproblem_count": [3, 5]
     },
     "E": {
-      "label": "E 题",
-      "category": "专科组-创新",
+      "label": "E 棰?,
+      "category": "涓撶缁?鍒涙柊",
       "primary_type": "creative",
       "task_type_key": "E_creative",
-      "typical_problems": ["开放性建模", "社会问题", "跨学科"],
+      "typical_problems": ["寮€鏀炬€у缓妯?, "绀句細闂", "璺ㄥ绉?],
       "expected_subproblem_count": [3, 5]
     },
     "F": {
-      "label": "F 题",
-      "category": "专科组-理工 (历史保留)",
+      "label": "F 棰?,
+      "category": "涓撶缁?鐞嗗伐 (鍘嗗彶淇濈暀)",
       "primary_type": "evaluation",
       "task_type_key": "B_evaluation",
-      "typical_problems": ["评价类", "近年合并入 B"],
+      "typical_problems": ["璇勪环绫?, "杩戝勾鍚堝苟鍏?B"],
       "expected_subproblem_count": [3, 5]
     }
   }
 }
+

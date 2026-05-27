@@ -1,5 +1,5 @@
-{
-  "_doc": "国赛 CUMCM 一等奖论文实测分位 (p25/p50/p75)。L1 Critic 评硬阈值维度时由 score_artifact.py 注入到 evidence 字段。源文档: empirical_notes.md。",
+﻿{
+  "_doc": "CUMCM empirical percentiles for optional Stage 2, Stage 8, and Stage 9 judging context. Use as background evidence only; do not treat this file as an active workflow controller.",
   "competition": "cumcm",
   "source": {
     "papers_total": 91,
@@ -26,7 +26,7 @@
     "abstract_quantitative_ratio": 0.627,
     "abstract_5seg_full_hit_ratio": 0.271,
     "abstract_5seg_partial_hit_ratio": 0.729,
-    "_note": "一等奖应 ≥80% 含定量结果 (anti_pattern A1 阈值)。partial 命中 ≥3 anchor"
+    "_note": "涓€绛夊搴?鈮?0% 鍚畾閲忕粨鏋?(anti_pattern A1 闃堝€?銆俻artial 鍛戒腑 鈮? anchor"
   },
   "by_topic": {
     "A": {"doc_chars_zh": {"p25": 14729, "p50": 16758, "p75": 20604}, "main_section_count": {"p25": 3, "p50": 5, "p75": 7}, "figure_count": {"p25": 5, "p50": 8, "p75": 9},  "table_count": {"p25": 2, "p50": 4, "p75": 4},  "formula_count": {"p25": 7,  "p50": 11, "p75": 67}},
@@ -37,3 +37,4 @@
     "F": {"doc_chars_zh": {"p25": 15081, "p50": 17490, "p75": 22265}, "main_section_count": {"p25": 3, "p50": 5, "p75": 9}, "figure_count": {"p25": 6, "p50": 12,"p75": 22}, "table_count": {"p25": 4, "p50": 5, "p75": 6},  "formula_count": {"p25": 20, "p50": 36, "p75": 46}}
   }
 }
+

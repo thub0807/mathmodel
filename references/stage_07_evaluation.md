@@ -13,9 +13,9 @@ This file now supports `verification_protocol.md`, `final_integration_protocol.m
 
 Use this guidance in:
 - `q_i_summary.md`
-- `final_results.md`
-- `paper.md`
-- `quality_report.md`
+- `workspace/output/final/final_results.md`
+- `workspace/output/final/paper.md`
+- `workspace/output/final/quality_report.md`
 
 ## Good Evaluation Pattern
 

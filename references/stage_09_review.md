@@ -13,9 +13,9 @@ This file now supports `final_review_protocol.md`.
 ## Reuse in v1.2
 
 Use this material to strengthen:
-- `review_report.md`
-- `anonymity_report.md`
-- `quality_report.md`
+- `workspace/output/final/review_report.md`
+- `workspace/output/final/anonymity_report.md`
+- `workspace/output/final/quality_report.md`
 
 ## Helpful Final-Review Lenses
 

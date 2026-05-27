@@ -1,7 +1,7 @@
-{
-  "_doc": "MCM/ICM 题号体系 + 题型 → task_type 映射 hint。SEED v0.1。",
+﻿{
+  "_doc": "Legacy competition-structure reference only. Keep for optional Stage 2, Stage 8, and Stage 9 context. It is not an active startup selector in v1.2-alpha.",
   "_seed_version": "0.1",
-  "_seed_source": "COMAP 历年题目分类 + 公开评审标准",
+  "_seed_source": "COMAP 鍘嗗勾棰樼洰鍒嗙被 + 鍏紑璇勫鏍囧噯",
   "competition": "mcm",
   "official_name": "Mathematical / Interdisciplinary Contest in Modeling",
   "duration_h": 96,
@@ -16,7 +16,7 @@
       "category": "Continuous",
       "primary_type": "continuous_modeling",
       "task_type_key": "A_continuous",
-      "typical_problems": ["PDE / ODE 系统", "物理建模", "流体 / 热传导"],
+      "typical_problems": ["PDE / ODE 绯荤粺", "鐗╃悊寤烘ā", "娴佷綋 / 鐑紶瀵?],
       "expected_subproblem_count": [3, 5]
     },
     "B": {
@@ -24,7 +24,7 @@
       "category": "Discrete",
       "primary_type": "discrete_optimization",
       "task_type_key": "B_discrete",
-      "typical_problems": ["组合优化", "图论", "调度"],
+      "typical_problems": ["缁勫悎浼樺寲", "鍥捐", "璋冨害"],
       "expected_subproblem_count": [3, 5]
     },
     "C": {
@@ -32,7 +32,7 @@
       "category": "Data Insights",
       "primary_type": "data_analysis",
       "task_type_key": "C_data",
-      "typical_problems": ["大数据分析", "预测", "机器学习"],
+      "typical_problems": ["澶ф暟鎹垎鏋?, "棰勬祴", "鏈哄櫒瀛︿範"],
       "expected_subproblem_count": [4, 6]
     },
     "D": {
@@ -40,7 +40,7 @@
       "category": "Operations Research / Network Science",
       "primary_type": "network_or_systems",
       "task_type_key": "D_network",
-      "typical_problems": ["网络流", "供应链", "运筹"],
+      "typical_problems": ["缃戠粶娴?, "渚涘簲閾?, "杩愮"],
       "expected_subproblem_count": [4, 6]
     },
     "E": {
@@ -48,7 +48,7 @@
       "category": "Sustainability / Environmental",
       "primary_type": "interdisciplinary",
       "task_type_key": "E_interdisciplinary",
-      "typical_problems": ["环境建模", "可持续性", "跨学科"],
+      "typical_problems": ["鐜寤烘ā", "鍙寔缁€?, "璺ㄥ绉?],
       "expected_subproblem_count": [4, 6]
     },
     "F": {
@@ -56,9 +56,10 @@
       "category": "Policy",
       "primary_type": "policy_modeling",
       "task_type_key": "F_policy",
-      "typical_problems": ["公共政策", "社会问题", "成本效益"],
+      "typical_problems": ["鍏叡鏀跨瓥", "绀句細闂", "鎴愭湰鏁堢泭"],
       "expected_subproblem_count": [4, 6],
-      "_note": "F 题通常要求 Memo / Letter to Policymakers, 1-2 页"
+      "_note": "F 棰橀€氬父瑕佹眰 Memo / Letter to Policymakers, 1-2 椤?
     }
   }
 }
+

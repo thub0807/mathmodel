@@ -1,32 +1,32 @@
-# MCM/ICM 实测分布 (SEED v0.1)
+﻿# MCM/ICM 瀹炴祴鍒嗗竷 (SEED v0.1)
 
-> **此目录数据为种子版本 (seed_v0.1), 未做真 PDF 烘焙。**
-> 阈值取自 COMAP 公开 scoring rubric + 已发表 MCM 备赛教材共识。
-> 后续若提交 30+ 篇 Outstanding Winner PDF, 可用 `scripts/ingest_papers.py` 重新烘焙覆盖。
+> **姝ょ洰褰曟暟鎹负绉嶅瓙鐗堟湰 (seed_v0.1), 鏈仛鐪?PDF 鐑樼剻銆?*
+> 闃堝€煎彇鑷?COMAP 鍏紑 scoring rubric + 宸插彂琛?MCM 澶囪禌鏁欐潗鍏辫瘑銆?
+> 鍚庣画鑻ユ彁浜?30+ 绡?Outstanding Winner PDF, 鍙敤 `scripts/ingest_papers.py` 閲嶆柊鐑樼剻瑕嗙洊銆?
 
-## 数据缺口提示
+## 鏁版嵁缂哄彛鎻愮ず
 
-`empirical.json` 中所有 `min` / `max` / `mean` 字段填的是估算值, 不是真实样本统计。score_artifact.py 在评分时, evidence 字段会自动标 `[seed: 阈值无实测分位]` 避免误导。
+`empirical.json` contains estimated `min` / `max` / `mean` values rather than measured sample statistics. In `v1.2-alpha`, treat them as optional background context for per-question review and final quality checks, and mark them clearly as seed-level evidence when cited.
 
-## 阈值出处
+## 闃堝€煎嚭澶?
 
-| 阈值 | 来源 | 备注 |
+| 闃堝€?| 鏉ユ簮 | 澶囨敞 |
 |------|------|------|
-| Summary 250-350 词 | COMAP scoring sheet "1-page summary" | 历年规则一致 |
-| 论文页数 25-35 页 | Outstanding 评审讲解 | 超 50 页扣分 |
-| Figure 8-22 | 经验估算 | Outstanding 普遍图多 |
-| Reference 12-25 | 经验估算 | IEEE 引用 |
-| Letter 350-700 词 | F 题历年 Memo 长度 | 1-2 页正常 |
+| Summary 250-350 璇?| COMAP scoring sheet "1-page summary" | 鍘嗗勾瑙勫垯涓€鑷?|
+| 璁烘枃椤垫暟 25-35 椤?| Outstanding 璇勫璁茶В | 瓒?50 椤垫墸鍒?|
+| Figure 8-22 | 缁忛獙浼扮畻 | Outstanding 鏅亶鍥惧 |
+| Reference 12-25 | 缁忛獙浼扮畻 | IEEE 寮曠敤 |
+| Letter 350-700 璇?| F 棰樺巻骞?Memo 闀垮害 | 1-2 椤垫甯?|
 
-## 与 cumcm/ 的差异
+## 涓?cumcm/ 鐨勫樊寮?
 
-国赛 91 篇 PDF 烘焙了 11 个维度的 p25/p50/p75。本目录只手填 8 个维度的估值。MCM 缺数据：
-- Outstanding Winner PDF 不公开下载
-- COMAP 只发布每年 outstanding 论文的 ~30 字摘要描述, 无全文
-- GitHub 上零散 MCM 论文版权状态不一
+鍥借禌 91 绡?PDF 鐑樼剻浜?11 涓淮搴︾殑 p25/p50/p75銆傛湰鐩綍鍙墜濉?8 涓淮搴︾殑浼板€笺€侻CM 缂烘暟鎹細
+- Outstanding Winner PDF 涓嶅叕寮€涓嬭浇
+- COMAP 鍙彂甯冩瘡骞?outstanding 璁烘枃鐨?~30 瀛楁憳瑕佹弿杩? 鏃犲叏鏂?
+- GitHub 涓婇浂鏁?MCM 璁烘枃鐗堟潈鐘舵€佷笉涓€
 
-## 推荐使用方式
+## 鎺ㄨ崘浣跨敤鏂瑰紡
 
-1. **优先使用模式定性**: `winning_patterns.md` 列的 Outstanding 共性是更可靠的 anchor
-2. **数值阈值仅作参考**: L1 critic 见到 `seed` 标记后弱化数值评判, 强化模式匹配
-3. **若用户能提供历年 Outstanding 论文**: 跑 `scripts/ingest_papers.py --competition mcm`, 覆盖本 JSON
+1. **浼樺厛浣跨敤妯″紡瀹氭€?*: `winning_patterns.md` 鍒楃殑 Outstanding 鍏辨€ф槸鏇村彲闈犵殑 anchor
+2. **鏁板€奸槇鍊间粎浣滃弬鑰?*: L1 critic 瑙佸埌 `seed` 鏍囪鍚庡急鍖栨暟鍊艰瘎鍒? 寮哄寲妯″紡鍖归厤
+3. **鑻ョ敤鎴疯兘鎻愪緵鍘嗗勾 Outstanding 璁烘枃**: 璺?`scripts/ingest_papers.py --competition mcm`, 瑕嗙洊鏈?JSON

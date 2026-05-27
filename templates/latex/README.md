@@ -20,6 +20,6 @@ The templates are preserved, but not all interfaces are fully adapted yet to the
 
 ## TODO
 
-- align template inputs with `workspace/output/paper.md`, `paper.tex`, and `source/`
+- align template inputs with `workspace/output/final/paper.md`, `paper.tex`, and `source/`
 - document the minimum assembly contract for each template
 - keep template reuse compatible with `locked_numbers.md` and final-review requirements

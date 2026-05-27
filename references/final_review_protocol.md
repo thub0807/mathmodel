@@ -4,9 +4,9 @@ Stage 9 performs the final audit after paper generation.
 
 ## Required Outputs
 
-- `workspace/output/review_report.md`
-- `workspace/output/anonymity_report.md`
-- `workspace/output/quality_report.md`
+- `workspace/output/final/review_report.md`
+- `workspace/output/final/anonymity_report.md`
+- `workspace/output/final/quality_report.md`
 
 ## Review Coverage
 

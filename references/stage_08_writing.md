@@ -13,9 +13,9 @@ This file now supports `paper_generation_protocol.md`.
 ## Reuse in v1.2
 
 Use this material when building:
-- `workspace/output/paper.md`
-- `workspace/output/paper.tex`
-- `workspace/output/source/`
+- `workspace/output/final/paper.md`
+- `workspace/output/final/paper.tex`
+- `workspace/output/final/source/`
 
 ## Helpful Writing Sequence
 

@@ -4,17 +4,17 @@ Stage 8 assembles the final paper from audited and locked project outputs.
 
 ## Required Outputs
 
-- `workspace/output/paper.md`
-- `workspace/output/paper.tex`
-- `workspace/output/paper.pdf`
-- `workspace/output/source/`
+- `workspace/output/final/paper.md`
+- `workspace/output/final/paper.tex`
+- `workspace/output/final/paper.pdf`
+- `workspace/output/final/source/`
 
 ## Required Inputs
 
 Build the paper from:
 - per-question summaries
-- `workspace/output/final_results.md`
-- `workspace/output/locked_numbers.md`
+- `workspace/output/final/final_results.md`
+- `workspace/output/final/locked_numbers.md`
 
 Do not introduce new quantitative results during paper drafting.
 
@@ -34,4 +34,4 @@ Reuse the valuable existing assets progressively:
 
 ## Source Directory
 
-`workspace/output/source/` should hold the assembled markdown, LaTeX fragments, bibliographic helpers, or other paper-source materials needed to regenerate the final document.
+`workspace/output/final/source/` should hold the assembled markdown, LaTeX fragments, bibliographic helpers, or other paper-source materials needed to regenerate the final document.

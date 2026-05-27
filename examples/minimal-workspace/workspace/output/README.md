@@ -22,3 +22,7 @@ This directory holds all generated modeling artifacts.
 - `workspace/output/question_index.md`
 - `workspace/output/q1/`
 - `workspace/output/q2/`
+- `workspace/output/final/final_results.md`
+- `workspace/output/final/locked_numbers.md`
+- `workspace/output/final/paper.md`
+- `workspace/output/final/review_report.md`

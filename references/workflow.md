@@ -86,26 +86,26 @@ For each question workspace, write:
 ## Stage 7 Final Integration and Evidence Lock
 
 Write:
-- `workspace/output/final_results.md`
-- `workspace/output/final_figures_index.md`
-- `workspace/output/final_tables_index.md`
-- `workspace/output/traceability.md`
-- `workspace/output/locked_numbers.md`
+- `workspace/output/final/final_results.md`
+- `workspace/output/final/final_figures_index.md`
+- `workspace/output/final/final_tables_index.md`
+- `workspace/output/final/traceability.md`
+- `workspace/output/final/locked_numbers.md`
 
 ## Stage 8 Paper Generation
 
 Write:
-- `workspace/output/paper.md`
-- `workspace/output/paper.tex`
-- `workspace/output/paper.pdf`
-- `workspace/output/source/`
+- `workspace/output/final/paper.md`
+- `workspace/output/final/paper.tex`
+- `workspace/output/final/paper.pdf`
+- `workspace/output/final/source/`
 
 ## Stage 9 Final Review
 
 Write:
-- `workspace/output/review_report.md`
-- `workspace/output/anonymity_report.md`
-- `workspace/output/quality_report.md`
+- `workspace/output/final/review_report.md`
+- `workspace/output/final/anonymity_report.md`
+- `workspace/output/final/quality_report.md`
 
 ## Loading Notes
 

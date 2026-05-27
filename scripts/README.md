@@ -4,6 +4,12 @@ Scripts in this directory are optional utilities only. They are not the active e
 
 ## Current Classification
 
+### Active Scripts
+
+- none required in `v1.2-alpha`
+- the active workflow is agent-led and Markdown-first
+- any script use is optional
+
 ### Keep As Optional Utilities
 
 - `extract_diff.py`
@@ -18,17 +24,17 @@ Scripts in this directory are optional utilities only. They are not the active e
   - Use: offline corpus processing and empirical reference generation.
   - Role: development-time helper, not modeling workflow.
 
-### Keep But Rewrite Later
+### Legacy Scripts Retained For Migration Reference
 
-- `render_paper.py`
+- `legacy/render_paper.py`
   - Intended role: optional paper-compilation helper for `paper.tex` and `paper.pdf`.
   - Current issue: still carries legacy competition and `decision_log` assumptions.
-  - `v1.2-alpha` status: not required by the active workflow until adapted to `workspace/output/`.
+  - `v1.2-alpha` status: retained for migration reference only.
 
-- `score_artifact.py`
+- `legacy/score_artifact.py`
   - Intended role: optional quality helper.
   - Current issue: still centered on legacy `decision_log`, competition overlays, and stage-scoring logic.
-  - `v1.2-alpha` status: not part of the active workflow. Later work may adapt it into `quality_gate.py` or a lighter review helper.
+  - `v1.2-alpha` status: retained for migration reference only. Later work may adapt it into `quality_gate.py` or a lighter review helper.
 
 ## Not Allowed As Active Workflow Dependencies
 

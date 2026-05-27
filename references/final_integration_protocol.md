@@ -4,11 +4,11 @@ Stage 7 consolidates per-question outputs into project-level evidence before pap
 
 ## Required Outputs
 
-- `workspace/output/final_results.md`
-- `workspace/output/final_figures_index.md`
-- `workspace/output/final_tables_index.md`
-- `workspace/output/traceability.md`
-- `workspace/output/locked_numbers.md`
+- `workspace/output/final/final_results.md`
+- `workspace/output/final/final_figures_index.md`
+- `workspace/output/final/final_tables_index.md`
+- `workspace/output/final/traceability.md`
+- `workspace/output/final/locked_numbers.md`
 
 ## File Roles
 
