@@ -6,7 +6,7 @@
     "papers_extracted": 59,
     "year_range": "2023-2025",
     "baked_at": "2026-05-05",
-    "baker": "scripts/ingest_papers.py",
+    "baker": "scripts/dev/ingest_papers.py",
     "status": "stable"
   },
   "dims": {

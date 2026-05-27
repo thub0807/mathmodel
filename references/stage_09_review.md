@@ -28,6 +28,6 @@ Use this material to strengthen:
 ## What Was Removed
 
 - final submission or packaging stage
-- `submission_ready` workflow state
+- old final packaging state
 - old panel orchestration contract
-- `decision_log` as final-review control plane
+- old JSON-state final-review control plane

@@ -2,7 +2,7 @@
 
 > **缁撴瀯鍖栨暟鎹鍚岀洰褰?`empirical.json`** 鈥?鏈枃浠舵槸浜鸿鍓湰 + 鍘嗗彶閲囨牱澶囦唤, 杩愯鏃朵笉鐩存帴璇汇€?
 > 鏁版嵁婧? 鎬绘牱鏈?91 绡囧浗璧涜鏂?(2023-2025), 鍏朵腑 59 绡囧彲鑷姩 PDF 鎻愬彇銆?
-> 鐑樼剻鏃堕棿: 2026-05-05T20:30:21, 鐢?`scripts/ingest_papers.py` 鐢熸垚 (宸插瓨妗?銆?
+> 鐑樼剻鏃堕棿: 2026-05-05T20:30:21, 鐢?`scripts/dev/ingest_papers.py` 鐢熸垚 (宸插瓨妗?銆?
 > These empirical ranges can support `q_i_summary.md`, `workspace/output/final/final_results.md`, `workspace/output/final/locked_numbers.md`, and `workspace/output/final/quality_report.md` as background judging context.
 
 ---

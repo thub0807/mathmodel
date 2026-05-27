@@ -28,7 +28,7 @@ The active workflow must be recoverable from repository files and workspace arti
 
 ## What Was Removed
 
-- Friendly Mode rules
-- `AskUserQuestion` binding
+- old simplified interaction mode
+- old harness-specific question UI binding
 - plugin or shim discovery rules
-- `decision_log` cross-harness state model
+- old JSON state model across harnesses

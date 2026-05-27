@@ -34,5 +34,5 @@ Use this material to improve:
 
 - recursive stage contract semantics
 - per-Qi verdict machinery as active workflow control
-- `decision_log` writes, weights, and review queues
+- old JSON-state writes, weights, and review queues
 - script-driven gating as a required step

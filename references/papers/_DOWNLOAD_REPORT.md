@@ -1,25 +1,26 @@
-# CUMCM Papers Download Report
+﻿# CUMCM Papers Download Report
 
-**总计**: 91 篇真国赛获奖论文 PDF (~432MB)
+**鎬昏**: 91 绡囩湡鍥借禌鑾峰璁烘枃 PDF (~432MB)
 
-| 来源 | 数量 | 备注 |
+| 鏉ユ簮 | 鏁伴噺 | 澶囨敞 |
 |------|------|------|
-| 教育部"中国大学生在线"展廊 (2023) | 9 | Playwright 渲染详情页 + 图片重建 PDF (image-only) |
-| 教育部展廊 (2024) | 16 | 同上 |
-| 教育部展廊 (2025) | 7 | A 题验证为 2025 真题 (无人机烟幕) |
-| GitHub `zhanwen/MathModel/国赛论文/2023年优秀论文/` | 58 | 直接公开 PDF, A-F 题号齐全 |
-| GitHub `Jackyleo-Zhao/cumcm-2025` (国二) | 1 | 2025 C 题 NIPT |
+| 鏁欒偛閮?涓浗澶у鐢熷湪绾?灞曞粖 (2023) | 9 | Playwright 娓叉煋璇︽儏椤?+ 鍥剧墖閲嶅缓 PDF (image-only) |
+| 鏁欒偛閮ㄥ睍寤?(2024) | 16 | 鍚屼笂 |
+| 鏁欒偛閮ㄥ睍寤?(2025) | 7 | A 棰橀獙璇佷负 2025 鐪熼 (鏃犱汉鏈虹儫骞? |
+| GitHub `zhanwen/MathModel/鍥借禌璁烘枃/2023骞翠紭绉€璁烘枃/` | 58 | 鐩存帴鍏紑 PDF, A-F 棰樺彿榻愬叏 |
+| GitHub `Jackyleo-Zhao/cumcm-2025` (鍥戒簩) | 1 | 2025 C 棰?NIPT |
 
-## 抽检验证
+## 鎶芥楠岃瘉
 
-随机抽 3 篇官方展廊 PDF (2023-B226 / 2024-B195 / 2024-E218) 第一页确认年份与文件名一致。
-2025-A196 第一页含"多情形下无人机烟幕遮蔽策略", 与 2025 A 题真题匹配。
+闅忔満鎶?3 绡囧畼鏂瑰睍寤?PDF (2023-B226 / 2024-B195 / 2024-E218) 绗竴椤电‘璁ゅ勾浠戒笌鏂囦欢鍚嶄竴鑷淬€?
+2025-A196 绗竴椤靛惈"澶氭儏褰笅鏃犱汉鏈虹儫骞曢伄钄界瓥鐣?, 涓?2025 A 棰樼湡棰樺尮閰嶃€?
 
-## 已知限制
+## 宸茬煡闄愬埗
 
-- 33 篇展廊重建 PDF 是图片型, pdfplumber 提取不到文字 → `ingest_papers.py` 自动过滤, 仅 59 篇参与 `empirical_distribution.md` 烘焙。
-- 题号覆盖: 2023 A/B/C/D/E/F, 2024 A/B/C/D/E, 2025 A/B/C/D/E (含 1 篇国二)。
+- 33 绡囧睍寤婇噸寤?PDF 鏄浘鐗囧瀷, pdfplumber 鎻愬彇涓嶅埌鏂囧瓧 鈫?`scripts/dev/ingest_papers.py` 鑷姩杩囨护, 浠?59 绡囧弬涓?`empirical_distribution.md` 鐑樼剻銆?
+- 棰樺彿瑕嗙洊: 2023 A/B/C/D/E/F, 2024 A/B/C/D/E, 2025 A/B/C/D/E (鍚?1 绡囧浗浜?銆?
 
-## 重新下载方式
+## 閲嶆柊涓嬭浇鏂瑰紡
 
-`scripts/download_cumcm_papers.py` 已存档, 不在运行时调用。需补充 PDF 时手动跑该脚本或用 codex 子代理 (见 git log)。
+`scripts/dev/download_cumcm_papers.py` 宸插瓨妗? 涓嶅湪杩愯鏃惰皟鐢ㄣ€傞渶琛ュ厖 PDF 鏃舵墜鍔ㄨ窇璇ヨ剼鏈垨鐢?codex 瀛愪唬鐞?(瑙?git log)銆?
+

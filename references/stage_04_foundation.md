@@ -28,5 +28,5 @@ Use this material to strengthen:
 ## What Was Removed
 
 - stage frontmatter
-- `decision_log` output schema
+- old JSON-state output schema
 - old stage-to-stage transition rules

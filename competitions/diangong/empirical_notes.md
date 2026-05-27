@@ -2,11 +2,11 @@
 
 > **姝ょ洰褰曟暟鎹负绉嶅瓙鐗堟湰 (seed_v0.1), 鏈仛鐪?PDF 鐑樼剻銆?*
 > 闃堝€煎彇鑷巻骞寸數宸ユ澂棰樼洰棰橀噺鍒嗘瀽 + 鍏紑璇勫鏍囧噯浼扮畻 + 鍥借禌 D 棰橀儴鍒嗙被姣斻€?
-> 鍚庣画鑻ユ彁浜?30+ 绡囩數宸ユ澂涓€绛夊 PDF, 鍙敤 `scripts/ingest_papers.py` 閲嶆柊鐑樼剻瑕嗙洊銆?
+> 鍚庣画鑻ユ彁浜?30+ 绡囩數宸ユ澂涓€绛夊 PDF, 鍙敤 `scripts/dev/ingest_papers.py` 閲嶆柊鐑樼剻瑕嗙洊銆?
 
 ## 鏁版嵁缂哄彛鎻愮ず
 
-`empirical.json` 涓墍鏈?`min` / `max` / `mean` 瀛楁濉殑鏄及绠楀€笺€俿core_artifact.py 娉ㄥ叆鏃? evidence 瀛楁浼氳嚜鍔ㄦ爣 `[seed: 闃堝€兼棤瀹炴祴鍒嗕綅]` 閬垮厤璇銆?
+`empirical.json` 涓墍鏈?`min` / `max` / `mean` 瀛楁濉殑鏄及绠楀€笺€?In `v1.2-alpha`, treat them as optional background context for per-question review and final quality checks, and mark them clearly as seed-level evidence when cited.
 
 ## 闃堝€煎嚭澶?
 

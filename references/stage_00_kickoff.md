@@ -27,5 +27,5 @@ Use it as supporting guidance for:
 
 - questionnaire-style startup
 - competition, team-size, deadline, and topic-number intake
-- required `decision_log.json` initialization
+- required old JSON state initialization
 - any requirement to bootstrap the workflow through scripts or harness-specific UI

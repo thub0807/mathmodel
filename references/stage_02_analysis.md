@@ -27,6 +27,6 @@ This file now serves as a reference for `per_question_plan.md`, not as an active
 ## What Was Removed
 
 - stage frontmatter and execution contract
-- `decision_log` writes
+- old JSON-state writes
 - PDF-first assumptions
 - fixed subquestion numbering workflow as a control mechanism

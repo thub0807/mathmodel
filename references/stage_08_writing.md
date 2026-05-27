@@ -36,6 +36,6 @@ Use this material when building:
 
 ## What Was Removed
 
-- `decision_log`-assembled writing flow
+- old JSON-state assembled writing flow
 - competition-first branching as the paper contract
 - old page-budget enforcement as workflow control

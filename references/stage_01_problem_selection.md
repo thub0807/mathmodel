@@ -30,4 +30,4 @@ This material can inform:
 - multi-problem or multi-topic selection flow
 - topic-letter scoring and lock-in
 - competition-specific `topic_specs.json` dependence
-- `decision_log`-based candidate ranking
+- old JSON-state candidate ranking

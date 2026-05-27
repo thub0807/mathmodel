@@ -55,4 +55,4 @@ Find contradictions, hidden assumption drift, notation drift, or evidence drift 
 
 - full workflow rollback by default
 - treating this as a replacement for local validation
-- depending on legacy `decision_log` state
+- depending on a legacy JSON state controller

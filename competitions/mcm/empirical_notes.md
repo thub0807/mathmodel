@@ -2,7 +2,7 @@
 
 > **姝ょ洰褰曟暟鎹负绉嶅瓙鐗堟湰 (seed_v0.1), 鏈仛鐪?PDF 鐑樼剻銆?*
 > 闃堝€煎彇鑷?COMAP 鍏紑 scoring rubric + 宸插彂琛?MCM 澶囪禌鏁欐潗鍏辫瘑銆?
-> 鍚庣画鑻ユ彁浜?30+ 绡?Outstanding Winner PDF, 鍙敤 `scripts/ingest_papers.py` 閲嶆柊鐑樼剻瑕嗙洊銆?
+> 鍚庣画鑻ユ彁浜?30+ 绡?Outstanding Winner PDF, 鍙敤 `scripts/dev/ingest_papers.py` 閲嶆柊鐑樼剻瑕嗙洊銆?
 
 ## 鏁版嵁缂哄彛鎻愮ず
 
@@ -29,4 +29,4 @@
 
 1. **浼樺厛浣跨敤妯″紡瀹氭€?*: `winning_patterns.md` 鍒楃殑 Outstanding 鍏辨€ф槸鏇村彲闈犵殑 anchor
 2. **鏁板€奸槇鍊间粎浣滃弬鑰?*: L1 critic 瑙佸埌 `seed` 鏍囪鍚庡急鍖栨暟鍊艰瘎鍒? 寮哄寲妯″紡鍖归厤
-3. **鑻ョ敤鎴疯兘鎻愪緵鍘嗗勾 Outstanding 璁烘枃**: 璺?`scripts/ingest_papers.py --competition mcm`, 瑕嗙洊鏈?JSON
+3. **鑻ョ敤鎴疯兘鎻愪緵鍘嗗勾 Outstanding 璁烘枃**: 璺?`scripts/dev/ingest_papers.py --competition mcm`, 瑕嗙洊鏈?JSON

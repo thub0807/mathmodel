@@ -28,6 +28,6 @@ Use this material to strengthen:
 ## What Was Removed
 
 - championship-only branching as workflow control
-- `decision_log` storage requirements
+- old JSON-state storage requirements
 - harness-specific question prompts
 - stage-based gating rules

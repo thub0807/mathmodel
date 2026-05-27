@@ -27,5 +27,5 @@ Use this guidance in:
 ## What Was Removed
 
 - stage frontmatter
-- `decision_log` integration
+- old JSON-state integration
 - old scoring-gate behavior

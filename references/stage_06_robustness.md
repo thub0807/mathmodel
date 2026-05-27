@@ -29,4 +29,4 @@ Apply this guidance in:
 
 - old stage frontmatter
 - mode-specific branching as control logic
-- `decision_log` backtracking protocol
+- old JSON-state backtracking protocol
