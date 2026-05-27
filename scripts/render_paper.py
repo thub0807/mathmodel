@@ -16,6 +16,11 @@ render_paper.py — markdown 中间产物 → 最终 PDF (v3.0 三竞赛版)
     python scripts/render_paper.py --competition diangong --workspace ws/ --no-compile  (dry-run)
 """
 
+# Legacy adapter notice:
+# - optional only, not the active v1.2-alpha workflow entrypoint
+# - still contains legacy competition and decision_log assumptions
+# - adapt it to workspace/output before relying on it in the new workflow
+
 import argparse
 import json
 import os

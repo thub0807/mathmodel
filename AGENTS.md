@@ -1,46 +1,17 @@
-# Codex Project Instructions
+# mathmodel-md-copilot
 
-This repository implements `mathmodel-md-copilot`, a Markdown-first mathematical modeling workflow Skill.
+Internal implementation constraints for the active skill:
 
-The repository must follow the v1.2 workflow exactly. Do not infer older behavior from any reference project if it conflicts with this file, `SKILL.md`, or `references/workflow.md`.
-
-## Editable Repository
-
-- Current repository: `mathmodel-md-copilot`
-
-## Reference Repositories
-
-The following repositories may be used as references only:
-
-- AutoMCM-Pro: workflow skeleton, AP/Manual mode, verification gates, optional parallelism ideas, LaTeX compile and review tooling ideas.
-- mathmodel-skill: model knowledge, competition resources, rubrics, paper templates, anti-patterns, feedback layers.
-- auto-MM: evidence discipline, result.json, baseline/ablation/sensitivity, traceability, anonymity and quality review.
-
-Do not copy reference project behavior blindly. Migrate only the parts compatible with this v1.2 Skill.
-
-## Core Positioning
-
-This Skill is:
-
-- Markdown-first.
-- Agent-first.
-- Workspace-based.
-- Per-question structured.
-- Evidence-backed.
-- Default Python language locked.
-- Compatible with both Claude-like and Codex-like environments.
-- Not dependent on multi-agent parallel execution.
-- Not a submit packaging tool.
-
-## Required Workspace Contract
-
-The Skill must assume this input layout:
-
-```text
-workspace/
-├── problem/
-│   ├── problem.md
-│   ├── images/
-│   ├── attachments/
-│   └── reference.pdf
-└── output/
+- Fixed input path: `workspace/problem/problem.md`.
+- Read images from `workspace/problem/images/` and attachments from `workspace/problem/attachments/`.
+- Treat `workspace/problem/reference.pdf` as audit-only; `problem.md` is the working source.
+- The agent performs semantic problem understanding and question decomposition directly from the materials.
+- Do not rely on regex question detection, required manifests, or mandatory setup scripts before the agent reads the problem.
+- Default `implementation_language` is `python`; lock it in `workspace/output/project_contract.md` before formal modeling.
+- All solve, verify, figure, and data-processing code must use the locked implementation language.
+- `scripts/` are optional utilities only and must not become the main workflow entrypoint.
+- Do not use questionnaire-style startup inputs unrelated to solving the current problem.
+- Do not generate packaging or competition submission artifacts.
+- Manual mode returns review file paths only.
+- AP mode may continue automatically and should write `review_note.md` and `warnings.md`.
+- Parallelism is capability-aware and optional; final integration remains serial.

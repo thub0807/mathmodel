@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "question_id": "q1",
+  "status": "draft",
+  "implementation_language": "python",
+  "model_name": "",
+  "run_command": "python solve.py",
+  "main_result": {},
+  "metrics": {},
+  "parameters": {},
+  "figures": [],
+  "tables": [],
+  "warnings": []
+}

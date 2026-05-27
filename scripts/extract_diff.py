@@ -13,6 +13,10 @@ extract_diff.py — Section-level patch refinement 工具
     python scripts/extract_diff.py --artifact a.md --critique c.json --mode diff --apply patch.diff
 """
 
+# Optional utility notice:
+# - may help refine an existing Markdown artifact after critique
+# - not part of the required v1.2-alpha workflow
+
 import json
 import argparse
 import re
