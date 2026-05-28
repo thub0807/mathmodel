@@ -1,233 +1,205 @@
 ---
-name: mathmodel-skill
-description: 数学建模竞赛端到端工作流, 用于 CUMCM 国赛 / MCM·ICM 美赛 / 电工杯的选题、建模、求解、论文写作和终稿审核. Use when Codex helps with 建模、数模、CUMCM、国赛、MCM、ICM、美赛、电工杯、A题/B题/C题、竞赛论文、模型选择、灵敏度分析、摘要写作或终稿 review. 10 阶段 + 4 反馈层, 全程编号问答式, 支持 Codex Skills / AGENTS.md / plugin packaging, state 跨 Codex 与 Claude Code 互通.
+name: mathmodel-copilot
+description: markdown-first single-problem mathematical modeling copilot for fixed workspace/problem/problem.md workflows. Use when the user wants to solve one mathematical modeling problem from a prepared workspace, decompose the problem into subquestions, build models, run code, verify results, generate figures/tables, write a CUMCM-style paper, and perform final review. Defaults to Manual mode and Chinese CUMCM-style output; AP mode and MCM English output require explicit user request.
 ---
 
-# mathmodel-skill — 数学建模 三竞赛通用 Skill (v6.0)
+# mathmodel-copilot：Markdown-first 单题数学建模 Copilot
 
-10 阶段把"3-4 天打 1 篇竞赛论文"工程化, **全程问答式**——用户只需回答编号问题, 不必手敲 bash / python / json。每阶段产出经过 rubric 自评 + section-level patch 精修, 跨阶段一致性回检, 终局多视角 panel。三竞赛通用框架 + 国赛 91 篇真烘焙 + MCM/电工杯 seed v0.1。
+`mathmodel-copilot` 面向一个已经准备好的单题建模工作区。它以 `workspace/problem/problem.md` 为主工作文本，把所有过程状态沉淀为 `workspace/output/` 下可审查的 Markdown / JSON 文件，默认产出中文 CUMCM 风格论文。
 
-**v6 更新**: Codex-native packaging (`agents/openai.yaml` + `.codex-plugin/plugin.json`), 按 OpenAI Codex Skills / AGENTS.md / Plugins 的官方形态组织入口, 同时保留 v5 的 harness-agnostic 与 Friendly Mode。
+本 Skill 不做多题选题，不询问年份、题号、队员、分工或截止时间，不生成 `submit.zip`，不依赖 `decision_log.json`。
 
----
+## 固定输入工作区
 
-## Codex V6 原生入口
+必须使用以下固定结构：
 
-Codex 优先按 skill 目录发现本文件:
-
-- 用户级安装: `$HOME/.agents/skills/mathmodel-skill/`
-- 项目级安装: `<repo>/.agents/skills/mathmodel-skill/`
-- UI 元数据: `agents/openai.yaml`
-- 插件分发元数据: `.codex-plugin/plugin.json` + `skills/mathmodel-skill/SKILL.md` shim
-- 项目指导: `AGENTS.md` 仍可作为 repo / workspace 级 instructions, 但不是唯一入口
-
-当 skill 已安装后, 用户可直接说"开始建模"或显式说"使用 `$mathmodel-skill` 开始建模"。
-
----
-
-## Harness 兼容 (Claude Code / Codex)
-
-本 skill v6.0 以 Codex Skills 为一等入口, 同时保持 harness-agnostic 设计:
-
-| harness | 入口文件 | 用户交互工具 | 状态文件 |
-|---------|---------|-------------|---------|
-| Claude Code | `SKILL.md` (本文件) | `AskUserQuestion` 工具 | `cwd/state/decision_log.json` |
-| Codex CLI / Codex app | skill 目录中的 `SKILL.md` + 可选 `AGENTS.md` | markdown 编号列表 | 同上 (**互通**) |
-
-跨 harness 互通: day 1 用 Codex 跑 stage 0-2, day 2 切回 Claude Code 接着 stage 3+, 状态完全保留。详见 `references/harness_compat.md`。
-
----
-
-## 问答式优先 (Friendly Mode)
-
-**核心原则**: 用户只需回答**编号问题**, 不应被要求手敲 bash / python / json。
-
-- 离散选项 (选竞赛 / 选题 / 选模型 / verdict 决策) → **必须**用问答式
-- 自由文本 (PDF 路径 / 截止时间) → 单行回复
-- 状态读写 (decision_log.json) → agent 自动完成
-- 每个 stage 的关键决策点都有 "让我决定 (推荐 X)" 兜底选项, 用户无脑选 4 也能跑通
-
-Claude Code: 用 `AskUserQuestion` 工具; Codex: 用 markdown 编号列表 (1-4 + 兜底)。两者语义等价, 见 `references/harness_compat.md` §1。
-
----
-
-## 路径解析协议 (任何阶段必读)
-
-| 类型 | 位置 | 例 |
-|------|------|-----|
-| skill 内通用 | skill 根目录的相对路径 | `references/stage_05.md`, `templates/shared/decision_log.json` |
-| **竞赛特化** | `competitions/<comp>/...` 按 decision_log.competition dispatch | `competitions/cumcm/winning_patterns.md`, `competitions/mcm/abstract_template.md` |
-| **LaTeX 模板** | `templates/latex/<comp>/` | `templates/latex/cumcm/cumcmthesis/`, `templates/latex/mcm/main.tex` |
-| 用户产物 | 用户 `cwd/` 相对路径 | `cwd/state/`, `cwd/results/`, `cwd/figures/`, `cwd/paper_workspace/` |
-| state 持久化 | `cwd/state/decision_log.json` | 各 stage 必读必写 |
-| 环境变量 | `MATHMODEL_STATE_DIR` (兼容 `CUMCM_STATE_DIR`) / `MATHMODEL_COMPETITION` 可覆盖 | scripts 用此变量 |
-
-约定: `<skill>/` = skill 安装目录, `<cwd>/` = 用户 cwd, `<comp>/` = 当前竞赛 (cumcm | mcm | diangong)。
-
----
-
-## Quick Start (用户首次说"开始建模")
-
-```
-1. 一段话介绍 (≤50 字): "启动数学建模工作流, 10 阶段 + 三竞赛, 全程问答式."
-
-2. 一次性 5 问 (Claude Code: AskUserQuestion 单条消息; Codex: 5 个编号列表):
-   - 竞赛 (cumcm 国赛 / mcm 美赛 / diangong 电工杯, 默认 cumcm)
-   - 题号 (依竞赛: cumcm A-E / mcm A-F / diangong A-B; "未公布"亦可)
-   - 队员数 + 各人擅长 (建模/编程/写作)
-   - 截止时间 (ISO 字符串或 "距现在 X 小时")
-   - 题目 PDF 路径 ("未公布"亦可)
-
-3. 自动初始化 (agent 自动完成, 不要让用户编辑 json):
-   - 不存在 cwd/state/decision_log.json → cp <skill>/templates/shared/decision_log.json
-   - 写入 decision_log.competition = <选定竞赛>
-   - 已存在 → 读 current_stage 字段决定恢复点
-
-4. 加载 competitions/<comp>/winning_patterns.md 一次 (建立基线), 后续不再读
-
-5. 进入 Stage 0 (references/stage_00_kickoff.md), 不重复问已问过的问题
+```text
+workspace/
+└── problem/
+    ├── problem.md
+    ├── reference.pdf
+    ├── images/          # 可不存在或为空
+    └── attachments/     # 可不存在或为空
 ```
 
-**已有 state 触发** (用户中途回到 skill):
+硬性规则：
+
+- `workspace/problem/problem.md` 必须存在。
+- `workspace/problem/reference.pdf` 必须存在。
+- 如果任一必需文件缺失，提示用户补充，不能进入完整建模流程。
+- `problem.md` 是主工作文本，Agent 必须直接阅读并理解。
+- `reference.pdf` 是补充审计材料，不是默认全文审计对象。
+- 不使用 Python 对 `problem.md` 做语义解析。
+- 不使用正则脚本拆题。
+- 不要求先运行任何初始化或材料检查脚本。
+
+仅在以下场景读取 `reference.pdf`：
+
+- `problem.md` 表述不完整或存在歧义。
+- 图片说明不足。
+- 附件来源不清。
+- 单位、符号、编号、表格含义疑似缺失。
+- 用户明确要求核对 PDF。
+- 最终 review 发现题意依据不足。
+
+`images/` 与 `attachments/` 按 `problem.md` 中的相对路径读取。若 `problem.md` 引用了不存在的图片或附件，记录到：
+
+```text
+workspace/output/problem_audit.md
+workspace/output/material_index.md
 ```
-1. 读 cwd/state/decision_log.json 的 competition 与 current_stage
-2. 加载对应 stage_NN.md (按需结合 competitions/<comp>/* 内容)
-3. 不重复读 winning_patterns
+
+## 默认模式
+
+默认运行模式是 **Manual**。
+
+只有用户显式说“AP 模式”“自动推进”“不逐问确认”等含义时，才启用 **AP 模式**。
+
+Manual 模式规则：
+
+- 每个 `q*` 完成 Per-Question Plan 后，进入 Build 前必须暂停。
+- 暂停时不要复述完整方案内容，避免浪费 token。
+- 只列出该问题已经生成的完整解决材料保存路径。
+- 用户确认后，才进入该问题 Build 阶段。
+
+Manual checkpoint 示例：
+
+```text
+q1 的 Plan 材料已生成，请审查：
+
+workspace/output/q1/analysis.md
+workspace/output/q1/candidates.md
+workspace/output/q1/model.md
+workspace/output/q1/assumptions.md
+workspace/output/q1/notation.md
+workspace/output/q1/data_recon.md
+workspace/output/q1/warnings.md   # 如有
+
+确认后进入 q1 Build。
 ```
 
----
+AP 模式规则：
 
-## 三竞赛 × 三模式 矩阵
+- 不逐问等待用户确认。
+- 每个问题仍必须生成完整 Plan 文件。
+- 如存在强假设、材料缺口或路线风险，写入 `workspace/output/q*/review_note.md` 与 `workspace/output/q*/warnings.md`。
 
-时长 / 语言 / 模板 / 数据状态 由 competition 决定; token 预算 / 反馈深度由 mode 决定。两者**正交组合**。
+## 新主流程
 
-| Competition | 时长 | 语言 | LaTeX | 子问数 IQR | 数据状态 |
-|---|---|---|---|---|---|
-| cumcm | 72h | 中文 | xelatex / cumcmthesis | [3, 5] | stable (91 篇 2023-2025) |
-| mcm | 96h | English | pdflatex / article | [3, 6] | seed v0.1 |
-| diangong | 72h | 中文 | xelatex / ctex | [6, 8] | seed v0.1 |
+启动时优先读取：
 
-| Mode | Token | 反馈层 | 用途 |
-|---|---|---|---|
-| fast | ≤ 50k | L1 单次 | 选题试跑 / sanity check |
-| standard | ≤ 200k | L1+L2 | 默认主流程 |
-| championship | ≤ 500k | L1+L2+L3+L4 + red-team | 提交前最后冲刺 |
+- `references/workspace_protocol.md`
+- `references/workflow.md`
+- `references/modes_ap_manual.md`
 
-模式自动推荐 (按距 deadline 剩余):
-- > 60h: standard (最后 6h 升 championship)
-- 24-60h: standard
-- 6-24h: fast 关键阶段 + championship 终审
-- < 6h: 直接进 stage 9 (championship)
+按阶段懒加载：
 
----
+- 每问计划：`references/per_question_plan.md`
+- 每问构建：`references/per_question_build.md`
+- 验证：`references/verification_protocol.md`
+- 图表：`references/figures_tables_protocol.md`
+- 论文：`references/paper_generation_protocol.md`
+- 终审：`references/final_review_protocol.md`
 
-## 10 阶段索引
+10 个阶段如下：
 
-| # | 阶段 | reference | 时长 | 反馈 | 竞赛差异点 |
-|---|------|-----------|------|------|-----------|
-| 0 | 团队启动 + 资料预扫 | `stage_00_kickoff.md` | 1h | L1 | 时长 / 语言 / 编译器 / 题号体系 |
-| 1 | 选题 (多题对比 → 1) | `stage_01_problem_selection.md` | 2-4h | L1 | 题号体系 (A-E/A-F/A-B) + task_type 写入 |
-| 2 | 问题深度解析与分解 | `stage_02_analysis.md` | 2-3h | L1 | 通用 |
-| 3 | 模型选型 (≥3 候选) | `stage_03_model_selection.md` | 2-4h | L1 + 反事实 | 通用 |
-| 4 | Foundation (假设+符号+术语) | `stage_04_foundation.md` | 1h | L1 | 通用 |
-| 5 | **递归子问题循环** Q1..Qn + per-Qi 加权聚合 | `stage_05_subproblem_loop.md` | 6-12h × n | L1 + 子检查点 | 子问数差异 (cumcm 4 / mcm 4 / diangong 7); per-Qi 加权 |
-| 6 | 全局灵敏度 / 稳健性 | `stage_06_robustness.md` | 2-3h | L1 + L2 | 工程参数 (diangong) vs 数学参数 (cumcm/mcm) |
-| 7 | 模型评价 + 推广 | `stage_07_evaluation.md` | 1-2h | L1 | 通用 |
-| 8 | 论文写作 | `stage_08_writing.md` | 12-30h | L1 | 摘要类型 (5段 / 1-page+Letter / 4段) + LaTeX 模板 |
-| 9 | 终稿审核 + Panel | `stage_09_review.md` | 2-6h | L1 + L3 panel | anti_patterns + panel personas 各异 |
+```text
+Stage 0  Workspace Reading & Problem Understanding
+Stage 1  Question Decomposition
+Stage 2  Per-Question Plan
+Stage 3  Per-Question Build
+Stage 4  Per-Question Verification
+Stage 5  Figures and Tables
+Stage 6  Per-Question Summary
+Stage 7  Final Integration
+Stage 8  Paper Generation with Template
+Stage 9  Final Review
+```
 
----
+新版阶段文档：
 
-## 加载协议 (节省 token 的关键)
+- `references/stage_00_kickoff.md`
+- `references/stage_01_problem_selection.md`
+- `references/stage_08_writing.md`
+- `references/stage_09_review.md`
 
-**只在进入阶段 N 时加载** `references/stage_NN_*.md`。**切勿**一次性全读。
+旧知识层可以按需参考，例如：
 
-各阶段额外加载 (按需 + 按 competition 切换):
-- 每阶段开头: `cwd/state/decision_log.json` 必读
-- 每阶段结尾: `cwd/state/decision_log.json` 必写 (核心决策 + 5 维评分)
-- stage 1-9: `references/rubrics.md` 对应章节 (L1 评分用)
-- **stage 1**: `competitions/<comp>/topic_specs.json` (题号 → task_type 映射)
-- stage 3, 5: `references/model_catalog.md` (跨竞赛通用)
-- **stage 5**: per-Qi 评分跑完后调 `scripts/score_artifact.py --mode aggregate_qi` 聚合
-- **stage 8**: `competitions/<comp>/{winning_patterns, phrase_bank, abstract_template, paper_skeleton}.md`
-- **stage 8 硬阈值评分**: `competitions/<comp>/empirical.json` 注入 evidence (cumcm 真值; mcm/diangong seed 自动带 [seed: ...] 标记)
-- **stage 9**: `competitions/<comp>/anti_patterns.md` (逐条对照) + `rubric_overlay.json` 的 panel_personas
-- 触发反馈时: 对应 `references/feedback_layer*.md`
-- harness 适配差异 (Codex 用户必读): `references/harness_compat.md`
+- `references/model_catalog.md`
+- `references/rubrics.md`
+- `references/feedback_layer*.md`
+- `competitions/cumcm/*`
+- `competitions/mcm/*`
+- `competitions/diangong/*`
 
----
+这些文件是知识参考，不再作为主流程骨架。
 
-## 收敛准则 (统一定义, 三处一致)
+## Agent 执行策略
 
-**verdict 优先级 (从高到低)**:
+本 Skill 是 Agent-first 流程。复杂子问题、验证、图表检查和终审检查可以使用能力感知并行：
 
-| verdict | 触发 | 行为 |
-|---------|------|------|
-| `block` | issues 含 ≥1 high-severity | 暂停 skill, 用户介入 |
-| `pass_early` | raw_min ≥ 9 AND weighted_mean ≥ 9 | iter-1 早退 |
-| `pass` | raw_min ≥ 7 AND weighted_mean ≥ 8 | 进下一阶段 |
-| `pass_with_review` *(stage 5)* | 任 Qi mark_for_review 但加权阈值满足 | 进 stage 6, L2 必读 review_qis |
-| `refine` | 其他 | section-patch 精修, iter+=1 (cap 3) |
-| `refine_partial` *(stage 5)* | 任 Qi.min < 7, 其他 Qi 已 pass | 仅 refine 该 Qi, 不动其他 |
-| `carryover` | iter == 3 仍 refine | 进下一阶段, 标记由 L2 处理 |
+- 如果当前环境支持可靠的多 Agent / 子任务并行，可并行处理相互独立的 `q*` 分析、验证或审查任务。
+- 并行任务必须各自写入对应的 `workspace/output/q*/` 或 `workspace/output/final/` 文件，不共享隐式状态。
+- 如果当前环境不支持并行能力，自动降级为串行单 Agent 执行。
+- 不得因为缺少并行能力而阻塞流程。
 
-`weighted_mean` = Σ(s_i × w_i) / Σ(w_i), 权重来自 `config/dim_weights.json[<comp>][<task_type>]` (clamp [0.7, 1.5]); `task_type=default` 全 1.0 等价老逻辑。
+## 输出协议
 
-此定义在 `feedback_layer1_critic.md` / `rubrics.md` / `scripts/score_artifact.py` 三处必须**完全一致**。
+所有流程产物严格写入：
 
----
+```text
+workspace/output/
+```
 
-## 状态持久化
+每问产物严格写入：
 
-每阶段:
-- 开头: `Read cwd/state/decision_log.json`, 核对 current_stage 与上下文
-- 结尾: 更新 stage 节点 (核心决策 + 摒弃方案 + 评分), `current_stage += 1`
+```text
+workspace/output/q*/
+```
 
-`decision_log.json` v3.0 schema 关键字段 (与 `templates/shared/decision_log.json` 对齐):
-- root: `competition`, `task_type`, `mode`, `current_stage`, `budget`, `events`
-- stage_5 扩展: `qi_count`, `qi_weights`, `qi_status`
-- scores 扩展: 含 `weighted_mean`, `review_qis`, `refine_qis` (stage 5 加权聚合用)
+最终产物严格写入：
 
-L2 跨阶段回检 (stage 5/6/8 末尾) 读这个文件主动找冲突, 触发**定向回滚**: 不重做整阶段, 只针对冲突点。
+```text
+workspace/output/final/
+```
 
----
+`workspace/output/final/quality_report.md` 是新版质量记录，替代旧的集中式评分或状态记录。
 
-## Token 预算纪律
+## 实现语言与编码
 
-- L1 Critic 强制 JSON 输出, ~500 token/次
-- 精修策略: section-level patch (`scripts/extract_diff.py`), 不重传完整 artifact (省 ~60% token)
-- references/ 与 competitions/ 文件**懒加载**, 本 SKILL.md 主体 ≤ 6k tokens
-- 阶段完成后, artifact 摘要 + 关键数据 + 路径写入 decision_log, 不在上下文保留全文
-- 超预算 30% → 自动降级 (championship → standard, standard → fast)
+默认：
 
----
+```text
+implementation_language = python
+```
 
-## 用户指令快捷
+所有求解、验证、绘图、制表和数据处理代码必须使用锁定实现语言。
 
-- "进入 stage N" / "重做 stage N" → 跳转
-- "切到 mcm" / "切到 cumcm" / "切到 diangong" → 改 decision_log.competition (注意已有 state 兼容性)
-- "升级到 championship" → 启用 L3 + L4 + red-team
-- "切到 fast" → 关闭迭代
-- "回退到 stage M" → 读 decision_log, 回退 current_stage 并清理 ≥M 节点
-- "做 L2 回检" → 立即触发 cross-stage backtrack
-- "看进度" → 输出 decision_log 摘要 + 当前评分
+Python 文本读写必须显式使用：
 
----
+```python
+encoding="utf-8"
+```
 
-## 数据来源声明
+JSON 写入必须使用：
 
-- `competitions/cumcm/`: 91 篇真国赛 2023-2025 PDF 烘焙 (`empirical.json` 含 11 维 p25/p50/p75); 91 PDF 已存档不读, 仅蒸馏 markdown
-- `competitions/mcm/`: SEED v0.1, 基于 COMAP 公开 scoring rubric + Outstanding Winner 公开模式手写; empirical 占位
-- `competitions/diangong/`: SEED v0.1, 基于历年题量 + 公开评审标准估算; empirical 占位
-- 通用模型清单 `references/model_catalog.md` 跨竞赛复用
+```python
+ensure_ascii=False
+```
 
-后续如有 30+ MCM Outstanding 或电工杯一等奖 PDF, 可用 `scripts/ingest_papers.py --competition <comp>` 重新烘焙覆盖 seed。
+不要引入 GBK、ANSI 或 Latin-1 编码假设。
 
----
+## 禁止事项
 
-## 与外部资源的关系
-
-skill 自包含, 运行时不联网。下列离线资源可作人工补充:
-- 国赛: `personqianduixue/Math_Model`, `datawhalechina/intro-mathmodel`, `dxs.moe.gov.cn` 优秀论文展廊
-- 美赛: COMAP 官网 `comap.com`, `MCM Tutorial` (Frank Giordano)
-- 电工杯: 中国电机工程学会论文集
+- 不创建或要求 `decision_log.json`。
+- 不读写 `cwd/state/decision_log.json`。
+- 不恢复多题选题、多题评分或 A-E/A-F 题推荐。
+- 不询问年份、题号、队员、分工、团队规模或截止时间。
+- 不新增 `detect_questions.py`。
+- 不新增 `create_question_dirs.py`。
+- 不把 `init_workspace.py` 或 `check_materials.py` 作为主流程依赖。
+- 不把 `question_manifest.json` 作为必需文件。
+- 不生成 `submit.zip`。
+- 不新增提交包逻辑。
+- 没有 `result.json` 的硬数字不得进入最终论文。
+- `status = partial` 或 `status = fail` 的结果必须在追溯报告和终审报告中标明限制。
