@@ -1,0 +1,59 @@
+% Paper LaTeX 模板
+%
+% 文件用途: 生成 workspace/output/final/paper.tex。
+% 对应 stage: Stage 8 Paper Generation。
+% 必填字段: title, abstract, keywords, sections, figures, tables, references, appendix。
+% 来源字段: paper.md, traceability.md, final_figures_index.md, final_tables_index.md。
+% 可追溯要求: 所有硬数字和图表说明必须可追溯到 traceability.md。
+% 禁止空泛表达: 不加入未验证的结论或无法追溯的数字。
+
+\documentclass[UTF8]{ctexart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+\title{<论文标题>}
+\author{<匿名占位>}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+<仅使用 traceability.md 中 allowed in abstract = yes 的结论。>
+
+\textbf{关键词：}<关键词1>；<关键词2>；<关键词3>
+\end{abstract}
+
+\section{问题重述}
+<基于 problem.md 和 paper.md。>
+
+\section{模型假设}
+<引用 assumptions.md。>
+
+\section{符号说明}
+<引用 notation.md。>
+
+\section{模型建立与求解}
+<来自 q*_summary.md。>
+
+\section{结果分析}
+<来自 final_results.md 和 traceability.md。>
+
+\section{验证与灵敏度分析}
+<来自 validation.md 和 sensitivity.md。>
+
+\section{模型评价与改进}
+<具体限制和改进。>
+
+\section*{参考文献}
+<参考文献。>
+
+\appendix
+\section{附录}
+<代码、数据和 source 说明。>
+
+\end{document}

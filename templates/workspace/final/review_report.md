@@ -1,33 +1,58 @@
-# Review Report
+# Review Report 模板
 
-## 子问题回答情况
+## 文件用途
 
-| 问题 | 是否回答 | 证据 | 限制 |
-|---|---|---|---|
-| `<q*>` | `<是/否/部分>` | `<文件>` | `<限制>` |
+检查最终论文是否回答所有子问题，并记录材料缺口、未验证结果、`partial` / `fail` 限制和 PDF 生成状态。
 
-## 材料缺口
+## 对应 stage
 
-`<记录材料缺口。>`
+Stage 9 Final Review
 
-## 未解决题意疑问
+## 必填字段
 
-`<记录疑问。>`
+| 字段 | 填写规则 |
+|---|---|
+| question coverage | 每个 `q*` 是否回答 |
+| artifact completeness | Plan、Build、Verification、Summary 是否齐全 |
+| material gap | 指向 `problem_audit.md` 或 `material_index.md` |
+| partial/fail labeling | 检查限制是否进入论文和 traceability |
+| unverified result check | 检查论文 claim 是否有验证来源 |
+| paper generation status | 记录 `paper.md`、`paper.tex`、`paper.pdf` 状态 |
 
-## Plan / Build / Verification / Summary 完整性
+## 来源字段
 
-| 问题 | Plan | Build | Verification | Figures/Tables | Summary | result.json |
+`question_index.md`、`q*/q*_summary.md`、`final/paper.md`、`final/traceability.md`、`final/final_results.md`。
+
+## 可追溯要求
+
+每个 review finding 必须指向具体文件路径。
+
+## 禁止空泛表达
+
+不要写“论文基本完整”。必须列出每个子问题和关键缺口。
+
+## Question Coverage
+
+| question | answer status | source summary | paper section | limitation |
+|---|---|---|---|---|
+| `<q*>` | `<answered/partial/missing>` | `<path>` | `<section>` | `<note>` |
+
+## Artifact Completeness
+
+| question | Plan | Build | Verification | Figures/Tables | Summary | limitation |
 |---|---|---|---|---|---|---|
-| `<q*>` | `<状态>` | `<状态>` | `<状态>` | `<状态>` | `<状态>` | `<状态>` |
+| `<q*>` | `<ok/missing>` | `<ok/missing>` | `<ok/missing>` | `<ok/missing>` | `<ok/missing>` | `<note>` |
 
-## partial / fail 标记
+## Material Gaps
 
-`<记录限制。>`
+| gap | source file | paper impact | action |
+|---|---|---|---|
+| `<gap>` | `<path>` | `<impact>` | `<action>` |
 
-## 未验证结果检查
+## Paper Generation Status
 
-`<记录检查结论。>`
-
-## paper.pdf 生成状态
-
-`<成功/失败/未尝试>`：`<说明>`
+| artifact | status | path or failure note |
+|---|---|---|
+| `paper.md` | `<status>` | `<path/note>` |
+| `paper.tex` | `<status>` | `<path/note>` |
+| `paper.pdf` | `<status>` | `<path/note>` |

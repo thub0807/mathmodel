@@ -1,4 +1,4 @@
-# Manual 与 AP 模式协议
+# Manual / AP Mode Protocol
 
 ## Manual 模式
 

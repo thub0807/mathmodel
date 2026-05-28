@@ -30,30 +30,35 @@ workspace/problem/attachments/
 - JSON 写入必须使用 `ensure_ascii=False`。
 - 可在能力支持时使用多 Agent / 子任务并行处理独立问题；若当前环境不支持，自动降级为串行单 Agent 执行。
 
-## 禁止事项
+## 工作流边界
 
-- 不使用集中式状态机 JSON。
-- 不运行旧 `scripts/score_artifact.py` 作为主流程质量门禁。
-- 不要求在阅读 `problem.md` 前运行预检脚本。
-- 不使用 Python 对 `problem.md` 做语义拆题。
-- 不使用正则脚本识别问题。
-- 不把 `question_manifest.json` 作为必需文件。
-- 不做多题选题、多题对比或多题评分。
-- 不询问年份、题号、队员、分工、团队规模或截止时间。
-- 不生成提交包或 `submit.zip`。
+当前 workflow 由固定输入、阶段协议、模板契约和验证产物驱动。Agent 直接阅读 `problem.md`，按 `question_index.md` 拆分 `q*`，并把质量结论写入 `workspace/output/final/quality_report.md`。
 
 ## 主协议文件
 
-按需懒加载以下新版协议：
+启动时读取：
 
 - `references/workspace_protocol.md`
 - `references/workflow.md`
 - `references/modes_ap_manual.md`
-- `references/per_question_plan.md`
-- `references/per_question_build.md`
-- `references/verification_protocol.md`
-- `references/figures_tables_protocol.md`
-- `references/paper_generation_protocol.md`
-- `references/final_review_protocol.md`
 
-旧知识层如 `references/model_catalog.md`、`references/rubrics.md`、`references/feedback_layer*.md` 与 `competitions/` 可以作为知识参考，但不是新版主流程骨架。
+按阶段读取：
+
+- `references/stage_00_workspace_audit.md`
+- `references/stage_01_question_decomposition.md`
+- `references/stage_02_per_question_plan.md`
+- `references/stage_03_per_question_build.md`
+- `references/stage_04_verification_sensitivity.md`
+- `references/stage_05_figures_tables.md`
+- `references/stage_06_per_question_summary.md`
+- `references/stage_07_final_integration.md`
+- `references/stage_08_paper_generation.md`
+- `references/stage_09_final_review.md`
+
+Supporting contracts:
+
+- `references/result_traceability.md`
+- `references/quality_gate.md`
+- `templates/workspace/`
+
+Historical materials live under `legacy/`; offline corpus and maintenance materials live under `maintenance/`.
