@@ -1,5 +1,5 @@
 {
-  "_doc": "MCM 实测分位 — SEED v0.1, 占位。score_artifact.py 注入时强制带 [seed: 阈值取自 COMAP guidelines, 未实测] 标记。",
+  "_doc": "MCM 实测分位 — SEED v0.1, 占位。Stage 8/9 或 feedback layers 使用时必须标为 seed reference: 阈值取自 COMAP guidelines, 未实测。",
   "_seed_version": "0.1",
   "_seed_basis": "COMAP scoring rubric + 已发表 MCM 备赛教材共识",
   "competition": "mcm",

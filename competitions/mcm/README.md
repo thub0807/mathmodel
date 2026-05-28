@@ -15,7 +15,7 @@ Mathematical / Interdisciplinary Contest in Modeling (COMAP)。
 | LaTeX 编译器 | pdflatex (亦可 xelatex) |
 | LaTeX 模板 | `templates/latex/mcm/` |
 | 引用格式 | IEEE / APA (任选, 内部一致即可) |
-| 题号 | A / B / C (MCM) + D / E / F (ICM) |
+| Problem set | COMAP yearly problem letters |
 | 默认子问题数 | 4-5 (题目通常含 3-5 个 subtask + 1 个 letter) |
 | 数据状态 | **seed v0.1** — 蒸馏未完成, 阈值取自公开 judge guidelines |
 
@@ -33,7 +33,7 @@ Mathematical / Interdisciplinary Contest in Modeling (COMAP)。
 
 | 文件 | 用途 | 状态 |
 |------|------|------|
-| `topic_specs.json` | A-F 题号体系 + 题型映射 | seed |
+| `topic_specs.json` | COMAP problem-letter metadata and task-type hints; not an active routing input | seed |
 | `rubric_overlay.json` | MCM 评分维度 (novel/rigor/communication/letter) | seed |
 | `empirical.json` | 占位 (n=0); 阈值取自 COMAP judge guidelines | seed |
 | `empirical_notes.md` | 缺数据说明 + 阈值出处 | seed |

@@ -1,5 +1,5 @@
 {
-  "_doc": "CUMCM 国赛题号体系 + 题型 → dim 权重映射 hint。stage 1 选题时加载, score_artifact.py 用 task_type 字段查 config/dim_weights.json。",
+  "_doc": "CUMCM 历史题型经验参考。当前 workspace workflow 不使用本文件做自动路由；如人工参考, 仅用于理解题型经验, 不作为 Stage 1/2 的必需输入。",
   "competition": "cumcm",
   "official_name": "全国大学生数学建模竞赛",
   "duration_h": 72,

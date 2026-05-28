@@ -6,7 +6,7 @@
 
 ## 数据缺口提示
 
-`empirical.json` 中所有 `min` / `max` / `mean` 字段填的是估算值, 不是真实样本统计。score_artifact.py 在评分时, evidence 字段会自动标 `[seed: 阈值无实测分位]` 避免误导。
+`empirical.json` 中所有 `min` / `max` / `mean` 字段填的是估算值, 不是真实样本统计。Stage 8/9 或 feedback layers 使用这些字段时, 必须把它们标为 seed reference, 避免误导。
 
 ## 阈值出处
 

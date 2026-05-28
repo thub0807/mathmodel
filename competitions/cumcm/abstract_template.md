@@ -1,6 +1,6 @@
 # 摘要模板 (5 段式 abstract_template)
 
-> 国赛一等奖摘要 ≈ 严格 5 段式。stage 8 最后一步,把决策日志的关键信息填入下列占位符即可。字数 600-900, 必须 ≥3 个定量结果。
+> 国赛高分摘要通常接近 5 段式。Stage 8 最后一步，从 `workspace/output/final/traceability.md` 允许进入摘要的 claim 和 `workspace/output/final/final_results.md` 中抽取关键信息填入下列占位符。字数 600-900，必须包含可追溯的定量结果。
 
 ---
 
@@ -16,7 +16,7 @@
 
 **填空要点**:
 - 核心问题描述: 用题目中的核心动词 (如"调度"、"配比"、"预测") 而非空泛"研究"
-- 因素 1-3: 关键约束或主要考量, 应来自 stage 4 假设
+- 因素 1-3: 关键约束或主要考量，应来自 `workspace/output/q*/assumptions.md`
 - 模型族命名变体: 必须包含修饰词 (如"动态权重"、"改进型"、"混合的", 见 winning_patterns §4)
 - 求解方法: 算法名 + 主要工具 (e.g., "Lagrangian 松弛 + cvxpy")
 - 总成果: ≥1 个数 (利润、误差、时间)
@@ -74,7 +74,7 @@
 ```
 
 **填空要点**:
-- 创新点 1-3 来自 stage 7 评价节
+- 创新点 1-3 来自 `workspace/output/final/final_results.md`、`q*_summary.md` 和验证/灵敏度结论
 - 推广必须 ≥2 具体场景, 不能 "可推广至各类相关问题" (anti_pattern H3)
 
 ### 关键词
@@ -143,11 +143,12 @@
 
 ---
 
-## stage 8 调用流程
+## Stage 8 调用流程
 
 1. 已写完 §5-§7 后, 启动摘要写作
-2. 打开本文件 + decision_log.json
-3. 逐段填空, 每段写完核对其填空要点
-4. 写完跑 7 项自检
-5. 跑 phrase_bank §10 危险句式扫描
-6. 字数计数确认 600-900
+2. 打开本文件、`workspace/output/final/final_results.md` 和 `workspace/output/final/traceability.md`
+3. 只使用 validation status 非 fail 且 allowed in abstract = yes 的 claim
+4. 逐段填空, 每段写完核对其填空要点
+5. 写完跑 7 项自检
+6. 跑 `phrase_bank.md` §10 危险句式扫描
+7. 字数计数确认 600-900

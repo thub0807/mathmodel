@@ -1,7 +1,7 @@
 # 国赛论文骨架 (paper_skeleton — 纯占位符)
 
-> 22-25 页 LaTeX 骨架。stage 8 把 decision_log 的内容填入 `<填...>` 占位符即可。
-> **详细写作流程、prompt、自检清单见 `references/stage_08_writing.md`**, 本文件不重复。
+> CUMCM 论文写作骨架。Stage 8 应从 `workspace/output/q*/q*_summary.md`、`workspace/output/final/final_results.md`、`workspace/output/final/traceability.md`、最终图表索引中抽取可追溯内容填入 `<填...>` 占位符。
+> 本文件提供竞赛经验与写作结构，不是 workspace 输出契约。
 
 ---
 
@@ -21,11 +21,11 @@
 | 附录 | 不计 | 自由 |
 | **正文合计** | **22-25** | **18000-22000** |
 
-实测分布参见 `references/empirical_distribution.md` (从 91 篇真获奖论文烘焙)。
+实测分布参见本目录的 `empirical.json` 和 `empirical_notes.md`。
 
 ---
 
-## 骨架 (markdown 中间产物 → render_paper.py → cumcmthesis LaTeX)
+## 骨架 (`paper.md` 中间稿 → cumcmthesis LaTeX)
 
 ```
 [标题页 — cumcmthesis 自动生成, 通过 \title \tihao 等命令]
@@ -49,10 +49,10 @@
 ## 2.3 问题三分析  <同, 引用 Q1/Q2 结果>
 
 # 3. 模型假设
-<填: 3-7 条, 每条带支撑 (文献/数据/物理意义); 见 assumption_table.md>
+<填: 3-7 条, 每条带支撑 (文献/数据/物理意义); 来源为 workspace/output/q*/assumptions.md>
 
 # 4. 符号说明
-<填: ≥10 行表格, 全有单位; 见 notation_table.md>
+<填: ≥10 行表格, 全有单位; 来源为 workspace/output/q*/notation.md>
 
 # 5. 模型的建立与求解 (主体, 12-16 页)
 
@@ -65,7 +65,7 @@
 ## 5.3 问题三: <同, 显式引用 Q1/Q2>
 
 # 6. 灵敏度分析与稳健性检验
-<填: LHS 三档扰动 + 表 + 图; 见 sensitivity_table.md>
+<填: 多参数扰动 + 表 + 图; 来源为 workspace/output/q*/sensitivity.md>
 
 # 7. 模型评价与推广
 ## 7.1 优点  <填: ≥3 条, 每条带数据证据>
@@ -89,10 +89,11 @@
 | 章节 | 对应模板 |
 |------|--------|
 | 摘要 | `abstract_template.md` (5 段式) |
-| §3 假设 | `assumption_table.md` |
-| §4 符号 | `notation_table.md` |
-| §6 灵敏度 | `sensitivity_table.md` |
-| 全文写作流程 | `references/stage_08_writing.md` |
-| 一等奖共性 | `references/winning_patterns.md` |
-| 句式 | `references/phrase_bank.md` |
-| 反模式自检 | `references/anti_patterns.md` |
+| §3 假设 | `workspace/output/q*/assumptions.md` |
+| §4 符号 | `workspace/output/q*/notation.md` |
+| §5 结果 | `workspace/output/q*/q*_summary.md` 与 `workspace/output/final/final_results.md` |
+| §6 灵敏度 | `workspace/output/q*/sensitivity.md` |
+| 全文证据链 | `workspace/output/final/traceability.md` |
+| 一等奖共性 | `winning_patterns.md` |
+| 句式 | `phrase_bank.md` |
+| 反模式自检 | `anti_patterns.md` |

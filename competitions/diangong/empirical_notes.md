@@ -6,7 +6,7 @@
 
 ## 数据缺口提示
 
-`empirical.json` 中所有 `min` / `max` / `mean` 字段填的是估算值。score_artifact.py 注入时, evidence 字段会自动标 `[seed: 阈值无实测分位]` 避免误导。
+`empirical.json` 中所有 `min` / `max` / `mean` 字段填的是估算值。Stage 8/9 或 feedback layers 使用这些字段时, 必须把它们标为 seed reference, 避免误导。
 
 ## 阈值出处
 
@@ -21,9 +21,9 @@
 
 ## 与 cumcm 的差异
 
-电工杯的"工程实用性"维度国赛没有显式对应。本 overlay 加了 3 个工程化维度 (engineering_practicality / physical_meaning / data_completeness), 直接进 stage 8。
+电工杯的"工程实用性"维度国赛没有显式对应。本 overlay 加了 3 个工程化维度 (engineering_practicality / physical_meaning / data_completeness), 可供 Stage 8/9 写作与质量审查参考。
 
-电工杯的子问数中位数 7, 比国赛 4 多近一倍, 这意味着 stage 5 在 standard 模式下可能跑不完。建议预算分配:
-- stage 1-4: 共 8h (国赛 6h 略加)
-- stage 5: 18-24h (国赛 6-12h × 子问数, 但电工杯总预算受 72h 约束, 单 Qi ≤ 2.5h)
-- stage 6-9: 共 12-18h
+电工杯的子问数中位数 7, 比国赛 4 多近一倍。建议在 workspace workflow 中更早记录风险:
+- Stage 1-4: 明确子问题依赖、模型路线和验证计划
+- Stage 5-7: 优先保证关键结果、图表和 traceability
+- Stage 8-9: 把工程实用性和物理意义作为终稿重点

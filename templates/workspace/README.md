@@ -1,6 +1,18 @@
 # workspace 模板契约库
 
-`templates/workspace/` 是 `workspace/output/` 的强约束模板库，不是可选示例。Agent 生成 workflow 输出时，必须按对应模板的字段、表格、来源和追溯要求填写。
+`templates/workspace/` 是 `workspace/output/` 的输出文件契约库，不是可选示例。
+
+本目录只定义 workspace 输出文件的字段契约、追溯字段、必填项和结构。Agent 生成 workflow 输出时，必须按对应模板的字段、表格、来源和追溯要求填写。
+
+本目录不承担以下职责：
+
+- 建模方法库：建模方法来自 `references/model_catalog.md`、stage references 和 feedback layers。
+- 竞赛写作知识库：CUMCM 写作质量来自 `competitions/cumcm/`。
+- 正式 LaTeX 模板库：CUMCM 正式排版来自 `templates/latex/cumcm/cumcmthesis/`。
+
+`templates/workspace/final/paper.md` 是 Markdown 中间稿结构契约。
+
+`templates/workspace/final/paper.tex` 只是 fallback scaffold，不是 CUMCM 竞赛正式模板。
 
 ## 固定输入
 
@@ -36,7 +48,7 @@ workspace/output/final/
 | `workspace/output/q*/review_note.md` | `templates/workspace/q/review_note.md` | Stage 2 |
 | `workspace/output/q*/code/` | `templates/workspace/q/code/README.md` | Stage 3 |
 | `workspace/output/q*/results/result.json` | `templates/workspace/q/results/result.schema.json` | Stage 3 |
-| `workspace/output/q*/results/run.log` | `templates/workspace/q/results/run.log` | Stage 3 |
+| `workspace/output/q*/results/run.log` | `templates/workspace/q/results/run_log.md` | Stage 3 |
 | `workspace/output/q*/validation.md` | `templates/workspace/q/validation.md` | Stage 4 |
 | `workspace/output/q*/sensitivity.md` | `templates/workspace/q/sensitivity.md` | Stage 4 |
 | `workspace/output/q*/figures/figure_index.md` | `templates/workspace/q/figures/figure_index.md` | Stage 5 |
@@ -59,3 +71,33 @@ workspace/output/final/
 - 每个模板必须保留文件用途、对应 stage、必填字段、来源字段、可追溯要求和禁止空泛表达。
 - 不知道的字段写 `待确认` 或 `不适用`，并说明原因；不要留空。
 - 硬数字、图表、表格和论文结论必须能追溯到源文件和验证状态。
+
+## run log 命名规则
+
+模板文件使用 Markdown 名称：
+
+```text
+templates/workspace/q/results/run_log.md
+```
+
+实际产物文件仍写为：
+
+```text
+workspace/output/q*/results/run.log
+```
+
+也就是说，`run_log.md` 定义字段契约，`run.log` 是运行时输出文件名。
+
+## 纸面稿与正式模板边界
+
+`templates/workspace/final/paper.md` 只规定 Markdown 中间稿需要哪些字段和追溯信息。论文写作策略、摘要结构、句式、反模式和格式经验应读取：
+
+```text
+competitions/cumcm/
+```
+
+`templates/workspace/final/paper.tex` 只在正式模板不可用时提供 fallback scaffold。CUMCM 正式排版优先使用：
+
+```text
+templates/latex/cumcm/cumcmthesis/
+```

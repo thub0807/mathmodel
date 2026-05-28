@@ -1,5 +1,5 @@
 {
-  "_doc": "电工杯实测分位 — SEED v0.1, 占位。score_artifact.py 注入时强制带 [seed: 阈值未实测] 标记。",
+  "_doc": "电工杯实测分位 — SEED v0.1, 占位。Stage 8/9 或 feedback layers 使用时必须标为 seed reference: 阈值未实测。",
   "_seed_version": "0.1",
   "_seed_basis": "历年题目题量 + 公开评审标准估算",
   "competition": "diangong",

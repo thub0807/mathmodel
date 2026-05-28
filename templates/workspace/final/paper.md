@@ -2,7 +2,11 @@
 
 ## 文件用途
 
-生成 `workspace/output/final/paper.md`，作为论文正文的 Markdown-first 源文件。
+生成 `workspace/output/final/paper.md`，作为论文正文的 Markdown 中间稿结构契约。
+
+本文件只规定中间稿字段和追溯要求，不提供 CUMCM 写作方法。写作质量、摘要结构、句式、反模式和格式经验应参考 `competitions/cumcm/`。
+
+正式 LaTeX 排版不由本文件承担，应优先使用 `templates/latex/cumcm/cumcmthesis/`。
 
 ## 对应 stage
 

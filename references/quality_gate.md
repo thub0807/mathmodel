@@ -24,7 +24,40 @@ workspace/output/q*/warnings.md
 - figure/table citation
 - paper traceability
 - anonymity
+- CUMCM abstract quality
+- model naming and formula consistency
+- anti-pattern review
+- feedback layer findings
 - final verdict
+
+## Feedback Layers
+
+Final review should run or simulate:
+
+```text
+references/feedback_layer1_critic.md
+references/feedback_layer2_backtrack.md
+references/feedback_layer3_panel.md
+references/feedback_layer4_calibration.md
+```
+
+Findings must be summarized in:
+
+```text
+workspace/output/final/review_report.md
+workspace/output/final/quality_report.md
+```
+
+## Paper Quality Gate
+
+Check:
+
+- abstract uses traceable hard results and does not use validation-failed claims;
+- key results have hard numbers, units, and source fields;
+- figures and tables serve paper conclusions;
+- model names, variables, formulas, and units are consistent;
+- CUMCM anti-pattern hits are fixed or reported;
+- a quick judge read can identify the contribution from abstract, final results, and main visuals.
 
 ## Final Verdict
 

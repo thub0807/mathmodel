@@ -1,10 +1,10 @@
 {
-  "_doc": "CUMCM 国赛特化评分维度 overlay。叠加在 references/rubrics.md 通用基础维度之上。score_artifact.py 加载后合并到 DIM_WHITELIST。",
+  "_doc": "CUMCM 国赛特化质量维度 overlay。Stage 8/9 和 feedback layers 可结合 references/rubrics.md 人工/Agent 审查使用。",
   "competition": "cumcm",
   "version": "1.0",
   "stage_overrides": {
     "8": {
-      "_note": "国赛 stage 8 写作维度: 强制 5 段式摘要 + GB/T 7714 + 中文写作规范",
+      "_note": "国赛 Stage 8 写作维度: 5 段式摘要 + GB/T 7714 + 中文写作规范",
       "dims": {
         "1_abstract_5_paragraph": {
           "describe": "摘要必须满足 5 段式 (背景/方法/结果/亮点/关键词), 字数 IQR [748, 1146] 中位 992 (实测自 91 篇)",

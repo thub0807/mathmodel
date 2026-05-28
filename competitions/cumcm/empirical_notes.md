@@ -3,7 +3,7 @@
 > **结构化数据见同目录 `empirical.json`** — 本文件是人读副本 + 历史采样备份, 运行时不直接读。
 > 数据源: 总样本 91 篇国赛论文 (2023-2025), 其中 59 篇可自动 PDF 提取。
 > 烘焙时间: 2026-05-05T20:30:21, 由 `scripts/ingest_papers.py` 生成 (已存档)。
-> L1 critic 评硬阈值维度时由 `score_artifact.py` 从 `empirical.json` 注入分位数据到 evidence 字段。
+> Stage 8/9 和反馈层可人工/Agent 读取 `empirical.json`，用其中 p25/p50/p75 作为摘要、图表、灵敏度、篇幅等质量信号的经验参考。
 
 ---
 

@@ -1,5 +1,5 @@
 {
-  "_doc": "国赛 CUMCM 一等奖论文实测分位 (p25/p50/p75)。L1 Critic 评硬阈值维度时由 score_artifact.py 注入到 evidence 字段。源文档: empirical_notes.md。",
+  "_doc": "国赛 CUMCM 优秀论文实测分位 (p25/p50/p75)。Stage 8/9 和反馈层可读取这些经验阈值作为写作与质量审查参考。源文档: empirical_notes.md。",
   "competition": "cumcm",
   "source": {
     "papers_total": 91,
