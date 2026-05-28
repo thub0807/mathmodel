@@ -16,6 +16,7 @@ import cvxpy as cp
 from scipy.optimize import linprog, minimize
 import matplotlib.pyplot as plt
 from pathlib import Path
+from result_io import write_result_and_log
 
 # ---- 全局可复现性 ----
 np.random.seed(42)
@@ -186,3 +187,37 @@ if __name__ == "__main__":
     plt.tight_layout()
     plt.savefig("figures/Q1_x_star.png", dpi=300)
     print("已保存 figures/Q1_x_star.png")
+
+    status = "pass" if str(result["status"]).lower() in {"optimal", "optimal_inaccurate"} else "partial"
+    write_result_and_log(
+        question_id="q1",
+        model_name="MILP optimization starter",
+        status=status,
+        inputs={"source_files": ["<replace with workspace/problem or workspace/output inputs>"]},
+        main_result={
+            "objective_value": result["obj"],
+            "decision_vector_preview": result["x_star"][:10] if result["x_star"] is not None else None,
+            "solver_status": result["status"],
+        },
+        metrics={
+            "solve_time_s": result["solve_time_s"],
+            "baseline_profit": baseline_profit,
+            "relative_improvement_pct": (result["obj"] - baseline_profit) / baseline_profit * 100,
+            "sanity_checks": checks,
+        },
+        figures=["figures/Q1_x_star.png"],
+        tables=[],
+        warnings=[],
+        trace={
+            "objective_value": {
+                "source_file": "templates/shared/code_starter/optimization.py",
+                "source_field": "result.obj",
+                "validation_status": "partial",
+            }
+        },
+        log_context={
+            "code_starter_used": "optimization.py",
+            "random_seed": 42,
+            "toy_demo_result": "example MILP solved on generated data",
+        },
+    )

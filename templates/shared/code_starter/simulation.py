@@ -12,6 +12,7 @@ from scipy.stats import qmc
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 from pathlib import Path
+from result_io import write_result_and_log
 
 np.random.seed(42)
 Path("results").mkdir(exist_ok=True)
@@ -247,3 +248,39 @@ if __name__ == "__main__":
                           sens_results[0.10]["outputs"], param_names)
     plt.savefig("figures/simulation_lhs_pairs.png", dpi=300)
     print("\n所有图已保存 figures/")
+
+    write_result_and_log(
+        question_id="q1",
+        model_name="LHS Monte Carlo SEIR simulation starter",
+        status="partial",
+        inputs={"source_files": ["<replace with workspace/problem or workspace/output inputs>"]},
+        main_result={
+            "peak_I": result["peak_I"],
+            "peak_t": result["peak_t"],
+            "trajectory_length": len(result["t"]),
+        },
+        metrics={
+            "baseline_params": baseline,
+            "sensitivity_stats": {
+                str(level): r["stats"] for level, r in sens_results.items()
+            },
+        },
+        figures=[
+            "figures/simulation_seir.png",
+            "figures/simulation_lhs_pairs.png",
+        ],
+        tables=[],
+        warnings=["Starter uses generated demo data; replace inputs before claiming paper results."],
+        trace={
+            "peak_I": {
+                "source_file": "templates/shared/code_starter/simulation.py",
+                "source_field": "result.peak_I",
+                "validation_status": "partial",
+            }
+        },
+        log_context={
+            "code_starter_used": "simulation.py",
+            "random_seed": 42,
+            "toy_demo_result": "SEIR simulation and LHS sensitivity ran on generated parameters",
+        },
+    )

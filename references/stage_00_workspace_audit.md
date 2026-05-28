@@ -8,10 +8,11 @@ Confirm the fixed workspace inputs, read `problem.md` directly, and create the m
 
 ```text
 workspace/problem/problem.md
-workspace/problem/reference.pdf
 workspace/problem/images/
 workspace/problem/attachments/
 ```
+
+`reference.pdf` is audit-only supporting material. Its absence must be recorded, but it must not block the Agent from reading and understanding `problem.md`.
 
 ## Required Outputs
 
@@ -41,14 +42,14 @@ templates/workspace/root/material_index.md
 
 ## Exit Conditions
 
-- `problem_audit.md` states whether the required inputs exist and whether the problem can proceed.
+- `problem_audit.md` states whether `problem.md` exists, whether audit-only materials exist, and whether the problem can proceed.
 - `material_index.md` lists available, referenced, missing, and audit-only materials.
 - Any ambiguity that may affect decomposition is recorded.
 
 ## Failure Handling
 
 - If `problem.md` is missing, stop the full workflow and ask for the fixed input.
-- If `reference.pdf` is missing, record the missing audit material and pause before full workflow execution.
+- If `reference.pdf` is missing, record the missing audit material and continue if `problem.md` is sufficient.
 - If optional images or attachments are missing, record them unless they block problem understanding.
 
 ## Manual Checkpoint Behavior

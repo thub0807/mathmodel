@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
+from result_io import write_result_and_log
 
 np.random.seed(42)
 Path("results").mkdir(exist_ok=True)
@@ -222,3 +223,35 @@ if __name__ == "__main__":
     )
     plt.savefig("figures/evaluation_weights.png", dpi=300)
     print("已保存 figures/evaluation_weights.png")
+
+    write_result_and_log(
+        question_id="q1",
+        model_name="AHP-entropy-TOPSIS evaluation starter",
+        status="partial",
+        inputs={"source_files": ["<replace with workspace/problem or workspace/output inputs>"]},
+        main_result={
+            "combined_weights": result["combined_weights"],
+            "topsis_scores": result["topsis_scores"],
+            "rank_1_based": result["rank"] + 1,
+        },
+        metrics={
+            "ahp_weights": result["ahp_weights"],
+            "entropy_weights": result["entropy_weights"],
+            "alpha": 0.5,
+        },
+        figures=["figures/evaluation_weights.png"],
+        tables=[],
+        warnings=["Starter uses generated demo data; replace inputs before claiming paper results."],
+        trace={
+            "rank_1_based": {
+                "source_file": "templates/shared/code_starter/evaluation.py",
+                "source_field": "result.rank + 1",
+                "validation_status": "partial",
+            }
+        },
+        log_context={
+            "code_starter_used": "evaluation.py",
+            "random_seed": 42,
+            "toy_demo_result": "AHP-entropy-TOPSIS ran on generated evaluation matrix",
+        },
+    )

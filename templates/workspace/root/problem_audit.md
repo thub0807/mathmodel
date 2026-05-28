@@ -12,7 +12,7 @@ Stage 0 Workspace Audit
 
 | 字段 | 填写规则 |
 |---|---|
-| 必需文件检查 | 必须列出 `problem.md` 与 `reference.pdf` 是否存在 |
+| 必需文件检查 | 必须列出 `problem.md` 是否存在，并列出 `reference.pdf` 的 audit-only 状态 |
 | 题意理解 | 用自己的话概括，不复制原文 |
 | 材料疑点 | 记录单位、符号、图片、附件和表格疑点 |
 | 缺失或路径错误 | 记录 `problem.md` 引用但不存在的材料 |
@@ -20,7 +20,7 @@ Stage 0 Workspace Audit
 
 ## 来源字段
 
-`workspace/problem/problem.md`、`workspace/problem/reference.pdf`、`workspace/problem/images/`、`workspace/problem/attachments/`
+`workspace/problem/problem.md`、`workspace/problem/reference.pdf`（audit-only）、`workspace/problem/images/`、`workspace/problem/attachments/`
 
 ## 可追溯要求
 

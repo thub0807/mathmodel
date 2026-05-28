@@ -1,80 +1,192 @@
 ---
 stage: 7
-name: per_question_summary_and_final_integration
-inputs: [workspace/output/q*/q*_summary.md, workspace/output/q*/results/result.json, workspace/output/q*/validation.md, workspace/output/q*/sensitivity.md, workspace/output/q*/figures, workspace/output/q*/tables]
-outputs: [workspace/output/q*/q*_summary.md, workspace/output/final/final_results.md, workspace/output/final/traceability.md]
-loads_reference: [references/workflow.md, references/final_review_protocol.md]
+name: evaluation
+duration_h: 1-2
+inputs: [stage.5.sub_problems, stage.6.{stability_verdict, failure_warning, L2_backtrack}, decision_log_full]
+outputs: [stage.7.{strengths, limitations, improvements, generalizations}]
+loads_reference: [winning_patterns.md§8, rubrics.md§Stage_7, anti_patterns.md§H]
+feedback: [L1]
 next: stage_08_writing
 ---
 
-# Stage 7：Per-Question Summary 与 Final Integration
+# Stage 7 — 模型评价 + 推广 + 自我批判
+
+**时长**: 1-2h | **反馈层**: L1
+
+---
 
 ## 目标
 
-为每个 `q*` 形成可写入论文的总结，并把各问题的结果、图表和证据来源整合到最终结果与追溯报告。
+写出**真自我批判**(winning_patterns §8): 三条**可信缺点**, 每条配 (a) 替代方法 (b) 改进幅度估算 (c) 代价说明。这是与二等奖的关键差距。
 
-## 每问输入
+---
 
-```text
-workspace/output/q*/analysis.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/results/result.json
-workspace/output/q*/validation.md
-workspace/output/q*/sensitivity.md
-workspace/output/q*/figures/
-workspace/output/q*/tables/
+## 输入
+
+- stage 5 各 Qi 结果与代码
+- stage 6 灵敏度报告 + L2 回检结果
+- 全部 decision_log
+
+## 产出
+
+- 模型优点 (≥3 条, 每条带证据)
+- 模型缺点 (≥3 条, 每条 (a)(b)(c) 三要素)
+- 改进方向 (≥2 条可执行路径)
+- 推广场景 (≥2 个跨领域 + 适配性)
+- 写入 `decision_log.stages.7`
+
+---
+
+## 操作流程
+
+### Step 1: 优点提炼 (20 min)
+
+每条优点用模板:
+```
+优点 i: <名称>。
+  证据: <数据/实验/对比>。
+
+例:
+优点 1: 求解效率高。
+  证据: 1000 规模实例下 GUROBI 求解 < 5min, 优于 CBC 的 23min。
+
+优点 2: 模型严谨。
+  证据: Lagrangian 对偶界与原问题最优解差距 0.8%, 表明松弛紧致。
+
+优点 3: 鲁棒性强。
+  证据: 灵敏度分析 ±10% 扰动下目标函数偏差 <8% (stage 6 表 N)。
 ```
 
-## 每问输出
+≥3 条, 每条必须有具体数据支持 (anti_pattern H2)。
 
-```text
-workspace/output/q*/q*_summary.md
+### Step 2: 缺点 (3-要素强制) (45 min) ⭐ 核心
+
+**反模式 H1 (套话式批判) 是 stage 7 头号杀手**。
+
+每条缺点必须三要素:
+```
+缺点 i: <名称>
+  现象: <现状描述>
+  (a) 替代方法: <具体名称>
+  (b) 改进估算: <数值>
+  (c) 代价: <实施代价>
 ```
 
-`q*_summary.md` 必须包含：
+例:
+```
+缺点 1: 假设需求服从泊松分布
+  现象: stage 4 假设 1 基于 χ² 检验 p=0.34 接受泊松, 
+        但 stage 6 数据显示方差/均值 = 1.8, 暗示过度离散。
+  (a) 替代方法: 改用负二项分布 (NB)
+  (b) 改进估算: Q3 预测精度可能从 7.8% 误差降至 3-5%, 提升 ~50%
+  (c) 代价: cvxpy 不支持 NB MLE, 需切换到 GAMS 或自实现 EM, 开发时间 +6h, 
+       且求解速度可能下降 30%。
 
-- 问题目标。
-- 建模路线。
-- 核心公式。
-- 求解过程。
-- 主要结果。
-- 验证结论。
-- 灵敏度结论。
-- 图表索引。
-- 可写入论文的段落草稿。
-- 局限性与改进方向。
+缺点 2: 跨子问题用同一时间尺度
+  现象: Q1/Q2/Q3 都按月度求解, 但 Q3 的随机性其实在日级显著。
+  (a) 替代方法: Q3 改为日级两阶段随机规划
+  (b) 改进估算: 短期决策准确率 +12%, 长期不变
+  (c) 代价: 数据规模 ×30, 求解时间从 2min → 1h。
 
-## 最终整合输出
-
-```text
-workspace/output/final/final_results.md
-workspace/output/final/final_figures_index.md
-workspace/output/final/final_tables_index.md
-workspace/output/final/traceability.md
+缺点 3: 子问题复用是单向
+  现象: Q3 用 Q1 的 x*, 但 Q1 没考虑 Q3 的不确定性反馈。
+  (a) 替代方法: 双向耦合的迭代式求解 (类似 Benders 分解)
+  (b) 改进估算: 整体最优性 +3-5%
+  (c) 代价: 需要新建 master-subproblem 框架, +8h 开发。
 ```
 
-## `traceability.md` 必须说明
+≥3 条, 每条三要素全。**这是一等奖与二等奖最核心的差距来源**。
 
-- 论文关键结论来自哪个 `q*`。
-- 硬数字来自哪个 `result.json` / `validation.md` / `sensitivity.md`。
-- 图来自哪个 `q*/figures/`。
-- 表来自哪个 `q*/tables/`。
-- 假设来自哪个 `assumptions.md`。
-- 符号来自哪个 `notation.md`。
-- `partial` 或 `fail` 的限制如何影响最终论文。
+### Step 3: 改进方向 (≥2 条可执行) (15 min)
 
-## 规则
+不是空谈, 是路线图:
 
-- 不读取旧集中式状态。
-- 不写入任何集中式状态文件。
-- 不把 `fail` 结果写成论文结论。
-- `partial` 结果必须带限制说明。
+```
+改进 1: 引入分布鲁棒优化 (DRO)
+  路径: 用 Wasserstein 球替代固定泊松假设 → cvxpy 1.2+ 已支持
+  数据需求: 当前 stage 6 LHS 样本可复用
+  时间需求: 需 +12h 开发与调参
+  预期收益: 最坏情况下决策稳健性显著提升
+
+改进 2: 模型参数学习化
+  路径: 用 Bayesian Optimization 自动调超参 (e.g., λ in Lagrangian)
+  数据需求: 已有
+  时间需求: +4h
+  预期收益: 求解时间降 20%
+```
+
+### Step 4: 推广场景 (≥2 个) (15 min)
+
+**反模式 H3 (推广空泛)**: 不要写 "本模型可推广至各类相关问题"。
+
+每个推广场景:
+```
+场景 1: 物流配送中心选址
+  适配方式: x_i 重定义为"选址 i 的容量", p_i 为"覆盖收益", c_i 为"建设成本"
+  需调整假设: 假设 1 (泊松需求) 改为"区域人口的伯努利混合"
+  现实意义: ...
+
+场景 2: 电网调度
+  适配方式: x_i 为"机组 i 的发电量", p_i 为"电价", c_i 为"启停成本"
+  需调整: 添加 ramp 约束, 时间维度细化
+  现实意义: ...
+```
+
+### Step 5: 自我批判可信度自检 (15 min)
+
+回扫 Step 2 三条缺点, 自问:
+- 哪一条最容易被评委信? (要 100% 命中)
+- 哪一条可能被评委质疑"瞎写"? (替换或补强)
+- 三条加起来, 是不是把模型每个层面都点到了 (假设 / 算法 / 范式)?
+
+如发现两条都在批假设, 一条在批算法, 第三条空缺 → 补一条数据相关的缺点。
+
+### Step 6: 输出 (10 min)
+
+写入 `decision_log.stages.7`:
+```json
+{
+  "strengths": [
+    {"name": "...", "evidence": "..."}, ...
+  ],
+  "limitations": [
+    {
+      "name": "...", "phenomenon": "...",
+      "alternative": "...", "improvement_estimate": "...", "cost": "..."
+    }, ...
+  ],
+  "improvements": [
+    {"name": "...", "path": "...", "data_need": "...", "time_need_h": ..., "expected_gain": "..."}
+  ],
+  "generalizations": [
+    {"scenario": "...", "adaptation": "...", "assumption_changes": "..."}, ...
+  ]
+}
+```
+
+---
+
+## L1 Rubric
+
+| 维度 | 满分行为 |
+|------|---------|
+| 1. 优点具体 | ≥3 条, 每条带数据证据 |
+| 2. 缺点真实 | ≥3 条, 每条 (a)(b)(c) 三要素全 |
+| 3. 改进方向 | ≥2 条可执行 (含数据/算力/时间) |
+| 4. 推广场景 | ≥2 个 + 适配性说明 |
+| 5. 可信度 | 不命中 H1 套话, 不命中 H3 空泛 |
+
+## 常见坑
+
+- H1 套话式自我批判 → Step 2 三要素强制
+- H2 优点夸大 → Step 1 必须数据支持
+- H3 推广空泛 → Step 4 适配方式必填
 
 ## 退出条件
 
-- 每个 `q*` 均有 `q*_summary.md`。
-- `final_results.md` 已生成。
-- `final_figures_index.md` 与 `final_tables_index.md` 已生成。
-- `traceability.md` 已生成并覆盖硬数字来源。
+1. 优点缺点改进推广全到位
+2. 缺点三要素无空缺
+3. 推广场景含适配方式
+4. L1 全维 ≥7
+
+→ 跳转 `stage_08_writing.md`

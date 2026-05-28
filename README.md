@@ -1,61 +1,79 @@
 # mathmodel-copilot
 
-`mathmodel-copilot` 是一个 Markdown-first、Agent-first、固定工作区的单题数学建模 Skill。它从 `workspace/problem/problem.md` 出发，完成问题审计、子问题拆分、逐问建模、求解、验证、图表索引、最终整合、论文生成和终审。
+`mathmodel-copilot` 是固定工作区、CUMCM-only、Markdown-first、Agent-first 的单题数学建模 Skill。
 
-## 固定工作区
-
-输入材料放在：
+它从：
 
 ```text
-workspace/
-└── problem/
-    ├── problem.md
-    ├── reference.pdf
-    ├── images/
-    └── attachments/
+workspace/problem/problem.md
 ```
 
-规则：
-
-- `problem.md` 是主工作文本。
-- `reference.pdf` 是补充审计材料。
-- `images/` 和 `attachments/` 按 `problem.md` 中相对路径读取。
-- 材料审计结果写入 `workspace/output/problem_audit.md` 和 `workspace/output/material_index.md`。
-
-## 输出结构
-
-所有流程产物写入：
+读取题目，并把全部过程产物写入：
 
 ```text
 workspace/output/
 ```
 
-每问产物写入：
+## 固定工作区
+
+输入材料：
 
 ```text
-workspace/output/q*/
+workspace/problem/problem.md
+workspace/problem/reference.pdf
+workspace/problem/images/
+workspace/problem/attachments/
 ```
 
-最终产物写入：
+输出结构：
 
 ```text
+workspace/output/
+workspace/output/q*/
 workspace/output/final/
 ```
 
-关键最终文件包括：
+规则：
 
-- `workspace/output/final/final_results.md`
-- `workspace/output/final/traceability.md`
-- `workspace/output/final/paper.md`
-- `workspace/output/final/paper.tex`
-- `workspace/output/final/paper.pdf`
-- `workspace/output/final/review_report.md`
-- `workspace/output/final/anonymity_report.md`
-- `workspace/output/final/quality_report.md`
+- `problem.md` 是主工作文本。
+- `reference.pdf` 是 audit-only 支持材料；缺失时记录审计风险，不阻止 Agent 直接读取 `problem.md`。
+- 每问产物进入 `workspace/output/q*/`。
+- 最终论文、traceability 和质量报告进入 `workspace/output/final/`。
+- 默认 `implementation_language` 为 `python`，所有求解、验证、图表和数据处理代码使用锁定语言。
+
+## Active Scope
+
+当前 active workflow 默认且仅支持 CUMCM。
+
+Active CUMCM 层：
+
+```text
+competitions/cumcm/
+templates/latex/cumcm/cumcmthesis/
+templates/workspace/
+```
+
+历史 MCM / Diangong 材料已移动到 `legacy/`，仅作为历史或未来扩展材料，不属于当前 active workflow。
+
+## 三层架构
+
+| Layer | Role | Paths |
+|---|---|---|
+| Workflow control layer | 固定路径、阶段顺序、Manual/AP 模式、产物生命周期 | `SKILL.md`; `references/workspace_protocol.md`; `references/workflow.md`; `references/modes_ap_manual.md`; `references/stage_00...stage_09...` |
+| Modeling and quality layer | 建模目录、rubric、反馈层、traceability、quality gate | `references/model_catalog.md`; `references/rubrics.md`; `references/feedback_layer1_critic.md`; `references/feedback_layer2_backtrack.md`; `references/feedback_layer3_panel.md`; `references/feedback_layer4_calibration.md`; `references/result_traceability.md`; `references/quality_gate.md` |
+| CUMCM competition and output layer | CUMCM 写作质量材料、正式 LaTeX 资产、workspace artifact contract | `competitions/cumcm/`; `templates/latex/cumcm/cumcmthesis/`; `templates/workspace/` |
 
 ## 主流程
 
-新版流程共 10 阶段：
+启动时读取：
+
+```text
+references/workspace_protocol.md
+references/workflow.md
+references/modes_ap_manual.md
+```
+
+阶段：
 
 ```text
 Stage 0  Workspace Audit
@@ -70,37 +88,33 @@ Stage 8  Paper Generation
 Stage 9  Final Review
 ```
 
-默认模式是 Manual。每个问题完成 Plan 后，Agent 只列出 Plan 文件路径并等待用户确认。AP 模式只有在用户明确要求自动推进时启用。
+每个阶段运行前读取对应 `references/stage_*.md`，并按 `references/workflow.md` 中列出的 knowledge layer、templates/assets 和 outputs 执行。
 
-## 协议文件
+## 默认模式
 
-启动时读取：
+默认 Manual 模式。
 
-- `references/workspace_protocol.md`
-- `references/workflow.md`
-- `references/modes_ap_manual.md`
+- Stage 2 每个 `q*` Plan 完成后暂停，用户审阅后进入 Build。
+- Stage 2 暂停前必须生成 `workspace/output/q*/solution_plan.md`，作为统一审阅入口。
+- Stage 7 完成后暂停，用户审阅 `final_results.md`、`traceability.md`、`final_figures_index.md`、`final_tables_index.md` 后进入 Paper Generation。
+- AP 模式只在用户明确要求自动推进时启用。
 
-按阶段读取：
+## 证据规则
 
-- `references/stage_00_workspace_audit.md`
-- `references/stage_01_question_decomposition.md`
-- `references/stage_02_per_question_plan.md`
-- `references/stage_03_per_question_build.md`
-- `references/stage_04_verification_sensitivity.md`
-- `references/stage_05_figures_tables.md`
-- `references/stage_06_per_question_summary.md`
-- `references/stage_07_final_integration.md`
-- `references/stage_08_paper_generation.md`
-- `references/stage_09_final_review.md`
+论文 hard numbers 和 final claims 只能来自：
 
-Supporting contracts:
+```text
+workspace/output/q*/results/result.json
+workspace/output/q*/validation.md
+workspace/output/q*/sensitivity.md
+workspace/output/final/final_results.md
+workspace/output/final/traceability.md
+```
 
-- `references/result_traceability.md`
-- `references/quality_gate.md`
-- `templates/workspace/`
+`partial` 结果必须限制表达。`fail` 结果不能作为论文 claim。
 
-## Legacy 和 Maintenance
+## Legacy 与 Maintenance
 
-历史迁移材料位于 `legacy/`，仅用于迁移审计或人工参考。离线资料维护脚本和论文资料位于 `maintenance/`，不属于用户建模运行时 workflow。
-
-`scripts/` 只保留可选 runtime helper；主流程推进以 `SKILL.md`、active references 和 `templates/workspace/` 为准。
+`legacy/` 是开发迁移档案，不属于 active workflow。
+`maintenance/` 是离线维护材料，不属于用户建模运行时 workflow。
+`scripts/` 当前没有必需 active runtime scripts。

@@ -1,21 +1,35 @@
-# Optional Runtime Scripts
+# Active Runtime Scripts
 
-The active `mathmodel-copilot` workflow is file-contract first. It reads `workspace/problem/problem.md` directly and writes Markdown-first artifacts under `workspace/output/`.
+当前 active workflow 没有必需 runtime scripts。
 
-Scripts in this directory are optional helpers only. They are not required to start the workflow, read the problem, decompose questions, build models, verify results, generate paper artifacts, or run final review.
+`mathmodel-copilot` 的主流程由以下文件和目录驱动：
 
-## Available helper
+```text
+SKILL.md
+references/
+competitions/cumcm/
+templates/workspace/
+templates/latex/cumcm/
+```
 
-### `extract_diff.py`
+Agent 直接读取：
 
-Optional helper for local diff extraction or manual maintenance work. It is not a stage gate and is not referenced by the active workflow.
+```text
+workspace/problem/problem.md
+```
 
-## Moved materials
+并把全部产物写入：
 
-Historical scoring and paper rendering utilities were moved to `legacy/scripts/`.
+```text
+workspace/output/
+```
 
-Offline paper ingestion and download utilities were moved to `maintenance/scripts/`.
+旧评分、旧 patch、旧渲染或历史维护脚本均不属于 active workflow。历史脚本已移动到 `legacy/scripts/`，离线资料维护脚本位于 `maintenance/`。
 
-## Encoding
+如未来新增 active helper，本 README 必须说明：
 
-Python text I/O should use explicit UTF-8, and JSON writing should use `ensure_ascii=False`.
+- helper 是否为可选；
+- 关联 stage；
+- 输入输出路径；
+- 是否会影响 quality gate；
+- UTF-8 文本读写和 JSON `ensure_ascii=False` 要求。

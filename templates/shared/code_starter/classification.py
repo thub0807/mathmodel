@@ -21,6 +21,7 @@ from sklearn.metrics import (
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
+from result_io import write_result_and_log
 
 np.random.seed(42)
 Path("results").mkdir(exist_ok=True)
@@ -200,3 +201,40 @@ if __name__ == "__main__":
                                   title="Stacking 混淆矩阵")
     plt.savefig("figures/classification_stacking_cm.png", dpi=300)
     print("\n图已保存 figures/")
+
+    write_result_and_log(
+        question_id="q1",
+        model_name="Stacking classification starter",
+        status="partial",
+        inputs={"source_files": ["<replace with workspace/problem or workspace/output inputs>"]},
+        main_result={
+            "stacking_metrics": stack_result["metrics"],
+            "confusion_matrix": stack_result["confusion_matrix"],
+        },
+        metrics={
+            name: {
+                "test_metrics": r["metrics"],
+                "cv_f1_mean": r["cv_f1_mean"],
+                "cv_f1_std": r["cv_f1_std"],
+            }
+            for name, r in results.items()
+        },
+        figures=[
+            "figures/classification_comparison.png",
+            "figures/classification_stacking_cm.png",
+        ],
+        tables=[],
+        warnings=["Starter uses generated demo data; replace inputs before claiming paper results."],
+        trace={
+            "stacking_metrics": {
+                "source_file": "templates/shared/code_starter/classification.py",
+                "source_field": "stack_result.metrics",
+                "validation_status": "partial",
+            }
+        },
+        log_context={
+            "code_starter_used": "classification.py",
+            "random_seed": 42,
+            "toy_demo_result": "model comparison and stacking ran on generated classification data",
+        },
+    )

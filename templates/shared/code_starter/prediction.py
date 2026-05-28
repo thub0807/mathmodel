@@ -13,6 +13,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 from pathlib import Path
+from result_io import write_result_and_log
 
 np.random.seed(42)
 Path("results").mkdir(exist_ok=True)
@@ -202,3 +203,36 @@ if __name__ == "__main__":
 
     plt.savefig("figures/prediction_diagnostics.png", dpi=300)
     print("已保存 figures/prediction_diagnostics.png")
+
+    write_result_and_log(
+        question_id="q1",
+        model_name="ARIMA-GM(1,1) ensemble prediction starter",
+        status="partial",
+        inputs={"source_files": ["<replace with workspace/problem or workspace/output inputs>"]},
+        main_result={
+            "forecast": ensemble["ensemble"],
+            "weights": ensemble["weights"],
+            "horizon": 12,
+        },
+        metrics={
+            "arima_aic": arima_result["aic"],
+            "arima_bic": arima_result["bic"],
+            "gm11_in_sample_mape_pct": gm_result["in_sample_mape"],
+            "test_metrics": metrics,
+        },
+        figures=["figures/prediction_diagnostics.png"],
+        tables=[],
+        warnings=["Starter uses generated demo data; replace inputs before claiming paper results."],
+        trace={
+            "forecast": {
+                "source_file": "templates/shared/code_starter/prediction.py",
+                "source_field": "ensemble.ensemble",
+                "validation_status": "partial",
+            }
+        },
+        log_context={
+            "code_starter_used": "prediction.py",
+            "random_seed": 42,
+            "toy_demo_result": "ensemble prediction ran on generated seasonal trend data",
+        },
+    )

@@ -1,158 +1,269 @@
-# Model Catalog
+# 建模目录
 
-## Purpose
+## 目的
 
-This file is the active modeling knowledge layer for Stage 2 Per-Question Plan. Use it to build `workspace/output/q*/candidates.md` and `workspace/output/q*/model.md`.
-
-It is a knowledge reference, not an execution tool. It does not require any script or hidden state file.
-
-## Active Inputs And Outputs
-
-Read:
+本文件是 active knowledge layer 中的建模目录。用于撰写和审阅以下产物：
 
 ```text
 workspace/output/question_index.md
 workspace/output/q*/analysis.md
-workspace/output/q*/data_recon.md
-workspace/output/q*/assumptions.md
-```
-
-Write or update:
-
-```text
 workspace/output/q*/candidates.md
 workspace/output/q*/model.md
-workspace/output/q*/review_note.md      # AP mode or risky route
-workspace/output/q*/warnings.md         # gaps, strong assumptions, infeasible routes
+workspace/output/q*/assumptions.md
+workspace/output/q*/notation.md
+workspace/output/q*/data_recon.md
+workspace/output/q*/results/result.json
+workspace/output/q*/validation.md
+workspace/output/q*/sensitivity.md
+workspace/output/q*/review_note.md
+workspace/output/final/final_results.md
+workspace/output/final/traceability.md
 ```
 
-## Problem Type To Model Family Map
+这是新版工作流的 active 建模知识目录，不是旧式选题目录，也不是自动执行工具。Agent 必须直接阅读 `workspace/problem/problem.md`，把题目要求拆成 `q*`，再用本文件选择可实现、可验证、可解释、可追踪的模型路线。
 
-| Problem type | Good first families | Useful competitors | Typical evidence to check |
+## 建模路线契约
+
+每个 `q*` 的 `candidates.md` 在条件允许时应比较至少三类结构不同的路线：
+
+| 候选角色 | 必要作用 | 常见例子 | 保留条件 |
 |---|---|---|---|
-| Optimization / allocation / scheduling | linear programming, integer programming, nonlinear programming | dynamic programming, robust optimization, metaheuristics | feasibility, constraint satisfaction, objective sensitivity |
-| Prediction / forecasting | regression, time series, grey prediction | machine learning predictors, ensemble prediction | train/test split, error metric, residual pattern |
-| Evaluation / ranking | AHP, entropy weight, TOPSIS | fuzzy evaluation, PCA, factor analysis | indicator direction, weight stability, rank sensitivity |
-| Classification / recognition | logistic regression, SVM, tree models | neural networks, kNN, naive Bayes | confusion matrix, class balance, threshold sensitivity |
-| Clustering / segmentation | k-means, hierarchical clustering | DBSCAN, Gaussian mixture, spectral clustering | cluster validity, interpretability, robustness to scaling |
-| Simulation / stochastic process | Monte Carlo, discrete-event simulation | system dynamics, agent-based model | random seed control, scenario design, convergence |
-| Network / routing / graph | shortest path, max flow, min-cost flow | MST, TSP/VRP heuristics, centrality | graph construction, edge meaning, complexity |
-| Statistical inference | descriptive statistics, hypothesis test, correlation/regression | ANOVA, distribution fitting, Bayesian update | assumptions, confidence intervals, sample size |
-| Dynamics / diffusion / physical process | ODE, PDE, difference equations | compartment model, cellular automata | units, boundary conditions, stability |
-| Signal / image / spatiotemporal data | FFT, wavelet, filtering | feature engineering, spatiotemporal regression | sampling rate, denoising effect, feature validity |
-| Decision / policy / strategy | decision tree, game theory, MDP | multi-criteria decision, scenario policy | payoff definition, scenario coverage, risk tradeoff |
+| 基线模型 | 透明下界与 sanity check | 手算公式、贪心规则、OLS、简单 TOPSIS、最短路 | 能快速运行，并能用一段话解释 |
+| 主模型 | 在精度、解释性、可实现性之间取得最佳平衡 | MILP、ARIMA+回归、熵权-TOPSIS、随机森林、系统动力学 | 直接回答该 `q*` 的目标输出 |
+| 鲁棒替代模型 | 检验结论是否依赖单一建模选择 | 鲁棒优化、bootstrap 排名、交叉方法预测、情景仿真 | 能暴露不确定性或模型选择风险 |
 
-## Candidate Model Selection Method
-
-For each `q*`, generate at least three structurally different candidates when the problem allows it:
-
-| Candidate role | Purpose | Example |
-|---|---|---|
-| Baseline | Simple and auditable lower bound | manual formula, greedy rule, ordinary least squares, simple TOPSIS |
-| Main model | Best balance of fit, interpretability, and implementability | mixed-integer model, ARIMA + regression, entropy-TOPSIS, random forest |
-| Robust alternative | Tests whether conclusions depend on one modeling choice | robust optimization, bootstrap ranking, alternative classifier, scenario simulation |
-
-Record rejected candidates in `candidates.md` with a concrete reason:
+`candidates.md` 必须记录被淘汰的路线：
 
 ```text
-candidate | kept/rejected | reason | data need | compute risk | paper interpretability
+candidate | kept/rejected | task fit | data need | implementation risk | validation route | paper interpretability | reason
 ```
 
-Reject a candidate when:
+出现以下情况时应淘汰或降级路线：
 
-- required data are absent from `workspace/problem/` or cannot be reconstructed;
-- assumptions are stronger than the problem supports;
-- implementation would be too fragile for the available time;
-- the model cannot produce traceable fields for `result.json`;
-- the explanation would be weaker than a simpler model with similar performance.
+- 所需数据在 `workspace/problem/` 中不存在，且无法合理重构；
+- 无法产生适合写入 `workspace/output/q*/results/result.json` 的结构化字段；
+- 假设强度超过题面和数据可支持范围；
+- 验证只能装饰性存在，不能诊断模型风险；
+- 简单模型在论文表达上更可信，复杂模型没有明显收益；
+- 计算风险高，且没有可完成的 fallback。
 
-## Model Families
+## 问题类型到模型族映射
 
-### Optimization
+| `analysis.md` 中的任务信号 | 优先考虑的模型族 | 可竞争路线 | 必查证据 |
+|---|---|---|---|
+| 分配、调度、指派、路径、资源约束下决策 | LP、IP、MILP、非线性规划 | 动态规划、最小费用流、鲁棒优化、启发式 | 可行性、约束残差、目标敏感性 |
+| 多目标冲突下取折中 | 加权多目标、Pareto、目标规划 | epsilon-constraint、鲁棒多目标 | 权重敏感性、折中曲线 |
+| 预测未来数值或补全趋势 | 回归、时间序列、灰色预测 | 机器学习预测、集成、状态空间 | 训练/测试误差、残差、预测期稳定性 |
+| 推断关系或估计参数 | 回归、假设检验、贝叶斯更新 | 机理模型校准、分布拟合 | 置信区间、残差、假设 |
+| 综合评价或排序 | 熵权、AHP、TOPSIS | 模糊评价、PCA、因子分析 | 指标方向、权重敏感性、排名稳定性 |
+| 分类、识别、风险分级 | Logistic、SVM、树模型 | 随机森林、GBDT、KNN、朴素贝叶斯 | 类别平衡、混淆矩阵、阈值稳定性 |
+| 聚类或对象分群 | k-means、层次聚类 | DBSCAN、GMM、谱聚类 | 标准化、聚类有效性、可解释性 |
+| 不确定、排队、反馈、异质主体 | Monte Carlo、离散事件仿真 | 系统动力学、Agent-based model | 情景设计、收敛、随机种子 |
+| 物理、生态、扩散、增长衰减过程 | ODE、PDE、差分方程 | 仓室模型、元胞自动机 | 单位、边界条件、稳定性 |
+| 网络、路径、流量、影响力、连通性 | 最短路、最大流、最小费用流 | MST、TSP/VRP、中心性、社团发现 | 图构造、边权含义、复杂度 |
+| 信号、图像、时空特征 | FFT、小波、滤波 | 特征工程、时空回归 | 采样率、噪声、特征有效性 |
+| 策略、博弈、序贯决策 | 决策树、博弈论、MDP | 情景政策、多准则决策 | 收益定义、情景覆盖、风险 |
 
-- Linear programming: use when objective and constraints can be expressed linearly; strong for allocation and production planning.
-- Integer or binary programming: use when decisions are discrete, selected, assigned, opened, routed, or scheduled.
-- Nonlinear programming: use when objective or constraints include nonlinear response, saturation, risk, or physics.
-- Multi-objective programming: use when tradeoffs are part of the question; report Pareto or weighted compromise clearly.
-- Dynamic programming: use when decisions are sequential and have overlapping substructure.
-- Robust or stochastic programming: use when parameters are uncertain and worst-case or distribution-aware decisions matter.
-- Heuristics and metaheuristics: use for large combinatorial spaces; must include baseline comparison and reproducibility notes.
+## 候选模型评估维度
 
-### Prediction
+在 `candidates.md` 中使用定性评价；证据不足时不要伪造精确分数。
 
-- Regression: interpretable baseline for numeric response.
-- Time series: use trend, seasonality, autocorrelation, or temporal dependence.
-- Grey prediction: acceptable for small-sample monotone systems, but validate carefully.
-- Machine learning predictors: use when nonlinear features and enough samples exist.
-- Ensemble prediction: use when multiple weak models offer complementary errors.
-
-### Evaluation And Ranking
-
-- AHP: useful for expert-structured criteria; document pairwise consistency.
-- Entropy weight: useful when objective variation in indicators should drive weights.
-- TOPSIS: useful for distance-to-ideal ranking; verify indicator normalization.
-- Fuzzy evaluation: useful when criteria are qualitative or interval-like.
-- PCA or factor analysis: useful when indicators are correlated and dimension reduction is justified.
-
-### Classification
-
-- Logistic regression: interpretable baseline for binary or multiclass with engineered features.
-- SVM: useful for medium-size feature spaces and margin-based separation.
-- Tree models: useful for nonlinear rules and feature importance.
-- Neural networks: use only when data volume and validation are sufficient.
-- kNN or naive Bayes: simple baselines for classification sanity checks.
-
-### Simulation
-
-- Monte Carlo: quantify uncertainty and scenario distributions.
-- System dynamics: model feedback loops over time.
-- Cellular automata: model local rules and spatial evolution.
-- Agent-based model: model heterogeneous actors and interactions.
-- Discrete-event simulation: model queues, service systems, and event timelines.
-
-### Graph And Network
-
-- Shortest path: route, transfer, or minimal-cost path.
-- Max flow and min-cost flow: capacity-constrained transport or assignment.
-- MST: minimal connection network.
-- Centrality and community detection: influence, importance, or structure discovery.
-- TSP/VRP: routing with visit constraints; usually needs heuristics for large instances.
-
-### Statistics And Dynamics
-
-- Hypothesis tests and confidence intervals: support claims and comparisons.
-- Distribution fitting: describe uncertain variables or generate scenarios.
-- ODE/PDE/difference equations: describe continuous or discrete physical evolution.
-- FFT and wavelet methods: extract frequency or multiscale signal structure.
-- Game theory and MDP: reason about strategic or sequential decisions.
-
-## Hybrid Model Patterns
-
-Good papers often combine a transparent baseline with a stronger model:
-
-| Hybrid pattern | Use when | Example output |
+| 维度 | 强路线 | 弱路线 |
 |---|---|---|
-| Prediction + optimization | future quantity drives allocation | predicted demand feeds integer program |
-| Evaluation + clustering | alternatives need grouping and ranking | cluster first, rank within groups |
-| Simulation + policy | policy must be stress-tested | scenario simulation compares rules |
-| Graph + optimization | network structure constrains decisions | shortest path candidates enter allocation model |
-| Statistical inference + mechanistic model | parameters need estimation | regression estimates coefficients for ODE |
+| 题意匹配 | 直接对应要求输出与约束 | 解决了相邻但不同的问题 |
+| 数据匹配 | 使用已有数据，预处理清楚 | 依赖缺失、猜测或脆弱数据 |
+| 可解释性 | 变量、参数、结果能进入论文解释 | 黑箱结果缺少意义层 |
+| 可实现性 | 能用 Python 和现有库在时间内完成 | 求解器、数据或复杂度风险过高 |
+| 可验证性 | 有边界、基线、敏感性或交叉验证路线 | 只产出答案值 |
+| 可追踪性 | 输出字段能进入 `result.json` 与 `traceability.md` | 论文结论只能靠人工复制 |
+| 鲁棒性 | 结论能承受合理参数变化 | 小扰动可能推翻答案 |
+| 论文表达力 | 支撑模型命名、图表、假设、评价 | 像工具调用而非建模过程 |
 
-## Plan Checklist
+## 模型族目录
 
-Before Stage 3 Build, `model.md` should answer:
+### 优化类
 
-- What is optimized, predicted, ranked, classified, simulated, or inferred?
-- What are the variables, parameters, units, and domains?
-- What assumptions are necessary and where are they recorded?
-- What is the baseline or sanity-check method?
-- What exact fields will appear in `result.json`?
-- Which constraints or metrics will be checked in `validation.md`?
-- Which parameters will be varied in `sensitivity.md`?
-- What conclusion would make the model unusable?
+适用于最优分配、安排、计划、调度、路径、定价、容量、政策等约束决策问题。
 
-## Manual And AP Behavior
+| 模型 | 适用条件 | 数据需求 | 输出形式 | 可解释性 | 常见失败模式 | CUMCM 命名方式 | 代码模板 |
+|---|---|---|---|---|---|---|---|
+| 线性规划 | 目标和约束可线性表达或线性化 | 系数、资源上限、变量界 | 决策向量、目标值、约束松弛 | 高；对偶和松弛有解释价值 | 隐含非线性、约束不可行、单位不一致 | 资源约束线性规划模型 | `templates/shared/code_starter/optimization.py` |
+| 整数/0-1 规划 | 决策是选择、分配、开关、计数、调度 | 对象集合、成本、容量、兼容矩阵 | 选择集、调度表、分配表 | 高，前提是变量命名清楚 | 组合爆炸、整数性遗漏、忽略 gap | 0-1 指派优化模型 | `templates/shared/code_starter/optimization.py` |
+| 非线性规划 | 存在饱和、乘积、风险、距离或物理非线性 | 非线性参数、初值、边界 | 最优解、局部解、敏感性 | 中等，需要曲线和约束解释 | 局部最优、尺度不稳、拟合关系无支撑 | 非线性响应优化模型 | `templates/shared/code_starter/optimization.py` |
+| 动态规划 | 序贯决策有阶段和重叠子结构 | 状态、转移、终止收益/成本 | 策略表、价值函数 | 状态较小时较高 | 状态爆炸、Markov 假设错误 | 阶段递推动态规划模型 | `templates/shared/code_starter/optimization.py` |
+| 启发式/元启发式 | 大规模组合问题难以精确求解 | 目标评价器、约束、随机种子、迭代次数 | 最优候选、收敛曲线 | 中等，必须与基线比较 | 随机不可复现、无最优性证据 | 启发式搜索优化模型 | `templates/shared/code_starter/optimization.py` |
 
-Manual mode: after `candidates.md` and `model.md` are written, pause before Build and list file paths only.
+优化类验证至少应包含：可行性、约束残差、基线比较、关键系数敏感性。
 
-AP mode: continue only when `review_note.md` records why the selected model is acceptable and `warnings.md` records unresolved risk.
+### 多目标与鲁棒优化
+
+适用于目标冲突明显或不确定参数会改变答案的情形。
+
+| 模型 | 适用条件 | 数据需求 | 输出形式 | 可解释性 | 常见失败模式 | CUMCM 命名方式 | 代码模板 |
+|---|---|---|---|---|---|---|---|
+| 加权多目标 | 目标可归一化，权重有含义 | 目标指标、归一化范围、权重 | 折中解、各目标值 | 高，若权重解释清楚 | 权重任意、尺度支配 | 加权多目标评价-优化模型 | `templates/shared/code_starter/optimization.py` |
+| Pareto 前沿 | 折中关系本身重要 | 可行求解器、目标函数 | 前沿图、代表性方案 | 图形表达强 | 前沿点太少、缺少决策规则 | Pareto 前沿折中模型 | `templates/shared/code_starter/optimization.py` |
+| 目标规划 | 目标水平比单纯最优更重要 | 目标值、偏差惩罚 | 偏差表、推荐方案 | 高 | 目标值凭空设定 | 目标规划折中决策模型 | `templates/shared/code_starter/optimization.py` |
+| 鲁棒优化 | 参数不确定且最坏情形重要 | 不确定区间或情景 | 鲁棒方案、鲁棒代价 | 中高 | 过度保守、区间无依据 | 鲁棒情景优化模型 | `templates/shared/code_starter/optimization.py` |
+| 随机规划 | 不确定性有情景概率 | 情景、概率、recourse 成本 | 期望目标、情景结果 | 中等 | 概率猜测、情景未审计 | 情景随机规划模型 | `templates/shared/code_starter/optimization.py` |
+
+必须报告鲁棒性带来的代价：目标损失、可行裕度或政策复杂度。
+
+### 预测类
+
+适用于未来值、缺失值、趋势、需求、风险或响应估计。
+
+| 模型 | 适用条件 | 数据需求 | 输出形式 | 可解释性 | 常见失败模式 | CUMCM 命名方式 | 代码模板 |
+|---|---|---|---|---|---|---|---|
+| 线性/多元回归 | 关系可解释，样本量适中 | 响应变量、特征、训练/测试划分 | 系数、预测、置信或误差 | 高 | 多重共线、外推、残差未检 | 多因素回归预测模型 | `templates/shared/code_starter/prediction.py` |
+| ARIMA/ETS 时间序列 | 趋势、季节、自相关明显 | 有序时间序列、频率、预测期 | 预测表、区间、残差诊断 | 中等 | 序列太短、结构突变、无 holdout | 时间序列趋势预测模型 | `templates/shared/code_starter/prediction.py` |
+| 灰色预测 | 样本很小且趋势单调 | 短序列 | 短期预测 | 中等但脆弱 | 用于波动数据、无残差检验 | 灰色系统预测模型 | `templates/shared/code_starter/prediction.py` |
+| 树/森林/提升模型 | 非线性特征且样本充足 | 特征表、目标、验证划分 | 预测、特征重要性、误差 | 中等 | 过拟合、数据泄漏、解释弱 | 特征驱动集成预测模型 | `templates/shared/code_starter/prediction.py` |
+| 集成预测 | 多模型误差互补 | 可比较的模型输出 | 加权预测、模型比较 | 中等 | 权重任意、误差分析缺失 | 混合集成预测模型 | `templates/shared/code_starter/prediction.py` |
+
+预测验证至少包含一种误差指标、残差检查，并说明预测期是否可信。
+
+### 评价类
+
+适用于方案打分、优先级、分级、多指标比较。
+
+| 模型 | 适用条件 | 数据需求 | 输出形式 | 可解释性 | 常见失败模式 | CUMCM 命名方式 | 代码模板 |
+|---|---|---|---|---|---|---|---|
+| AHP | 专家结构或层次逻辑是核心 | 层次结构、两两比较 | 权重、一致性比率 | 高，若一致性通过 | 比较任意、一致性失败 | 层次指标赋权模型 | `templates/shared/code_starter/evaluation.py` |
+| 熵权法 | 指标离散程度应决定权重 | 归一化指标矩阵 | 权重、贡献率 | 高 | 指标方向错误、尺度错误 | 熵权指标评价模型 | `templates/shared/code_starter/evaluation.py` |
+| TOPSIS | 到理想解距离有意义 | 指标矩阵、权重、方向 | 贴近度、排名 | 高 | 归一化错误、排名不稳 | 熵权-TOPSIS 综合评价模型 | `templates/shared/code_starter/evaluation.py` |
+| 模糊评价 | 指标定性、区间化或语言化 | 隶属函数、因素集 | 隶属向量、等级 | 中等 | 隶属度任意、等级含糊 | 模糊综合评价模型 | `templates/shared/code_starter/evaluation.py` |
+| PCA/因子分析 | 多个相关指标需降维 | 数值指标矩阵 | 主成分、得分、载荷 | 中等 | 样本不足、成分不可读 | 主成分综合评价模型 | `templates/shared/code_starter/evaluation.py` |
+| 聚类+排序 | 对象行为分组后再评价更合理 | 特征、标准化方法 | 类别、组内排名 | 中等 | 类数任意、未标准化 | 聚类分层评价模型 | `templates/shared/code_starter/evaluation.py` |
+
+排序结论必须有权重敏感性和排名变化分析，不能只有最终排名。
+
+### 分类类
+
+适用于类别、风险等级、状态、是否决策。
+
+| 模型 | 适用条件 | 数据需求 | 输出形式 | 可解释性 | 常见失败模式 | CUMCM 命名方式 | 代码模板 |
+|---|---|---|---|---|---|---|---|
+| Logistic 回归 | 需要可解释的类别概率 | 标签、特征 | 概率、阈值、类别 | 高 | 类别不平衡、阈值未检 | 可解释 Logistic 分类模型 | `templates/shared/code_starter/classification.py` |
+| SVM | 中等规模特征空间，间隔分离重要 | 标准化特征、标签 | 类别、间隔、支持向量 | 中等 | 核函数任意、未标准化 | 支持向量分类模型 | `templates/shared/code_starter/classification.py` |
+| 决策树/随机森林/GBDT | 非线性规则和特征重要性重要 | 充足标签样本 | 类别、重要性、混淆矩阵 | 中高 | 过拟合、数据泄漏、验证浅 | 树集成风险分类模型 | `templates/shared/code_starter/classification.py` |
+| 朴素贝叶斯/KNN | 简单基线或快速 sanity check | 标签特征 | 类别、概率或邻居投票 | 中等 | 独立性或尺度问题 | 基线概率分类模型 | `templates/shared/code_starter/classification.py` |
+| 神经网络 | 高维数据且样本量足够 | 大量标签、验证集 | 类别/概率、训练曲线 | 中低 | 黑箱、过拟合、难论证 | 数据驱动神经分类模型 | `templates/shared/code_starter/classification.py` |
+
+分类验证应包含混淆矩阵、类别平衡、指标选择、阈值检查和错误样本分析。
+
+### 仿真类
+
+适用于不确定性、排队、空间演化、反馈系统或异质主体互动。
+
+| 模型 | 适用条件 | 数据需求 | 输出形式 | 可解释性 | 常见失败模式 | CUMCM 命名方式 | 代码模板 |
+|---|---|---|---|---|---|---|---|
+| Monte Carlo | 需要传播不确定性或估计概率 | 参数分布或范围 | 分布、区间、风险概率 | 高，若假设清楚 | 分布猜测、试验次数少 | Monte Carlo 不确定性仿真模型 | `templates/shared/code_starter/simulation.py` |
+| 系统动力学 | 反馈回路随时间演化 | 库存-流量结构、速率 | 轨迹、情景比较 | 中高 | 反馈关系凭空设定、未校准 | 反馈系统动力学模型 | `templates/shared/code_starter/simulation.py` |
+| 离散事件仿真 | 排队、服务、到达、事件流程 | 到达/服务分布、事件规则 | 等待时间、利用率、吞吐 | 高 | 事件规则未验证、随机种子忽略 | 离散事件过程仿真模型 | `templates/shared/code_starter/simulation.py` |
+| 元胞自动机 | 局部空间规则生成整体模式 | 网格、邻域规则、步数 | 空间演化、状态计数 | 中等 | 规则任意、现实映射弱 | 元胞自动机演化模型 | `templates/shared/code_starter/simulation.py` |
+| Agent-based model | 异质主体交互 | 主体规则、环境、参数 | 情景结果、涌现模式 | 中等 | 规则过度猜测、难验证 | 主体交互仿真模型 | `templates/shared/code_starter/simulation.py` |
+
+仿真必须记录随机种子策略、情景定义、重复次数或收敛证据、基准情景。
+
+### 机理与微分方程类
+
+适用于守恒、扩散、增长、衰减、力、流、传播或状态转移机制。
+
+| 模型 | 适用条件 | 数据需求 | 输出形式 | 可解释性 | 常见失败模式 | CUMCM 命名方式 | 代码模板 |
+|---|---|---|---|---|---|---|---|
+| ODE | 连续时间状态按速率变化 | 初值、参数、时间范围 | 轨迹、平衡、峰值/时间 | 高，若单位清楚 | 单位错、求解不稳、参数无来源 | 机理驱动微分方程模型 | `templates/shared/code_starter/simulation.py` |
+| PDE | 状态同时随空间和时间变化 | 边界/初始条件、网格、系数 | 场、等值线、通量 | 中等 | 边界假设隐藏、离散误差 | 时空扩散方程模型 | `templates/shared/code_starter/simulation.py` |
+| 差分方程 | 离散时间递推自然 | 递推规则、初值 | 序列、稳定性、稳态 | 高 | 时间步长不匹配、递推不稳 | 离散时间演化模型 | `templates/shared/code_starter/simulation.py` |
+| 仓室模型 | 总体在状态间流动 | 转移率、仓室定义 | 仓室曲线、转移指标 | 高 | 仓室不完备、转移率猜测 | 仓室状态转移模型 | `templates/shared/code_starter/simulation.py` |
+
+机理模型必须做量纲检查和参数敏感性；论文需把方程与现实意义连接起来。
+
+### 图网络与路径类
+
+适用于节点、边、路径、流量、影响力、连通性或空间网络约束。
+
+| 模型 | 适用条件 | 数据需求 | 输出形式 | 可解释性 | 常见失败模式 | CUMCM 命名方式 | 代码模板 |
+|---|---|---|---|---|---|---|---|
+| 最短路 | 需要最小成本路径 | 节点、边、权重 | 路径、距离/成本、图或表 | 高 | 边权无意义、图不连通 | 加权网络最短路模型 | `templates/shared/code_starter/optimization.py` |
+| 最大流/最小费用流 | 容量约束运输或分配 | 容量、供需、费用 | 流量矩阵、瓶颈、总成本 | 高 | 流量守恒错误、需求不可行 | 容量约束网络流模型 | `templates/shared/code_starter/optimization.py` |
+| 最小生成树 | 需要最小连接网络 | 连通加权图 | 选中边、总权重 | 高 | 题目实际需要路径而非连接 | 最小生成网络模型 | `templates/shared/code_starter/optimization.py` |
+| TSP/VRP | 访问顺序或车辆路线重要 | 距离矩阵、车辆约束 | 路线、成本、服务表 | 中等 | 规模过大、约束遗漏 | 车辆路径优化模型 | `templates/shared/code_starter/optimization.py` |
+| 中心性/社团 | 影响力或结构是结果 | 网络拓扑、边权 | 中心性排名、社团 | 中等 | 图构造无支撑 | 网络结构评价模型 | `templates/shared/code_starter/evaluation.py` |
+
+图模型验证应检查不连通情形、边权含义、关键边或节点移除敏感性。
+
+## 强论文常见混合模式
+
+| 混合模式 | 适用情形 | 论文表达方式 |
+|---|---|---|
+| 预测 + 优化 | 需求、风险、负荷预测驱动决策 | “预测需求约束下的资源配置模型” |
+| 评价 + 优化 | 先筛选或评分，再分配资源 | “熵权-TOPSIS 筛选与资源优化模型” |
+| 仿真 + 政策比较 | 决策需经情景压力测试 | “政策鲁棒性的情景仿真比较” |
+| 图网络 + 优化 | 网络结构约束决策 | “路径可行性约束下的网络流分配模型” |
+| 机理 + 参数估计 | 方程参数需要数据校准 | “回归校准的状态演化模型” |
+| 聚类 + 局部模型 | 不同群体行为不同 | “分群预测与组内排序模型” |
+| 鲁棒优化 + 敏感性 | 不确定性是核心风险 | “含鲁棒代价分析的稳健方案模型” |
+
+如果两个模型之间没有真实的信息传递，不要强行命名为混合模型。论文必须说明模型 A 的哪个输出进入模型 B。
+
+## CUMCM 论文表达规则
+
+好模型名应具体、诚实、能体现机制：
+
+| 弱名称 | 更好的名称 |
+|---|---|
+| 数学模型一 | 熵权-TOPSIS 综合评价模型 |
+| 优化模型 | 容量约束混合整数分配模型 |
+| 预测模型 | ARIMA-回归混合需求预测模型 |
+| 仿真模型 | Monte Carlo 情景压力测试模型 |
+| 改进模型 | 鲁棒多目标路径优化模型 |
+
+每个模型在论文中应能说明：
+
+- 决策变量或状态变量；
+- 目标、评价指标或预测目标；
+- 约束或控制方程；
+- 输入数据与预处理；
+- 输出字段以及在 `result.json` 中的位置；
+- 验证路线；
+- 敏感性参数；
+- 局限和失败情形。
+
+## 各产物期望
+
+`analysis.md`：
+
+- 分类任务类型；
+- 写清输入、输出和依赖；
+- 定义成功标准；
+- 标出会导致模型不可用的风险。
+
+`candidates.md`：
+
+- 尽量包含基线、主模型、鲁棒替代；
+- 比较题意匹配、数据匹配、实现风险、验证路线、论文表达；
+- 记录被拒绝候选和具体原因。
+
+`model.md`：
+
+- 定义变量、参数、单位、域、目标/指标、约束、算法、预期输出字段；
+- 使用 CUMCM 风格的描述性模型名；
+- 说明求解器或库假设；
+- 说明哪些证据会使模型失效。
+
+`result.json`：
+
+- 包含结构化硬数字、状态、单位、来源命令、claim eligibility；
+- 状态使用 `pass`、`partial`、`fail`；
+- 不隐藏失败或 partial 运行。
+
+`validation.md` 与 `sensitivity.md`：
+
+- 把检查与模型风险相连；
+- 包含基线、边界、约束、残差、交叉方法、消融或扰动证据；
+- 说明结论稳定、条件稳定或不稳定。
+
+## 迁移说明
+
+本 active 目录保留 legacy 中有执行价值的建模知识，但移除了旧控制流依赖。所有建议必须落到可见 workspace 产物和默认 Python 实现语言上。

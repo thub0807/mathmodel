@@ -1,18 +1,25 @@
 # workspace 模板契约库
 
-`templates/workspace/` 是 `workspace/output/` 的输出文件契约库，不是可选示例。
+`templates/workspace/` 是 `workspace/output/` 的 artifact contract，不是示例库，也不是建模方法库。
 
-本目录只定义 workspace 输出文件的字段契约、追溯字段、必填项和结构。Agent 生成 workflow 输出时，必须按对应模板的字段、表格、来源和追溯要求填写。
+它属于当前三层架构中的 CUMCM competition and output layer，负责定义每个输出文件的字段、来源、追溯信息、必填项和结构。
 
-本目录不承担以下职责：
+## 职责边界
 
-- 建模方法库：建模方法来自 `references/model_catalog.md`、stage references 和 feedback layers。
-- 竞赛写作知识库：CUMCM 写作质量来自 `competitions/cumcm/`。
-- 正式 LaTeX 模板库：CUMCM 正式排版来自 `templates/latex/cumcm/cumcmthesis/`。
+`templates/workspace/` 负责：
 
-`templates/workspace/final/paper.md` 是 Markdown 中间稿结构契约。
+- 规定 `workspace/output/` 下各产物的结构；
+- 规定 result、traceability、review、quality report 的字段；
+- 规定 Markdown 中间稿和 fallback scaffold 的文件契约；
+- 帮助 Agent 保持产物一致、可审计、可追踪。
 
-`templates/workspace/final/paper.tex` 只是 fallback scaffold，不是 CUMCM 竞赛正式模板。
+`templates/workspace/` 不负责：
+
+- 建模方法：读取 `references/model_catalog.md` 和 stage references；
+- 质量判断：读取 `references/rubrics.md`、feedback layers、`quality_gate.md`；
+- CUMCM 写作经验：读取 `competitions/cumcm/`；
+- 正式 LaTeX 排版：读取 `templates/latex/cumcm/cumcmthesis/`；
+- 历史迁移材料：不读取 `legacy/`。
 
 ## 固定输入
 
@@ -39,6 +46,7 @@ workspace/output/final/
 | `workspace/output/material_index.md` | `templates/workspace/root/material_index.md` | Stage 0 |
 | `workspace/output/question_index.md` | `templates/workspace/root/question_index.md` | Stage 1 |
 | `workspace/output/q*/analysis.md` | `templates/workspace/q/analysis.md` | Stage 2 |
+| `workspace/output/q*/solution_plan.md` | `templates/workspace/q/solution_plan.md` | Stage 2 |
 | `workspace/output/q*/candidates.md` | `templates/workspace/q/candidates.md` | Stage 2 |
 | `workspace/output/q*/model.md` | `templates/workspace/q/model.md` | Stage 2 |
 | `workspace/output/q*/assumptions.md` | `templates/workspace/q/assumptions.md` | Stage 2 |
@@ -59,8 +67,7 @@ workspace/output/final/
 | `workspace/output/final/final_tables_index.md` | `templates/workspace/final/final_tables_index.md` | Stage 7 |
 | `workspace/output/final/traceability.md` | `templates/workspace/final/traceability.md` | Stage 7 |
 | `workspace/output/final/paper.md` | `templates/workspace/final/paper.md` | Stage 8 |
-| `workspace/output/final/paper.tex` | `templates/workspace/final/paper.tex` | Stage 8 |
-| `workspace/output/final/paper.pdf` | Generated from `paper.tex`; record failures in Stage 9 reports | Stage 8 |
+| `workspace/output/final/paper.tex` | `templates/workspace/final/paper.tex` fallback scaffold | Stage 8 |
 | `workspace/output/final/source/` | `templates/workspace/final/source/README.md` | Stage 8 |
 | `workspace/output/final/review_report.md` | `templates/workspace/final/review_report.md` | Stage 9 |
 | `workspace/output/final/anonymity_report.md` | `templates/workspace/final/anonymity_report.md` | Stage 9 |
@@ -68,36 +75,22 @@ workspace/output/final/
 
 ## 填写规则
 
-- 每个模板必须保留文件用途、对应 stage、必填字段、来源字段、可追溯要求和禁止空泛表达。
+- 每个输出文件必须保留模板中的用途、stage、必填字段、来源字段和追溯字段。
 - 不知道的字段写 `待确认` 或 `不适用`，并说明原因；不要留空。
 - 硬数字、图表、表格和论文结论必须能追溯到源文件和验证状态。
+- `paper.md` 是 Markdown 中间稿契约。
+- `paper.tex` 是 fallback scaffold；CUMCM 正式排版优先使用 `templates/latex/cumcm/cumcmthesis/`。
 
 ## run log 命名规则
 
-模板文件使用 Markdown 名称：
+模板文件：
 
 ```text
 templates/workspace/q/results/run_log.md
 ```
 
-实际产物文件仍写为：
+实际产物：
 
 ```text
 workspace/output/q*/results/run.log
-```
-
-也就是说，`run_log.md` 定义字段契约，`run.log` 是运行时输出文件名。
-
-## 纸面稿与正式模板边界
-
-`templates/workspace/final/paper.md` 只规定 Markdown 中间稿需要哪些字段和追溯信息。论文写作策略、摘要结构、句式、反模式和格式经验应读取：
-
-```text
-competitions/cumcm/
-```
-
-`templates/workspace/final/paper.tex` 只在正式模板不可用时提供 fallback scaffold。CUMCM 正式排版优先使用：
-
-```text
-templates/latex/cumcm/cumcmthesis/
 ```

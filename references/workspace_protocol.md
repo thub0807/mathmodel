@@ -19,12 +19,12 @@ Required:
 
 ```text
 workspace/problem/problem.md
-workspace/problem/reference.pdf
 ```
 
 Optional:
 
 ```text
+workspace/problem/reference.pdf
 workspace/problem/images/
 workspace/problem/attachments/
 ```
@@ -65,6 +65,7 @@ workspace/output/material_index.md
 
 ## Failure Handling
 
-- 缺失 `problem.md` 或 `reference.pdf` 时，不能进入完整 workflow。
+- 缺失 `problem.md` 时，不能进入完整 workflow。
+- 缺失 `reference.pdf` 时，记录为 audit-only 材料缺失；不得因此阻止 Agent 直接阅读和理解 `problem.md`。
 - 缺失可选材料时，记录到 `problem_audit.md` 与 `material_index.md`。
 - 材料无法解释时，进入 Manual checkpoint 请求用户补充或确认。
