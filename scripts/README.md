@@ -8,17 +8,18 @@
 
 ### `render_paper.py`
 
-用途：在需要时辅助把论文中间文件转换为 LaTeX / PDF。
+用途：legacy / optional 工具，可在改造后辅助把论文中间文件转换为 LaTeX / PDF。
 
 注意：
 
 - 新主流程的论文输出位置是 `workspace/output/final/`。
-- 如脚本内部仍保留旧参数或旧路径兼容逻辑，本轮不把它作为主流程依赖。
+- 如脚本内部仍保留旧参数、旧路径或旧状态文件兼容逻辑，当前 active workflow 不调用它。
+- 后续如需使用，应先改造成读取 `workspace/output/` 的新版工具。
 - 若 PDF 生成失败，应把失败原因写入 `workspace/output/final/review_report.md` 与 `workspace/output/final/quality_report.md`。
 
 ### `extract_diff.py`
 
-用途：可选地辅助生成局部修改提示或差异内容。
+用途：legacy / optional 工具，可选地辅助生成局部修改提示或差异内容。
 
 注意：
 
@@ -27,13 +28,14 @@
 
 ### `score_artifact.py`
 
-用途：旧流程评分工具，当前保留为历史工具和维护参考。
+用途：legacy utility。旧流程评分工具，当前保留为历史工具和维护参考。
 
 注意：
 
 - 新主流程不调用它。
 - 新主流程不要求它写入任何集中式状态文件。
 - 新质量记录统一是 `workspace/output/final/quality_report.md`。
+- 如果它仍依赖旧状态文件，不能作为当前 active workflow 的质量门禁。
 
 ## 离线维护工具
 

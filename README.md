@@ -116,3 +116,5 @@ Stage 9  Final Review
 ## 脚本说明
 
 `scripts/` 下脚本是可选工具，不是主流程依赖。详见 `scripts/README.md`。
+
+如果旧脚本仍依赖旧状态文件，它们只能视为 legacy utility。当前 active workflow 不调用这些脚本作为质量门禁；新版质量记录以 `workspace/output/final/quality_report.md` 为准。

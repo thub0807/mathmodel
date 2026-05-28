@@ -33,6 +33,7 @@ workspace/problem/attachments/
 ## 禁止事项
 
 - 不使用集中式状态机 JSON。
+- 不运行旧 `scripts/score_artifact.py` 作为主流程质量门禁。
 - 不要求在阅读 `problem.md` 前运行预检脚本。
 - 不使用 Python 对 `problem.md` 做语义拆题。
 - 不使用正则脚本识别问题。
