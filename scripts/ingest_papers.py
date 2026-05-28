@@ -10,7 +10,7 @@ ingest_papers.py — 离线烘焙: 从 references/papers/ 下的 91 篇真国赛
 依赖: pdfplumber (pip install pdfplumber)
 
 用法:
-    python scripts/dev/ingest_papers.py --papers-dir references/papers/ \\
+    python scripts/ingest_papers.py --papers-dir references/papers/ \\
                                      --output references/empirical_distribution.md
 """
 
@@ -180,7 +180,7 @@ def render_markdown(overall: dict, by_year: dict, by_letter: dict, n_total: int)
     lines.append("")
     lines.append(f"> 从 `references/papers/` 下 {n_total} 篇真国赛获奖论文 (2023-2025) 自动烘焙。")
     lines.append(f"> 烘焙时间: {datetime.now().isoformat(timespec='seconds')}.")
-    lines.append("> 由 `scripts/dev/ingest_papers.py` 生成。L1 critic 评摘要字数等硬阈值维度时引用本文件 p 分位。")
+    lines.append("> 由 `scripts/ingest_papers.py` 生成。L1 critic 评摘要字数等硬阈值维度时引用本文件 p 分位。")
     lines.append("")
     lines.append("---")
     lines.append("")

@@ -11,15 +11,10 @@ render_paper.py — markdown 中间产物 → 最终 PDF (v3.0 三竞赛版)
 4. 三编生成 PDF
 
 用法:
-    python scripts/legacy/render_paper.py --competition cumcm --workspace cwd/paper_workspace/
-    python scripts/legacy/render_paper.py --competition mcm --workspace ws/ --output out/
-    python scripts/legacy/render_paper.py --competition diangong --workspace ws/ --no-compile  (dry-run)
+    python scripts/render_paper.py --competition cumcm --workspace cwd/paper_workspace/
+    python scripts/render_paper.py --competition mcm --workspace ws/ --output out/
+    python scripts/render_paper.py --competition diangong --workspace ws/ --no-compile  (dry-run)
 """
-
-# Legacy adapter notice:
-# - optional only, not the active v1.2-alpha workflow entrypoint
-# - still contains legacy competition and decision_log assumptions
-# - adapt it to workspace/output before relying on it in the new workflow
 
 import argparse
 import json
@@ -30,7 +25,7 @@ import shutil
 from pathlib import Path
 
 
-_SKILL_ROOT = Path(__file__).resolve().parent.parent.parent
+_SKILL_ROOT = Path(__file__).resolve().parent.parent
 
 TEMPLATE_MAP = {
     "cumcm": {

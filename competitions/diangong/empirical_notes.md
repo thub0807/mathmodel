@@ -1,32 +1,29 @@
-﻿# 鐢靛伐鏉疄娴嬪垎甯?(SEED v0.1)
+# 电工杯实测分布 (SEED v0.1)
 
-> **姝ょ洰褰曟暟鎹负绉嶅瓙鐗堟湰 (seed_v0.1), 鏈仛鐪?PDF 鐑樼剻銆?*
-> 闃堝€煎彇鑷巻骞寸數宸ユ澂棰樼洰棰橀噺鍒嗘瀽 + 鍏紑璇勫鏍囧噯浼扮畻 + 鍥借禌 D 棰橀儴鍒嗙被姣斻€?
-> 鍚庣画鑻ユ彁浜?30+ 绡囩數宸ユ澂涓€绛夊 PDF, 鍙敤 `scripts/dev/ingest_papers.py` 閲嶆柊鐑樼剻瑕嗙洊銆?
+> **此目录数据为种子版本 (seed_v0.1), 未做真 PDF 烘焙。**
+> 阈值取自历年电工杯题目题量分析 + 公开评审标准估算 + 国赛 D 题部分类比。
+> 后续若提交 30+ 篇电工杯一等奖 PDF, 可用 `scripts/ingest_papers.py` 重新烘焙覆盖。
 
-## 鏁版嵁缂哄彛鎻愮ず
+## 数据缺口提示
 
-`empirical.json` 涓墍鏈?`min` / `max` / `mean` 瀛楁濉殑鏄及绠楀€笺€?In `v1.2-alpha`, treat them as optional background context for per-question review and final quality checks, and mark them clearly as seed-level evidence when cited.
+`empirical.json` 中所有 `min` / `max` / `mean` 字段填的是估算值。score_artifact.py 注入时, evidence 字段会自动标 `[seed: 阈值无实测分位]` 避免误导。
 
-## 闃堝€煎嚭澶?
+## 阈值出处
 
-| 闃堝€?| 鏉ユ簮 |
+| 阈值 | 来源 |
 |------|------|
-| 鎽樿 600-1000 瀛?| 宸ョ▼绫绘憳瑕佸父瑙佸尯闂? 姣斿浗璧?5 娈靛紡鐣ョ煭 |
-| 璁烘枃 25-30 椤?| 鍘嗗勾鑾峰璁烘枃鐩祴 |
-| 瀛愰棶鏁?6-8 | 鍘嗗勾棰樼洰缁撴瀯绋冲畾 |
-| 鍥?12-25 | 宸ョ▼绫诲浘琛ㄥ, 鍚瓑楂樼嚎 / 鏃跺簭鏇茬嚎 / 鍗曠嚎鍥?|
-| 鍏紡 18-50 | 涓瓑瀵嗗害 |
-| 寮曠敤 10-22 | 鐢靛姏 / 鑳芥簮绫绘湡鍒婁负涓?|
+| 摘要 600-1000 字 | 工程类摘要常见区间, 比国赛 5 段式略短 |
+| 论文 25-30 页 | 历年获奖论文目测 |
+| 子问数 6-8 | 历年题目结构稳定 |
+| 图 12-25 | 工程类图表多, 含等高线 / 时序曲线 / 单线图 |
+| 公式 18-50 | 中等密度 |
+| 引用 10-22 | 电力 / 能源类期刊为主 |
 
-## 涓?cumcm 鐨勫樊寮?
+## 与 cumcm 的差异
 
-鐢靛伐鏉殑"宸ョ▼瀹炵敤鎬?缁村害鍥借禌娌℃湁鏄惧紡瀵瑰簲銆傛湰 overlay 鍔犱簡 3 涓伐绋嬪寲缁村害 (engineering_practicality / physical_meaning / data_completeness), 鐩存帴杩?stage 8銆?
+电工杯的"工程实用性"维度国赛没有显式对应。本 overlay 加了 3 个工程化维度 (engineering_practicality / physical_meaning / data_completeness), 直接进 stage 8。
 
-鐢靛伐鏉殑瀛愰棶鏁颁腑浣嶆暟 7, 姣斿浗璧?4 澶氳繎涓€鍊? 杩欐剰鍛崇潃 stage 5 鍦?standard 妯″紡涓嬪彲鑳借窇涓嶅畬銆傚缓璁绠楀垎閰?
-- planning and setup: about 8h
-- per-question build loop: about 18-24h
-- final integration, paper, and review: about 12-18h
-
-
-
+电工杯的子问数中位数 7, 比国赛 4 多近一倍, 这意味着 stage 5 在 standard 模式下可能跑不完。建议预算分配:
+- stage 1-4: 共 8h (国赛 6h 略加)
+- stage 5: 18-24h (国赛 6-12h × 子问数, 但电工杯总预算受 72h 约束, 单 Qi ≤ 2.5h)
+- stage 6-9: 共 12-18h

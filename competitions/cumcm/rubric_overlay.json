@@ -1,49 +1,49 @@
-﻿{
-  "_doc": "Optional CUMCM judging context for Stage 2 planning, Stage 8 paper assembly, and Stage 9 review. It is not an active control file in v1.2-alpha.",
+{
+  "_doc": "CUMCM 国赛特化评分维度 overlay。叠加在 references/rubrics.md 通用基础维度之上。score_artifact.py 加载后合并到 DIM_WHITELIST。",
   "competition": "cumcm",
   "version": "1.0",
   "stage_overrides": {
     "8": {
-      "_note": "鍥借禌 stage 8 鍐欎綔缁村害: 寮哄埗 5 娈靛紡鎽樿 + GB/T 7714 + 涓枃鍐欎綔瑙勮寖",
+      "_note": "国赛 stage 8 写作维度: 强制 5 段式摘要 + GB/T 7714 + 中文写作规范",
       "dims": {
         "1_abstract_5_paragraph": {
-          "describe": "鎽樿蹇呴』婊¤冻 5 娈靛紡 (鑳屾櫙/鏂规硶/缁撴灉/浜偣/鍏抽敭璇?, 瀛楁暟 IQR [748, 1146] 涓綅 992 (瀹炴祴鑷?91 绡?",
+          "describe": "摘要必须满足 5 段式 (背景/方法/结果/亮点/关键词), 字数 IQR [748, 1146] 中位 992 (实测自 91 篇)",
           "hard_threshold": {"abstract_chars": {"min": 600, "max": 1300, "empirical_ref": "abstract_chars"}},
           "anchor_count_min": 4
         },
         "2_section_completeness": {
-          "describe": "8 澶х珷鑺傞綈鍏? 鎽樿/闂閲嶈堪/鍒嗘瀽/鍋囪/绗﹀彿/妯″瀷/鐏垫晱搴?璇勪环/鍙傝€冩枃鐚?闄勫綍"
+          "describe": "8 大章节齐全: 摘要/问题重述/分析/假设/符号/模型/灵敏度/评价/参考文献/附录"
         },
         "3_formulas_figures_citations": {
-          "describe": "鍏紡 IQR [12, 67], 鍥?IQR [5, 20], 寮曠敤 GB/T 7714 鏍煎紡, 鏂囩尞鏁?IQR [16, 63]",
+          "describe": "公式 IQR [12, 67], 图 IQR [5, 20], 引用 GB/T 7714 格式, 文献数 IQR [16, 63]",
           "empirical_refs": ["formula_count", "figure_count", "reference_count"]
         },
         "4_language_quality": {
-          "describe": "涓枃瀛︽湳瑙勮寖, 鍙ラ暱 25-45 瀛? 涓嫳娣锋帓绌烘牸"
+          "describe": "中文学术规范, 句长 25-45 字, 中英混排空格"
         },
         "5_visual_consistency": {
-          "describe": "姣忓瓙闂瑙嗚涓変欢濂?(娴佺▼鍥?+ 缁撴灉鍥?+ 鐏垫晱搴﹀浘), 瀛楀彿 / 閰嶈壊缁熶竴"
+          "describe": "每子问题视觉三件套 (流程图 + 结果图 + 灵敏度图), 字号 / 配色统一"
         }
       }
     },
     "9": {
-      "_note": "鍥借禌缁堝寮鸿皟 anti_patterns 32 鏉?+ cumcmthesis 缂栬瘧 + GB/T 7714",
+      "_note": "国赛终审强调 anti_patterns 32 条 + cumcmthesis 编译 + GB/T 7714",
       "dims": {
         "1_anti_pattern_coverage": {
-          "describe": "瀵圭収 competitions/cumcm/anti_patterns.md 32 鏉￠€愭潯鏍告煡, 涓€绛夊搴?鈮?3 鏉¤Е鍙?
+          "describe": "对照 competitions/cumcm/anti_patterns.md 32 条逐条核查, 一等奖应 ≤ 3 条触发"
         },
         "5_pdf_compile_clean": {
-          "describe": "xelatex 涓夌紪 0 error 0 warning, 瀛楃瓒婄晫妫€鏌?
+          "describe": "xelatex 三编 0 error 0 warning, 字符越界检查"
         }
       }
     }
   },
   "panel_personas": [
-    {"id": "math_rigor",      "label": "鏁板涓ヨ皑娲?, "weight": 1.2, "focus": "璇佹槑 + 鍋囪鏀拺 + 鏀舵暃鎬?},
-    {"id": "model_innovation","label": "妯″瀷鍒涙柊娲?, "weight": 1.0, "focus": "鍛藉悕鍙樹綋 + 璺ㄥ绉?+ 鏀硅繘骞呭害"},
-    {"id": "code_correctness","label": "浠ｇ爜姝ｇ‘娲?, "weight": 1.0, "focus": "鏁板€肩簿搴?+ 杈圭晫 + 澶嶇幇鎬?},
-    {"id": "writing_clarity", "label": "鍐欎綔鍛堢幇娲?, "weight": 1.0, "focus": "5 娈靛紡 + 鐗╃悊鎰忎箟 + 瑙嗚"},
-    {"id": "judge_30s",       "label": "璇勫 30 绉掓淳", "weight": 1.5, "focus": "棣栧睆鍗虫姄 + 鎽樿 + 缁撴灉鍥?}
+    {"id": "math_rigor",      "label": "数学严谨派", "weight": 1.2, "focus": "证明 + 假设支撑 + 收敛性"},
+    {"id": "model_innovation","label": "模型创新派", "weight": 1.0, "focus": "命名变体 + 跨学科 + 改进幅度"},
+    {"id": "code_correctness","label": "代码正确派", "weight": 1.0, "focus": "数值精度 + 边界 + 复现性"},
+    {"id": "writing_clarity", "label": "写作呈现派", "weight": 1.0, "focus": "5 段式 + 物理意义 + 视觉"},
+    {"id": "judge_30s",       "label": "评委 30 秒派", "weight": 1.5, "focus": "首屏即抓 + 摘要 + 结果图"}
   ],
   "anti_pattern_path": "competitions/cumcm/anti_patterns.md",
   "phrase_bank_path": "competitions/cumcm/phrase_bank.md",
@@ -53,4 +53,3 @@
   "latex_template_dir": "templates/latex/cumcm/cumcmthesis",
   "citation_format": "GB/T 7714"
 }
-

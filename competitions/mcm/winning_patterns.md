@@ -1,83 +1,82 @@
-﻿<!-- SEED v0.1 鈥?鍩轰簬 COMAP 鍏紑 scoring rubric + Outstanding Winner press release 鎬荤粨鎵嬪啓, 鏈仛 PDF 鐑樼剻銆?-->
+<!-- SEED v0.1 — 基于 COMAP 公开 scoring rubric + Outstanding Winner press release 总结手写, 未做 PDF 烘焙。 -->
 
-# MCM/ICM Outstanding Winner 鍏辨€?(SEED v0.1)
+# MCM/ICM Outstanding Winner 共性 (SEED v0.1)
 
-> 缇庤禌 Outstanding (~1%) 涓庝竴鑸?Honorable Mention 鐨?10 涓樊璺濄€傛瘡鏉′笌 stage 鏂囦欢 / rubric 缁村害瀵归綈銆?
+> 美赛 Outstanding (~1%) 与一般 Honorable Mention 的 10 个差距。每条与 stage 文件 / rubric 维度对齐。
 
 ---
 
-## 1. **1-page Summary 鎶撲汉**
+## 1. **1-page Summary 抓人**
 
-Outstanding 鐨?summary 鍑犱箮閮藉寘鍚? (a) one-sentence problem framing, (b) approach in 2-3 sentences, (c) 鈮? quantitative results with units, (d) one bold takeaway. **閬垮厤**閫氱敤鐨?"we built a model and got results"銆?
+Outstanding 的 summary 几乎都包含: (a) one-sentence problem framing, (b) approach in 2-3 sentences, (c) ≥3 quantitative results with units, (d) one bold takeaway. **避免**通用的 "we built a model and got results"。
 
-`stage 8 / rubric 搂8 dim1`
+`stage 8 / rubric §8 dim1`
 
-## 2. **Novel Approach 鏄惧紡鏍囨敞**
+## 2. **Novel Approach 显式标注**
 
-Outstanding 璁烘枃鏄惧紡澹版槑 "Our novel contribution is...", 涓嶅彧鏄敤缁忓吀妯″瀷銆傜粍鍚?鈮? 涓绉戞柟娉?(e.g., game theory + ODE), 鎴栧缁忓吀绠楁硶鍋氬懡鍚嶆墿灞?("Adaptive-Threshold k-means")銆?
+Outstanding 论文显式声明 "Our novel contribution is...", 不只是用经典模型。组合 ≥2 个学科方法 (e.g., game theory + ODE), 或对经典算法做命名扩展 ("Adaptive-Threshold k-means")。
 
-`stage 3 / rubric 搂3 dim3`
+`stage 3 / rubric §3 dim3`
 
-## 3. **Sensitivity 鏄嫭绔嬪ぇ鑺?*
+## 3. **Sensitivity 是独立大节**
 
-涓嶆槸濉炲湪 conclusion 閲屼竴鍙ヨ瘽銆侽utstanding 閫氬父 1-2 椤典笓闂ㄥ仛 multivariate 鎵板姩 + tornado plot + robust interval銆侽AT (one-at-a-time) 涓嶅銆?
+不是塞在 conclusion 里一句话。Outstanding 通常 1-2 页专门做 multivariate 扰动 + tornado plot + robust interval。OAT (one-at-a-time) 不够。
 
-`stage 6 / rubric 搂6 dim1`
+`stage 6 / rubric §6 dim1`
 
-## 4. **Letter / Memo (D/E/F 棰? 鍗曠嫭鎵撶（**
+## 4. **Letter / Memo (D/E/F 题) 单独打磨**
 
-涓嶅彧鎶婃鏂囨憳瑕佸鍒跺埌 Letter銆侽utstanding Letter 鏀圭敤闈炴妧鏈瑷€, 鎻?3 涓?actionable recommendations, 1 椤靛唴, 鍚?stakeholder 瑙嗚銆?
+不只把正文摘要复制到 Letter。Outstanding Letter 改用非技术语言, 提 3 个 actionable recommendations, 1 页内, 含 stakeholder 视角。
 
 `stage 8`
 
-## 5. **璺ㄥ绉?/ 鍒涙剰 framing**
+## 5. **跨学科 / 创意 framing**
 
-ICM 鐨?D/E/F 棰?Outstanding 甯稿紩鍏ョぞ浼氬 / 缁忔祹瀛?/ 鍏叡鏀跨瓥瑙嗚銆傛妸鏁板寤烘ā鏀惧湪鏇村ぇ闂璇閲? 涓嶅彧鏄暟瀛︿紭鍖栥€?
+ICM 的 D/E/F 题 Outstanding 常引入社会学 / 经济学 / 公共政策视角。把数学建模放在更大问题语境里, 不只是数学优化。
 
-`Stage 2 planning / Stage 7 final integration`
+`stage 1 / stage 7`
 
-## 6. **Reproducibility 瀹屾暣**
+## 6. **Reproducibility 完整**
 
-Appendix 鍚?(a) full code listing, (b) data source URL/DOI, (c) parameter values table, (d) software environment銆侽utstanding 璁烘枃鍏佽浠绘剰绗笁鏂瑰鐜般€?
+Appendix 含 (a) full code listing, (b) data source URL/DOI, (c) parameter values table, (d) software environment。Outstanding 论文允许任意第三方复现。
 
 `stage 8 / stage 9`
 
-## 7. **Strengths and Weaknesses 鐪熷疄**
+## 7. **Strengths and Weaknesses 真实**
 
-鈮? 鏉″叿浣撳眬闄?+ 鈮? 鏉℃敼杩涜矾绾?(鍚?alternative method 鍚?+ 鏀硅繘骞呭害浼拌 + 璁＄畻鎴愭湰浼拌)銆備笉鍐?"could be improved with more data"銆?
+≥3 条具体局限 + ≥1 条改进路线 (含 alternative method 名 + 改进幅度估计 + 计算成本估计)。不写 "could be improved with more data"。
 
-`stage 7 / rubric 搂7 dim2`
+`stage 7 / rubric §7 dim2`
 
-## 8. **Visual: 姣忎釜 model / sub-problem 鏈夎嚜宸辩殑鍥?*
+## 8. **Visual: 每个 model / sub-problem 有自己的图**
 
-Outstanding 骞冲潎 14+ 鍥? 鍚? model schematic / data exploration / result main figure / sensitivity tornado / comparison to baseline銆傛瘡鍥炬湁 self-contained caption銆?
+Outstanding 平均 14+ 图, 含: model schematic / data exploration / result main figure / sensitivity tornado / comparison to baseline。每图有 self-contained caption。
 
 `stage 5 / stage 8`
 
 ## 9. **Quantified Comparison to Baseline**
 
-涓嶅彧澹版槑 "our method is better"銆傛姤 "our method reduces cost by 23.4% compared to greedy baseline (Table 5), and is 1.7脳 faster than LP relaxation"銆?
+不只声明 "our method is better"。报 "our method reduces cost by 23.4% compared to greedy baseline (Table 5), and is 1.7× faster than LP relaxation"。
 
 `stage 5 / stage 7`
 
 ## 10. **English Writing Quality**
 
-涓昏皳涓€鑷?/ 杩囧幓鍒嗚瘝 / 瀛︽湳 hedging ("suggests" vs "proves") 閮藉埌浣嶃€侽utstanding 涓嶄竴瀹?native English, 浣?grammar error 鏋佸皯涓旀湳璇簿纭€?
+主谓一致 / 过去分词 / 学术 hedging ("suggests" vs "proves") 都到位。Outstanding 不一定 native English, 但 grammar error 极少且术语精确。
 
-`stage 8 / rubric 搂8 dim3`
+`stage 8 / rubric §8 dim3`
 
 ---
 
-## 璇勪及閿氱偣 (L1 critic 鐢?
+## 评估锚点 (L1 critic 用)
 
-| 閿氱偣 | 璇勪及鏂瑰紡 |
+| 锚点 | 评估方式 |
 |------|---------|
-| Summary 鍚?鈮? quantitative results | 姝ｅ垯: `\d+(\.\d+)?%?` 鍦?summary 娈佃鏁?|
-| 涓荤珷鑺?鈮? | markdown `^## ` 璁℃暟 |
-| Sensitivity 鍗曠嫭澶ц妭 | 绔犺妭鏍囬鍚?sensitivity / robustness |
-| Letter (D/E/F) 瀛樺湪 | 鏂囨。鍚?`## Letter` 鎴?`## Memo` |
-| Code listing 鍦ㄩ檮褰?| appendix 鍚?lstlisting / verbatim |
-| 鈮? 鐪熷疄 limitations | stage 7 strengths_weaknesses 娈佃惤 鈮? 鍙?with specifics |
+| Summary 含 ≥3 quantitative results | 正则: `\d+(\.\d+)?%?` 在 summary 段计数 |
+| 主章节 ≥7 | markdown `^## ` 计数 |
+| Sensitivity 单独大节 | 章节标题含 sensitivity / robustness |
+| Letter (D/E/F) 存在 | 文档含 `## Letter` 或 `## Memo` |
+| Code listing 在附录 | appendix 含 lstlisting / verbatim |
+| ≥3 真实 limitations | stage 7 strengths_weaknesses 段落 ≥3 句 with specifics |
 
-绉嶅瓙鐗堟湰: 鍚庣画 PDF 鐑樼剻鍚庝細鐢ㄧ湡鍒嗕綅鏇挎崲涓婅堪闃堝€笺€?
-
+种子版本: 后续 PDF 烘焙后会用真分位替换上述阈值。
