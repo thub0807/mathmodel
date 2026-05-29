@@ -22,12 +22,7 @@ Layer 2 由矛盾触发。核心问题是：哪个早期产物现在变得错误
 对单个 `q*`：
 
 ```text
-workspace/output/q*/analysis.md
-workspace/output/q*/candidates.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/data_recon.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/results/result.json
 workspace/output/q*/results/run.log
 workspace/output/q*/validation.md
@@ -76,17 +71,17 @@ workspace/output/final/paper.tex
 
 | 后续发现 | 回溯到 active stage | 需检查源产物 | 可能需要同步的文件 |
 |---|---|---|---|
-| 验证发现约束失败 | Stage 2 Plan 或 Stage 3 Build | `model.md`、`assumptions.md`、`results/result.json` | `validation.md`、`review_note.md`、`q*_summary.md`、`traceability.md`、论文 |
-| 灵敏度推翻结论 | Stage 2 Plan、Stage 4 Verification | `model.md`、`sensitivity.md`、`results/result.json` | `q*_summary.md`、`final_results.md`、`traceability.md`、论文 |
-| 单位或维度不一致 | Stage 2 Plan | `notation.md`、`model.md`、`result.json` | 代码输出、图表、summary、论文公式 |
-| build 中出现隐藏假设 | Stage 2 Plan | `assumptions.md`、`model.md`、代码说明 | `review_note.md`、`validation.md`、`sensitivity.md`、论文限制 |
-| 数据预处理改变结果含义 | Stage 2 Plan 或 Stage 3 Build | `data_recon.md`、`run.log`、`result.json` | `validation.md`、`q*_summary.md`、final traceability |
-| 模型族不再适合数据 | Stage 2 Plan | `candidates.md`、`model.md`、`data_recon.md` | 所选模型、build 产物、summary |
-| 基线优于主模型 | Stage 2 Plan 或 Stage 3 Build | `candidates.md`、`validation.md`、`result.json` | 模型理由、final wording、claim eligibility |
+| 验证发现约束失败 | Stage 2 Plan 或 Stage 3 Build | `review_packet.md`、`results/result.json` | `validation.md`、`review_note.md`、`q*_summary.md`、`traceability.md`、论文 |
+| 灵敏度推翻结论 | Stage 2 Plan、Stage 4 Verification | `review_packet.md`、`sensitivity.md`、`results/result.json` | `q*_summary.md`、`final_results.md`、`traceability.md`、论文 |
+| 单位或维度不一致 | Stage 2 Plan | `review_packet.md`、`result.json` | 代码输出、图表、summary、论文公式 |
+| build 中出现隐藏假设 | Stage 2 Plan | `review_packet.md`、代码说明 | `review_note.md`、`validation.md`、`sensitivity.md`、论文限制 |
+| 数据预处理改变结果含义 | Stage 2 Plan 或 Stage 3 Build | `review_packet.md`、`run.log`、`result.json` | `validation.md`、`q*_summary.md`、final traceability |
+| 模型族不再适合数据 | Stage 2 Plan | `review_packet.md` | 所选模型、build 产物、summary |
+| 基线优于主模型 | Stage 2 Plan 或 Stage 3 Build | `review_packet.md`、`validation.md`、`result.json` | 模型理由、final wording、claim eligibility |
 | 运行失败后期才发现 | Stage 3 Build | `run.log`、`result.json` | 所有含结果的 summary 和论文 claim |
 | 最终论文新增 claim | Stage 7 Integration 或 Stage 8 Paper | `traceability.md`、source `result.json` | 论文文本、final reports |
 | 图表支撑了无证据 claim | Stage 5 Figures/Tables 或 Stage 8 Paper | visual source、`traceability.md` | caption、论文文本、review report |
-| 两个 `q*` 符号冲突 | Stage 2 Plan 或 Stage 7 Integration | `notation.md`、`final_results.md` | 论文公式、notation table |
+| 两个 `q*` 符号冲突 | Stage 2 Plan 或 Stage 7 Integration | `review_packet.md`、`final_results.md` | 论文公式、notation table |
 | result status 变成 partial/fail | Stage 3 Build 或 Stage 4 Verification | `result.json`、`validation.md`、`sensitivity.md` | summary、final results、traceability、abstract |
 | final review 发现 overclaim | Stage 8 Paper 或更早源 stage | paper、`traceability.md`、source artifact | paper wording、quality report、source review note |
 
@@ -192,13 +187,13 @@ workspace/output/final/quality_report.md
 
 回溯：
 
-- 修正 `notation.md`；
-- 更新 `model.md`、代码注释、论文公式、最终 notation table；
+- 修正 `review_packet.md` 的 assumptions and notation；
+- 更新代码注释、论文公式、最终 notation table；
 - 只有代码变量含义改变时才需要 rerun。
 
 ### 隐藏假设
 
-症状：代码设置上限、填补缺失或固定参数，但 `assumptions.md` 没记录。
+症状：代码设置上限、填补缺失或固定参数，但 `review_packet.md` 没记录。
 
 回溯：
 
@@ -212,7 +207,7 @@ workspace/output/final/quality_report.md
 
 回溯：
 
-- 返回 `candidates.md`；
+- 返回 `review_packet.md` 的 candidate model matrix；
 - 增加非线性或分段替代；
 - 重建，或把线性结果降为 baseline。
 

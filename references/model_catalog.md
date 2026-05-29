@@ -6,12 +6,7 @@
 
 ```text
 workspace/output/question_index.md
-workspace/output/q*/analysis.md
-workspace/output/q*/candidates.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/data_recon.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/results/result.json
 workspace/output/q*/validation.md
 workspace/output/q*/sensitivity.md
@@ -24,7 +19,7 @@ workspace/output/final/traceability.md
 
 ## 建模路线契约
 
-每个 `q*` 的 `candidates.md` 在条件允许时应比较至少三类结构不同的路线：
+每个 `q*` 的 `review_packet.md` 中的 candidate model matrix 在条件允许时应比较至少三类结构不同的路线：
 
 | 候选角色 | 必要作用 | 常见例子 | 保留条件 |
 |---|---|---|---|
@@ -32,7 +27,7 @@ workspace/output/final/traceability.md
 | 主模型 | 在精度、解释性、可实现性之间取得最佳平衡 | MILP、ARIMA+回归、熵权-TOPSIS、随机森林、系统动力学 | 直接回答该 `q*` 的目标输出 |
 | 鲁棒替代模型 | 检验结论是否依赖单一建模选择 | 鲁棒优化、bootstrap 排名、交叉方法预测、情景仿真 | 能暴露不确定性或模型选择风险 |
 
-`candidates.md` 必须记录被淘汰的路线：
+candidate model matrix 必须记录被淘汰的路线：
 
 ```text
 candidate | kept/rejected | task fit | data need | implementation risk | validation route | paper interpretability | reason
@@ -49,7 +44,7 @@ candidate | kept/rejected | task fit | data need | implementation risk | validat
 
 ## 问题类型到模型族映射
 
-| `analysis.md` 中的任务信号 | 优先考虑的模型族 | 可竞争路线 | 必查证据 |
+| `review_packet.md` question card 中的任务信号 | 优先考虑的模型族 | 可竞争路线 | 必查证据 |
 |---|---|---|---|
 | 分配、调度、指派、路径、资源约束下决策 | LP、IP、MILP、非线性规划 | 动态规划、最小费用流、鲁棒优化、启发式 | 可行性、约束残差、目标敏感性 |
 | 多目标冲突下取折中 | 加权多目标、Pareto、目标规划 | epsilon-constraint、鲁棒多目标 | 权重敏感性、折中曲线 |
@@ -66,7 +61,7 @@ candidate | kept/rejected | task fit | data need | implementation risk | validat
 
 ## 候选模型评估维度
 
-在 `candidates.md` 中使用定性评价；证据不足时不要伪造精确分数。
+在 candidate model matrix 中使用定性评价；证据不足时不要伪造精确分数。
 
 | 维度 | 强路线 | 弱路线 |
 |---|---|---|
@@ -232,20 +227,20 @@ candidate | kept/rejected | task fit | data need | implementation risk | validat
 
 ## 各产物期望
 
-`analysis.md`：
+`review_packet.md` / question card：
 
 - 分类任务类型；
 - 写清输入、输出和依赖；
 - 定义成功标准；
 - 标出会导致模型不可用的风险。
 
-`candidates.md`：
+`review_packet.md` / candidate model matrix：
 
 - 尽量包含基线、主模型、鲁棒替代；
 - 比较题意匹配、数据匹配、实现风险、验证路线、论文表达；
 - 记录被拒绝候选和具体原因。
 
-`model.md`：
+`review_packet.md` / model specification：
 
 - 定义变量、参数、单位、域、目标/指标、约束、算法、预期输出字段；
 - 使用 CUMCM 风格的描述性模型名；

@@ -21,12 +21,11 @@ workspace/output/problem_audit.md
 workspace/output/material_index.md
 ```
 
-## Templates
+## Output Contract
 
-```text
-templates/workspace/root/problem_audit.md
-templates/workspace/root/material_index.md
-```
+`problem_audit.md` 必须记录 `problem.md` 可读性、audit-only 材料状态、阻塞/非阻塞缺口、题意歧义和后续处理建议。
+
+`material_index.md` 必须记录 images、attachments、reference.pdf、题面引用路径、实际存在路径、缺失路径和使用限制。
 
 ## Entry Conditions
 

@@ -273,3 +273,15 @@ required fixes
 whether paper can be submitted with limitations
 next action
 ```
+
+## Stage 9 Structural Validator
+
+Recommended Stage 9 structure validation tool:
+
+```bash
+python scripts/validate_workspace.py <workspace> --strict
+```
+
+This helper is not the old scorer. It checks the workspace contract, `result.json` minimal schema, referenced artifact paths, Stage 8 render records, and final report consistency. It does not score modeling quality.
+
+The final quality verdict cannot contradict the validator result. If `validate_workspace.py --strict` reports missing required files, schema errors, or contradictions, `quality_report.md` must record them and the final verdict cannot be `PASS` until the artifact or report is corrected.

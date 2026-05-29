@@ -9,8 +9,7 @@
 ## Required Inputs
 
 ```text
-workspace/output/q*/analysis.md
-workspace/output/q*/model.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/results/result.json
 workspace/output/q*/validation.md
 workspace/output/q*/sensitivity.md
@@ -37,16 +36,11 @@ workspace/output/q*/warnings.md        # if visual limitations appear
 workspace/output/q*/review_note.md     # if L1 finds visual issues
 ```
 
-## Templates
+## Output Contract
 
-```text
-templates/workspace/q/figures/figure_index.md
-templates/workspace/q/figures/figure_check.md
-templates/workspace/q/tables/table_index.md
-templates/workspace/q/tables/table.md
-```
+`figures/figure_index.md` 和 `tables/table_index.md` 必须记录 artifact path、source file、source field、source command、linked claim、validation status、paper section、include in paper、caption note 和 limitation。
 
-如模板字段不足，增加 claim binding、source field、validation status、paper section、caption note、anti-pattern status 等段落。
+实际图表文件必须保存在对应 `figures/` 或 `tables/` 目录，不能只在索引中写占位路径。
 
 ## Entry Conditions
 
@@ -207,7 +201,7 @@ limitations or notes
 include in paper: yes / no
 ```
 
-每个由 `templates/workspace/q/tables/table.md` 创建的表必须包含：
+每个进入 `tables/` 的表必须包含：
 
 ```text
 source

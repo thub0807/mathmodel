@@ -16,7 +16,7 @@
 
 **填空要点**:
 - 核心问题描述: 用题目中的核心动词 (如"调度"、"配比"、"预测") 而非空泛"研究"
-- 因素 1-3: 关键约束或主要考量，应来自 `workspace/output/q*/assumptions.md`
+- 因素 1-3: 关键约束或主要考量，应来自 `workspace/output/q*/review_packet.md`
 - 模型族命名变体: 必须包含修饰词 (如"动态权重"、"改进型"、"混合的", 见 winning_patterns §4)
 - 求解方法: 算法名 + 主要工具 (e.g., "Lagrangian 松弛 + cvxpy")
 - 总成果: ≥1 个数 (利润、误差、时间)

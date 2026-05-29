@@ -31,13 +31,11 @@ workspace/output/material_index.md     # 如材料映射变化则更新
 
 每个 `workspace/output/q*/` 目录在本阶段只建立产物契约，不进行模型选择或求解。
 
-## Templates
+## Output Contract
 
-```text
-templates/workspace/root/question_index.md
-```
+`question_index.md` 必须包含 question list、每问来源、目标、输入、输出、约束、评价指标、材料映射、依赖关系、执行顺序、是否需要上游结果和拆分依据。
 
-如果模板字段不足，应在不破坏模板主体的前提下增加 decomposition notes、dependency graph、material mapping 等段落。
+每个 `q*` 的目录只表示后续产物位置；本阶段不得为所有问题批量生成 Stage 2/3 内容。
 
 ## Entry Conditions
 
@@ -134,7 +132,7 @@ templates/workspace/root/question_index.md
    - 跨 `q*` 可能共享的符号；
    - 可能导致冲突的术语。
 
-   本阶段不需要完成正式 `notation.md`，但必须为 Stage 2 提供足够线索。
+   本阶段不需要完成正式符号表，但必须为 Stage 2 的 `review_packet.md` 提供足够线索。
 
 7. 处理题意歧义。
 
@@ -182,15 +180,12 @@ templates/workspace/root/question_index.md
    对每个 `q*`，声明 Stage 2 将生成：
 
    ```text
-   workspace/output/q*/analysis.md
-   workspace/output/q*/candidates.md
-   workspace/output/q*/model.md
-   workspace/output/q*/assumptions.md
-   workspace/output/q*/notation.md
-   workspace/output/q*/data_recon.md
+   workspace/output/q*/review_packet.md
+   workspace/output/q*/warnings.md        # if needed
+   workspace/output/q*/review_note.md     # AP mode, rework, or risk notes
    ```
 
-   本阶段不预先填充模型内容。
+   本阶段不预先填充模型内容。旧的 split Plan 文件可作为兼容附件，但不是 v1.2 必需产物。
 
 10. 运行 Layer 1 局部检查。
 

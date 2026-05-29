@@ -11,11 +11,7 @@
 ```text
 workspace/output/q*/results/result.json
 workspace/output/q*/results/run.log
-workspace/output/q*/candidates.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/data_recon.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/warnings.md        # if exists
 workspace/output/q*/review_note.md     # if exists
 references/rubrics.md
@@ -42,21 +38,18 @@ workspace/output/final/review_report.md
 workspace/output/final/quality_report.md
 ```
 
-## Templates
+## Output Contract
 
-```text
-templates/workspace/q/validation.md
-templates/workspace/q/sensitivity.md
-```
+`validation.md` 必须包含 sanity check、baseline comparison、constraint audit、boundary cases、result status verdict、paper claim eligibility 和 unresolved risks。
 
-模板不足时可增加 sanity check、baseline comparison、constraint audit、boundary cases、single-parameter perturbation、joint perturbation、instability boundary、paper impact 等段落。
+`sensitivity.md` 必须包含 tested parameters、perturbation ranges、single-parameter perturbation、joint perturbation、instability boundary、paper impact 和 limitations。
 
 ## Entry Conditions
 
 - Stage 3 has produced `workspace/output/q*/results/result.json`。
 - `result.json.status` 存在，且为 `pass`、`partial` 或 `fail`。
 - `run.log` 能说明结果如何产生或为何失败。
-- `model.md` 中存在验证计划和灵敏度参数初选，或其缺失已在 `review_note.md` 中记录。
+- `review_packet.md` 中存在验证计划和灵敏度参数初选，或其缺失已在 `review_note.md` 中记录。
 
 ## Procedure
 
@@ -81,10 +74,10 @@ templates/workspace/q/sensitivity.md
 
    - 数值量级是否合理；
    - 正负号是否合理；
-   - 单位是否匹配 `notation.md`；
+   - 单位是否匹配 `review_packet.md`；
    - 单调性是否符合常识；
    - 结果是否落在可能范围；
-   - 输出字段是否与 `model.md` 预期一致；
+   - 输出字段是否与 `review_packet.md` 预期一致；
    - toy demo 或手算 case 是否能复现关键方向。
 
    写入 `validation.md`：
@@ -99,7 +92,7 @@ templates/workspace/q/sensitivity.md
 
 3. 执行 baseline 对比。
 
-   优先使用 `candidates.md` 中的 baseline。若 baseline 不存在，必须说明原因，并选择可防御替代：
+   优先使用 `review_packet.md` 中的 baseline。若 baseline 不存在，必须说明原因，并选择可防御替代：
 
    - 手算近似；
    - 简化模型；
@@ -148,7 +141,7 @@ templates/workspace/q/sensitivity.md
 
 6. 识别关键参数。
 
-   从 `model.md`、`assumptions.md`、`data_recon.md`、`result.json` 和 domain reasoning 选择 3-5 个可能改变结论的参数。
+   从 `review_packet.md`、`result.json` 和 domain reasoning 选择 3-5 个可能改变结论的参数。
 
    优先考虑：
 
@@ -300,7 +293,7 @@ templates/workspace/q/sensitivity.md
 
    以下情况必须触发 `references/feedback_layer2_backtrack.md`：
 
-   - 验证推翻 `model.md` 的目标、约束或假设；
+   - 验证推翻 `review_packet.md` 的目标、约束或假设；
    - 灵敏度推翻 `q*` 的主要结论；
    - baseline 明显优于主模型；
    - 单位、符号或数据处理与 Stage 2/3 不一致；

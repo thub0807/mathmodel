@@ -42,7 +42,7 @@ workspace/problem/problem.md
 workspace/problem/images/
 workspace/problem/attachments/
 workspace/output/question_index.md
-workspace/output/q*/analysis.md
+workspace/output/q*/review_packet.md
 ```
 
 `PASS` 信号：
@@ -66,17 +66,14 @@ workspace/output/q*/analysis.md
 - 结果回答了与题面不同的问题；
 - 论文结论无法回到 `problem.md`。
 
-发现写入 `question_index.md`、`analysis.md`，有下游影响时写入 `review_note.md`。
+发现写入 `question_index.md` 或 `review_packet.md`，有下游影响时写入 `review_note.md`。
 
 ### 2. 模型选择
 
 阅读：
 
 ```text
-workspace/output/q*/analysis.md
-workspace/output/q*/candidates.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
+workspace/output/q*/review_packet.md
 references/model_catalog.md
 ```
 
@@ -110,9 +107,7 @@ references/model_catalog.md
 阅读：
 
 ```text
-workspace/output/q*/model.md
-workspace/output/q*/notation.md
-workspace/output/q*/data_recon.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/results/result.json
 workspace/output/q*/results/run.log
 ```
@@ -314,7 +309,7 @@ workspace/output/final/quality_report.md
 
 `PASS`：
 
-- `analysis.md`、`candidates.md`、`model.md`、`assumptions.md`、`notation.md`、`data_recon.md` 构成可构建路线；
+- `review_packet.md` 的 question card、candidate model matrix、selected route、model specification、assumptions and notation、data reconstruction plan 构成可构建路线；
 - 候选路线和 fallback 清楚；
 - 数据限制在 build 前可见。
 

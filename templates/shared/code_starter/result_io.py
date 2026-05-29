@@ -2,8 +2,8 @@
 Shared result writer for mathmodel-copilot code starters.
 
 The helper writes:
-- results/result.json aligned with templates/workspace/q/results/result.schema.json
-- results/run.log aligned with templates/workspace/q/results/run_log.md
+- results/result.json aligned with the Stage 3 Result JSON Contract
+- results/run.log aligned with the Stage 3 run log contract
 """
 
 from __future__ import annotations
@@ -38,9 +38,15 @@ def write_result_and_log(
     inputs: dict[str, Any],
     main_result: dict[str, Any],
     metrics: dict[str, Any],
+    outputs: dict[str, Any] | None = None,
     figures: list[str] | None = None,
     tables: list[str] | None = None,
+    source_command: str | None = None,
+    source_files: list[str] | None = None,
+    validation_hooks: list[str] | None = None,
     warnings: list[str] | None = None,
+    limitations: list[str] | None = None,
+    paper_claims: list[str] | None = None,
     trace: dict[str, Any] | None = None,
     log_context: dict[str, Any] | None = None,
     results_dir: str | Path = "results",
@@ -55,12 +61,19 @@ def write_result_and_log(
         "question_id": question_id,
         "status": status,
         "model_name": model_name,
+        "implementation_language": "python",
         "inputs": _to_jsonable(inputs),
+        "outputs": _to_jsonable(outputs or {}),
         "main_result": _to_jsonable(main_result),
         "metrics": _to_jsonable(metrics),
         "figures": figures or [],
         "tables": tables or [],
+        "source_command": source_command or "python <starter>.py",
+        "source_files": source_files or [],
+        "validation_hooks": validation_hooks or [],
         "warnings": warnings or [],
+        "limitations": limitations or [],
+        "paper_claims": paper_claims or [],
         "trace": _to_jsonable(trace or {}),
         "created_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -79,14 +92,18 @@ def write_result_and_log(
         "|---|---|",
         f"| question_id | {question_id} |",
         f"| model_name | {model_name} |",
-        "| command | `python <starter>.py` |",
+        f"| command | `{result['source_command']}` |",
         "| implementation_language | python |",
         f"| result.json status | {status} |",
         f"| input files | {json.dumps(result['inputs'], ensure_ascii=False)} |",
-        f"| output files | {json.dumps({'result_json': str(result_file)}, ensure_ascii=False)} |",
+        f"| output files | {json.dumps(result['outputs'] or {'result_json': str(result_file)}, ensure_ascii=False)} |",
+        f"| source files | {json.dumps(result['source_files'], ensure_ascii=False)} |",
+        f"| validation hooks | {json.dumps(result['validation_hooks'], ensure_ascii=False)} |",
         f"| figures | {json.dumps(result['figures'], ensure_ascii=False)} |",
         f"| tables | {json.dumps(result['tables'], ensure_ascii=False)} |",
         f"| warnings | {json.dumps(result['warnings'], ensure_ascii=False)} |",
+        f"| limitations | {json.dumps(result['limitations'], ensure_ascii=False)} |",
+        f"| paper claims | {json.dumps(result['paper_claims'], ensure_ascii=False)} |",
         f"| metrics | {json.dumps(result['metrics'], ensure_ascii=False)} |",
         f"| main_result | {json.dumps(result['main_result'], ensure_ascii=False)} |",
         f"| trace | {json.dumps(result['trace'], ensure_ascii=False)} |",

@@ -83,8 +83,8 @@ paper claim -> source question -> source file -> source field -> validation stat
 - sensitivity conclusion：映射到 `sensitivity.md` 的参数扰动、失稳边界或稳定性 verdict；
 - figure claim：映射到 `final_figures_index.md`，并继续映射到原 `q*/figures/figure_index.md` 和 source field；
 - table claim：映射到 `final_tables_index.md`，并继续映射到原 `q*/tables/table_index.md` 和 source field；
-- assumption：映射到 `assumptions.md` 或 final paper 中明确保留的 assumption source；
-- notation：映射到 `notation.md` 或 Stage 7 unified notation register。
+- assumption：映射到 `review_packet.md` 的 assumptions and notation 或 final paper 中明确保留的 assumption source；
+- notation：映射到 `review_packet.md` 的 assumptions and notation 或 Stage 7 unified notation register。
 
 如果无法建立完整链条，该 claim 不得进入论文结论。
 
@@ -160,3 +160,20 @@ Stage 9 必须检查：
 workspace/output/final/review_report.md
 workspace/output/final/quality_report.md
 ```
+
+## Validator Support
+
+`traceability.md` must support `scripts/validate_workspace.py` checks. Each paper-facing claim should map to:
+
+```text
+source file
+source field
+validation status
+result status
+allowed in abstract
+limitation note
+```
+
+`fail` results cannot be used as paper claims. `partial` results cannot be used as strong abstract conclusions unless the claim is explicitly downgraded and the limitation is visible.
+
+Source file paths written in `traceability.md` should point to existing workspace files so the validator can detect broken trace links.

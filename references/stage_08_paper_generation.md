@@ -10,6 +10,7 @@
 
 ```text
 workspace/problem/problem.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/q*_summary.md
 workspace/output/q*/results/result.json
 workspace/output/q*/validation.md
@@ -42,22 +43,13 @@ workspace/output/final/source/
 workspace/output/final/review_report.md    # if generation warnings need early recording
 ```
 
-## Templates
+## Output Contract And Rendering Assets
 
 ```text
-templates/workspace/final/paper.md
-templates/workspace/final/paper.tex
-templates/workspace/final/source/README.md
 templates/latex/cumcm/cumcmthesis/
 ```
 
-模板优先级：
-
-1. `templates/workspace/final/paper.md` 是 Markdown 中间稿契约，必须先形成完整可读论文草稿。
-2. CUMCM 正式排版优先使用 `templates/latex/cumcm/cumcmthesis/`。
-3. `templates/workspace/final/paper.tex` 只是 fallback scaffold；仅当正式模板不可用时作为临时 LaTeX 输出。
-
-如果使用 fallback scaffold，必须在 Stage 9 final review 中记录原因。
+`paper.md` 是 Markdown 中间稿，必须先形成完整可读论文草稿。CUMCM 正式排版优先使用 `templates/latex/cumcm/cumcmthesis/`。若正式 LaTeX 资产不可用，helper 可生成内部临时 LaTeX 草稿并在 `render_report.json` 与 Stage 9 final review 中记录原因；不得把临时草稿当作正式 CUMCM 模板。
 
 ## Entry Conditions
 
@@ -295,7 +287,7 @@ templates/latex/cumcm/cumcmthesis/
    - 正式排版使用 cumcmthesis 结构；
    - 图表、公式、参考文献、附录格式尽量按模板；
    - 未由用户提供的正式字段使用安全占位，不伪造身份或队伍信息；
-   - `templates/workspace/final/paper.tex` 仅作 fallback scaffold。
+   - 若使用内部临时 LaTeX 草稿，必须记录正式模板不可用原因。
 
 17. 生成 `paper.pdf`。
 
@@ -316,11 +308,7 @@ templates/latex/cumcm/cumcmthesis/
 
 ## Output Contract
 
-`paper.md` 必须是完整 Markdown 中间稿，并符合：
-
-```text
-templates/workspace/final/paper.md
-```
+`paper.md` 必须是完整 Markdown 中间稿，包含摘要、关键词、问题重述、问题分析、模型假设与符号、数据处理、模型建立与求解、结果分析、验证、灵敏度、优缺点、参考文献和附录。
 
 `paper.tex` 应优先使用 CUMCM formal template：
 
@@ -328,7 +316,7 @@ templates/workspace/final/paper.md
 templates/latex/cumcm/cumcmthesis/
 ```
 
-若使用 fallback scaffold，必须记录原因。
+若使用内部临时 LaTeX 草稿，必须记录原因。
 
 `source/` 必须包含或引用审计 paper generation 所需资产。
 
@@ -347,7 +335,7 @@ templates/latex/cumcm/cumcmthesis/
 - 图表被嵌入论证而非装饰；
 - phrase bank 只用于润色已有证据；
 - anti-pattern hits 已修复或写入 final review；
-- 当 `cumcmthesis` 可用时，fallback scaffold 不被当作正式模板。
+- 当 `cumcmthesis` 可用时，内部临时 LaTeX 草稿不被当作正式模板。
 
 ## Exit Conditions
 
@@ -361,7 +349,7 @@ templates/latex/cumcm/cumcmthesis/
 - claim 不可追踪时，移除或改写为 clearly limited statement。
 - 摘要数字无法追踪时，从摘要删除。
 - PDF generation fails 时，记录命令、错误和受影响 output。
-- CUMCM formal template 不可用时，记录原因，并只把 fallback scaffold 作为临时输出。
+- CUMCM formal template 不可用时，记录原因，并只把内部临时 LaTeX 草稿作为临时输出。
 - 若发现 final layer 缺少必要结果，返回 Stage 7 或对应 `q*`，不要在论文中补造。
 
 ## Manual Mode Behavior
@@ -380,4 +368,61 @@ workspace/output/final/review_report.md    # if generation warnings exist
 
 ## AP Mode Behavior
 
-继续到 Stage 9，但必须保留所有 generation warnings、fallback scaffold 使用原因、PDF failure 和 claim limitation。AP mode 不得绕过 traceability 写强结论。
+继续到 Stage 9，但必须保留所有 generation warnings、内部临时 LaTeX 草稿使用原因、PDF failure 和 claim limitation。AP mode 不得绕过 traceability 写强结论。
+
+## Active Runtime Helper
+
+Stage 8 should prefer the active render bridge:
+
+```bash
+python scripts/render_workspace_paper.py <workspace>
+```
+
+For review-only Markdown and TeX generation:
+
+```bash
+python scripts/render_workspace_paper.py <workspace> --no-pdf
+```
+
+Formal template priority:
+
+```text
+templates/latex/cumcm/cumcmthesis/  highest priority
+internal temporary LaTeX draft only when formal assets are unavailable
+```
+
+Before generation, Stage 8 must read:
+
+```text
+docs/cumcm_latex_template_interface.md
+competitions/cumcm/paper_skeleton.md
+competitions/cumcm/abstract_template.md
+competitions/cumcm/winning_patterns.md
+competitions/cumcm/phrase_bank.md
+competitions/cumcm/anti_patterns.md
+competitions/cumcm/distilled_structures.md
+competitions/cumcm/distilled_formats.md
+workspace/output/final/final_results.md
+workspace/output/final/traceability.md
+workspace/output/final/final_figures_index.md
+workspace/output/final/final_tables_index.md
+workspace/output/q*/q*_summary.md
+```
+
+If the render helper fails:
+
+- inspect `workspace/output/final/latex_compile.log`;
+- inspect `workspace/output/final/render_report.json`;
+- do not claim `paper.pdf` was generated;
+- record the failure in `review_report.md` and `quality_report.md`;
+- keep `paper.md` and `paper.tex` as partial outputs when they exist.
+
+Paper hard numbers may only come from:
+
+```text
+workspace/output/q*/results/result.json
+workspace/output/q*/validation.md
+workspace/output/q*/sensitivity.md
+workspace/output/final/final_results.md
+workspace/output/final/traceability.md
+```

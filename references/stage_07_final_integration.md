@@ -16,9 +16,7 @@ workspace/output/q*/validation.md
 workspace/output/q*/sensitivity.md
 workspace/output/q*/figures/figure_index.md
 workspace/output/q*/tables/table_index.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/model.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/warnings.md        # if exists
 workspace/output/q*/review_note.md     # if exists
 references/result_traceability.md
@@ -36,16 +34,13 @@ workspace/output/final/traceability.md
 workspace/output/final/review_report.md     # if integration issues require early review notes
 ```
 
-## Templates
+## Output Contract
 
-```text
-templates/workspace/final/final_results.md
-templates/workspace/final/final_figures_index.md
-templates/workspace/final/final_tables_index.md
-templates/workspace/final/traceability.md
-```
+`final_results.md` 必须汇总每个 `q*` 的 result status、core result、validation verdict、sensitivity verdict、paper use 和 limitation。
 
-模板不足时，增加 unified notation、unit harmonization、model naming register、cross-question dependency map、abstract eligibility、conflict resolution 等段落。
+`final_figures_index.md` / `final_tables_index.md` 必须只列可追踪图表，并标记 include in paper。
+
+`traceability.md` 必须绑定 paper claim、source q、result field、validation status、sensitivity status、figure/table support、abstract eligibility 和 limitation。
 
 ## Entry Conditions
 
@@ -74,7 +69,7 @@ templates/workspace/final/traceability.md
 
 2. 统一符号。
 
-   从所有 `notation.md` 和 `q*_summary.md` 中建立 unified notation register：
+   从所有 `review_packet.md` 和 `q*_summary.md` 中建立 unified notation register：
 
    ```text
    symbol
@@ -111,7 +106,7 @@ templates/workspace/final/traceability.md
 
 4. 统一模型命名。
 
-   从各 `model.md` 和 `q*_summary.md` 汇总模型名称：
+   从各 `review_packet.md` 和 `q*_summary.md` 汇总模型名称：
 
    ```text
    q*

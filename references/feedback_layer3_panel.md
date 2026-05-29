@@ -31,10 +31,7 @@ workspace/output/final/quality_report.md
 ```text
 workspace/problem/problem.md
 workspace/output/question_index.md
-workspace/output/q*/analysis.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/results/result.json
 workspace/output/q*/validation.md
 workspace/output/q*/sensitivity.md
@@ -139,8 +136,8 @@ High issue：
 
 推荐修复：
 
-- 回到 `candidates.md` 增加替代路线；
-- 在 `model.md` 中补 model contract；
+- 回到 `review_packet.md` 增加替代路线；
+- 在 `review_packet.md` 中补 model contract；
 - 如果路线只能作情景分析，则降级论文 claim；
 - 增加基线比较或解释基线不足。
 
@@ -213,7 +210,7 @@ High issue：
 检查问题：
 
 - 题目附件、图片和数据源是否全部 accounted for？
-- `data_recon.md` 是否说明清洗、填补、过滤、归一化和重构字段？
+- `review_packet.md` 的 data reconstruction plan 是否说明清洗、填补、过滤、归一化和重构字段？
 - 行数、列含义、单位转换是否记录？
 - 每个最终硬数字是否追踪到 `result.json`？
 - 图表能否从记录输出复现？
@@ -291,11 +288,11 @@ Final panel verdict：
 
 | Panel finding | Rework target | 常见同步文件 |
 |---|---|---|
-| 模型不回答题目 | `analysis.md`、`candidates.md`、`model.md` | result、validation、summary、final paper |
+| 模型不回答题目 | `review_packet.md` | result、validation、summary、final paper |
 | 结果不可复现 | `run.log`、`result.json`、代码输出 | validation、summary、traceability |
 | 摘要 overclaim | paper draft、`traceability.md` | `quality_report.md` |
 | 图表无支撑 | figure/table source、`traceability.md` | caption、paper text、review report |
-| data lineage 弱 | `data_recon.md` | validation、limitation、traceability |
+| data lineage 弱 | `review_packet.md` | validation、limitation、traceability |
 | 灵敏度浅 | `sensitivity.md` | summary、final wording |
 | 最终答案难找 | `final_results.md`、paper structure | abstract、conclusion |
 

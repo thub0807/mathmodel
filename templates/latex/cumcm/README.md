@@ -10,18 +10,16 @@ templates/latex/cumcm/cumcmthesis/
 
 ## 三层架构位置
 
-本目录属于 CUMCM competition and output layer：
+本目录属于 CUMCM competition and rendering layer：
 
 ```text
 competitions/cumcm/
 templates/latex/cumcm/cumcmthesis/
-templates/workspace/
 ```
 
 职责分工：
 
 - `competitions/cumcm/`：CUMCM 写作质量、摘要、反模式、图表格式、经验材料。
-- `templates/workspace/`：`workspace/output/` 的 artifact contract。
 - `templates/latex/cumcm/`：最终 LaTeX 渲染资产。
 
 ## 文件说明
@@ -53,11 +51,11 @@ workspace/output/final/final_results.md
 workspace/output/final/traceability.md
 ```
 
-## Fallback Scaffold
+## 临时 LaTeX 草稿
 
-`templates/workspace/final/paper.tex` 只是 fallback scaffold，用于正式模板不可用时的临时 LaTeX 输出。
+若正式模板不可用，Stage 8 helper 可生成内部临时 LaTeX 草稿，并在 `render_report.json` 和 final review 中记录原因。
 
-它不是 CUMCM 正式排版模板。只要 `templates/latex/cumcm/cumcmthesis/` 可用，Stage 8 应优先使用本目录。
+临时草稿不是 CUMCM 正式排版模板。只要 `templates/latex/cumcm/cumcmthesis/` 可用，Stage 8 应优先使用本目录。
 
 ## Legacy 边界
 

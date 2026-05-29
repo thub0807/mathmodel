@@ -2,10 +2,14 @@
 
 本目录是 CUMCM 国赛的 active writing-quality layer，供 Stage 8 Paper Generation 和 Stage 9 Final Review 读取。这里保存竞赛经验、写作风格、反模式、优秀论文结构与经验阈值。
 
-本目录不定义 workspace 文件契约。过程产物和输出文件契约位于：
+本目录不定义 workspace 文件契约。过程产物和输出文件契约由 active stage references 直接定义：
 
 ```text
-templates/workspace/
+references/stage_00_workspace_audit.md
+references/stage_01_question_decomposition.md
+references/stage_02_per_question_plan.md
+...
+references/stage_09_final_review.md
 ```
 
 Stage 8/9 应把本目录作为写作与质量判断参考，并把所有硬结果追溯到：

@@ -21,7 +21,9 @@ workspace/problem/attachments/
 
 - 默认 Manual 模式。
 - 只有用户明确要求 AP 模式、自动推进或不逐问确认时，才启用 AP 模式。
-- Manual 模式下，每个 `q*` 完成 Stage 2 Plan 后、进入 Build 前必须暂停。
+- Manual 模式下，每个 `q*` 完成 Stage 2 Plan 后、进入 Build 前必须暂停，并且必须得到用户同意。
+- Manual 模式下，每个 `q*` 完成 Build、Verification、Sensitivity、Figures/Tables 和 Summary 后必须再次暂停，用户同意后才能进入下一问。
+- Manual 模式每次返工后必须在 `review_note.md` 写明本轮改进了什么、影响哪些结论、仍保留哪些限制、审查材料位置。
 - Manual 模式下，Stage 7 完成后、进入 Stage 8 前必须暂停。
 - Manual 暂停时只列文件路径，不复述完整方案。
 - 所有产物写入 `workspace/output/`。
@@ -31,7 +33,7 @@ workspace/problem/attachments/
 - 默认实现语言是 Python。
 - Python 文本读写必须使用 `encoding="utf-8"`。
 - JSON 写入必须使用 `ensure_ascii=False`。
-- 可在能力支持时使用多 Agent / 子任务并行处理独立问题；若当前环境不支持，自动降级为串行单 Agent 执行。
+- 对链式依赖问题，主求解流程必须按 `q1 -> q2 -> ...` 串行闭环推进。只有局部 critic、图表自检、最终 panel review 等无上游依赖任务可在能力支持时并行；若当前环境不支持，自动降级为串行单 Agent 执行。
 
 ## 三层架构
 
@@ -67,15 +69,14 @@ references/result_traceability.md
 references/quality_gate.md
 ```
 
-CUMCM competition and output layer：
+CUMCM competition and rendering layer：
 
 ```text
 competitions/cumcm/
 templates/latex/cumcm/cumcmthesis/
-templates/workspace/
 ```
 
-`templates/workspace/` 是 artifact contract。`competitions/cumcm/` 是 CUMCM writing-quality layer。`templates/latex/cumcm/` 是 final rendering asset。
+`competitions/cumcm/` 是 CUMCM writing-quality layer。`templates/latex/cumcm/` 是 final rendering asset。workspace 输出契约由 `references/stage_*.md` 直接定义，不再使用 `templates/workspace/`。
 
 ## 主协议文件
 
@@ -107,7 +108,6 @@ Supporting contracts：
 ```text
 references/result_traceability.md
 references/quality_gate.md
-templates/workspace/
 ```
 
 ## Active 边界
@@ -115,3 +115,25 @@ templates/workspace/
 当前 active workflow 默认且仅支持 CUMCM。历史竞赛材料和旧评分/旧脚本材料位于 `legacy/`，仅供开发迁移审计，不属于 active workflow。
 
 不要把 `legacy/` 作为运行时输入、知识源、模板、脚本或工具。
+
+## Stage 8/9 Runtime Helpers
+
+正式 CUMCM LaTeX 模板位于：
+
+```text
+templates/latex/cumcm/cumcmthesis/
+```
+
+Stage 8 优先使用：
+
+```bash
+python scripts/render_workspace_paper.py <workspace>
+```
+
+Stage 9 优先使用：
+
+```bash
+python scripts/validate_workspace.py <workspace> --strict
+```
+
+若正式 LaTeX 资产不可用，Stage 8 helper 可生成内部临时 LaTeX 草稿并在 `render_report.json` 记录原因；不得把临时草稿当作正式 CUMCM 模板。

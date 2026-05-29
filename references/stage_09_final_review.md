@@ -49,15 +49,13 @@ workspace/output/final/quality_report.md
 
 如果 review 需要修改论文或 traceability，应更新对应文件并在 `review_report.md` 记录。
 
-## Templates
+## Output Contract
 
-```text
-templates/workspace/final/review_report.md
-templates/workspace/final/anonymity_report.md
-templates/workspace/final/quality_report.md
-```
+`review_report.md` 必须包含 L1/L2/L3/L4 findings、多轮 review log、abstract review、figure/table review、traceability review、paper generation warnings、actions taken、unresolved issues 和 final verdict rationale。
 
-模板不足时，增加 L1/L2/L3/L4 findings、多轮 review log、abstract review、figure/table review、anonymity scan、final verdict rationale 等段落。
+`anonymity_report.md` 必须包含队伍/学校/姓名/路径/元数据扫描结论和需要人工确认的匿名性风险。
+
+`quality_report.md` 必须包含 CUMCM 风格、建模合理性、验证充分性、图表质量、论文可读性、限制表达和最终 `PASS` / `PARTIAL` / `FAIL` verdict。
 
 ## Entry Conditions
 
@@ -188,7 +186,7 @@ templates/workspace/final/quality_report.md
 
    检查：
 
-   - 模型名在 `model.md`、summary、final_results、paper 中一致；
+   - 模型名在 `review_packet.md`、summary、final_results、paper 中一致；
    - 变量含义跨章节一致；
    - 公式符号与 notation 一致；
    - 单位统一；
@@ -396,3 +394,34 @@ workspace/output/final/paper.pdf       # if exists
 ## AP Mode Behavior
 
 与 Manual 一样输出最终报告路径。AP mode 不得压制 final review findings，不得把 unresolved high issue 包装为 `PASS`。
+
+## Active Runtime Validator
+
+Stage 9 should prefer the active workspace validator:
+
+```bash
+python scripts/validate_workspace.py <workspace> --strict
+```
+
+If the script cannot run, manually review the same checks implemented by `validate_workspace.py`: stage completeness, q-level required files, `result.json` minimal schema and status, figure/table path references, Stage 8 render outputs, final report consistency, contradictions, and strict `paper.pdf` presence.
+
+Final reports must not conflict with validator findings:
+
+```text
+workspace/output/final/review_report.md
+workspace/output/final/anonymity_report.md
+workspace/output/final/quality_report.md
+```
+
+If validation finds a contradiction, first fix the actual artifact or the report, then issue the final verdict. Do not mark `PASS` while `validate_workspace.py --strict` reports blocking contradictions.
+
+Stage 9 final verdict must combine:
+
+- file completeness;
+- `result.json` status;
+- traceability;
+- `render_report.json`;
+- `latex_compile.log`;
+- validator result;
+- CUMCM writing quality;
+- anonymity.

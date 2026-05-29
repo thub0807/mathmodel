@@ -11,8 +11,7 @@ Layer 1 必须给出可执行的局部 patch。有效 finding 应说明：源产
 | 时机 | 主要审阅对象 | 主要输出 |
 |---|---|---|
 | 题目拆解后 | `workspace/output/question_index.md` | 必要时写入最终 review 记录 |
-| 单题分析后 | `workspace/output/q*/analysis.md` | `workspace/output/q*/review_note.md` |
-| 候选/模型规划后 | `candidates.md`、`model.md`、`assumptions.md`、`notation.md`、`data_recon.md` | `review_note.md`，必要时 `warnings.md` |
+| 单题 Plan 后 | `workspace/output/q*/review_packet.md` | `workspace/output/q*/review_note.md`，必要时 `warnings.md` |
 | build/result 后 | `results/result.json`、`results/run.log` | `review_note.md`，必要时调整 result 状态 |
 | 验证/灵敏度后 | `validation.md`、`sensitivity.md` | `review_note.md` 和限制标记 |
 | 单题 summary 后 | `q*_summary.md` | summary 可用性 finding |
@@ -25,12 +24,7 @@ Layer 1 必须给出可执行的局部 patch。有效 finding 应说明：源产
 
 ```text
 workspace/output/question_index.md
-workspace/output/q*/analysis.md
-workspace/output/q*/candidates.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/data_recon.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/results/result.json
 workspace/output/q*/results/run.log
 workspace/output/q*/validation.md
@@ -128,7 +122,7 @@ Patch 规则：
 
 ## 单题 Critic 检查清单
 
-### A. `analysis.md`
+### A. `review_packet.md` / question card
 
 检查问题：
 
@@ -151,7 +145,7 @@ High issue：
 - 增加任务表：目标、输入、输出、依赖、成功标准；
 - 增加 ambiguity note 和 downstream impact。
 
-### B. `candidates.md`
+### B. `review_packet.md` / candidate model matrix
 
 检查问题：
 
@@ -175,7 +169,7 @@ High issue：
 - 增加一个透明基线和一个鲁棒替代；
 - 说明所选路线为何优于基线。
 
-### C. `model.md`
+### C. `review_packet.md` / model specification
 
 检查问题：
 
@@ -184,7 +178,7 @@ High issue：
 - 方程是否与题意相连，而非符号装饰？
 - 是否描述预期 `result.json` keys？
 - 是否列出求解器设置、收敛预期或算法选择？
-- 假设是否同步到 `assumptions.md`？
+- 假设是否同步到 `review_packet.md` 的 assumptions and notation？
 - 是否说明模型失效条件？
 
 High issue：
@@ -198,7 +192,7 @@ High issue：
 
 - 增加 “model contract”：变量、参数、方程/目标、算法、输出、验证、失败触发。
 
-### D. `assumptions.md`
+### D. `review_packet.md` / assumptions
 
 检查问题：
 
@@ -218,7 +212,7 @@ High issue：
 
 - 增加 assumption table：source、role、risk、validation/sensitivity hook。
 
-### E. `notation.md`
+### E. `review_packet.md` / notation
 
 检查问题：
 
@@ -238,7 +232,7 @@ High issue：
 
 - 修正 notation table，并把命名变化传播到 model、result、summary 和 paper。
 
-### F. `data_recon.md`
+### F. `review_packet.md` / data reconstruction plan
 
 检查问题：
 
@@ -425,7 +419,7 @@ Manual mode：
 
 - high issue 改变模型路线、使结果失效、需要 rebuild、移除中心结论或需要用户判断时暂停；
 - 只返回受影响文件路径和所需决策；
-- 当前阶段要求 manual review 时仍写入 `solution_plan.md`。
+- 当前阶段要求 manual review 时仍写入 `review_packet.md`，并且回复用户时只返回审查材料路径。
 
 AP mode：
 

@@ -9,12 +9,7 @@
 ## Required Inputs
 
 ```text
-workspace/output/q*/analysis.md
-workspace/output/q*/candidates.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/data_recon.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/results/result.json
 workspace/output/q*/validation.md
 workspace/output/q*/sensitivity.md
@@ -33,13 +28,9 @@ workspace/output/q*/q*_summary.md
 workspace/output/q*/review_note.md     # if summary critic finds issues
 ```
 
-## Templates
+## Output Contract
 
-```text
-templates/workspace/q/q_summary.md
-```
-
-模板不足时，增加 paper-ready subsection、traceable claims、figure/table references、downgraded claims、limitations 等段落。
+`q*_summary.md` 必须是可进入论文正文的中文小节草稿，包含 question objective、model motivation、assumptions and notation、model equations、algorithm, results、validation、sensitivity、figures/tables、limitations、traceable claims 和 downgraded claims。
 
 ## Entry Conditions
 
@@ -67,7 +58,7 @@ templates/workspace/q/q_summary.md
    paper section role
    ```
 
-   目标必须来自 `analysis.md` 和 `question_index.md`，不得新增题目要求。
+   目标必须来自 `review_packet.md` 的 question card 和 `question_index.md`，不得新增题目要求。
 
 3. 写建模动机。
 
@@ -82,7 +73,7 @@ templates/workspace/q/q_summary.md
 
 4. 写核心假设与符号。
 
-   从 `assumptions.md` 和 `notation.md` 选择论文必要内容：
+   从 `review_packet.md` 的 assumptions and notation 选择论文必要内容：
 
    - 只保留模型使用的假设；
    - 保留关键变量、参数、单位和定义域；
@@ -99,7 +90,7 @@ templates/workspace/q/q_summary.md
    - 参数含义；
    - 输出量定义。
 
-   公式必须与 `model.md` 一致，不得为了论文好看新增未实现公式。
+   公式必须与 `review_packet.md` 一致，不得为了论文好看新增未实现公式。
 
 6. 写求解算法。
 
@@ -259,7 +250,7 @@ limitation note
 
 - summary 可直接改写为论文小节；
 - 每个 hard number 有 source file 和 source field；
-- 模型公式与 `model.md` 一致；
+- 模型公式与 `review_packet.md` 一致；
 - 求解算法与 `run.log` 和代码输出一致；
 - validation 和 sensitivity 结论可见；
 - partial/fail 限制靠近受影响 claim；

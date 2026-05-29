@@ -49,10 +49,10 @@
 ## 2.3 问题三分析  <同, 引用 Q1/Q2 结果>
 
 # 3. 模型假设
-<填: 3-7 条, 每条带支撑 (文献/数据/物理意义); 来源为 workspace/output/q*/assumptions.md>
+<填: 3-7 条, 每条带支撑 (文献/数据/物理意义); 来源为 workspace/output/q*/review_packet.md 的 assumptions and notation>
 
 # 4. 符号说明
-<填: ≥10 行表格, 全有单位; 来源为 workspace/output/q*/notation.md>
+<填: ≥10 行表格, 全有单位; 来源为 workspace/output/q*/review_packet.md 的 assumptions and notation 与 Stage 7 unified notation register>
 
 # 5. 模型的建立与求解 (主体, 12-16 页)
 
@@ -89,8 +89,8 @@
 | 章节 | 对应模板 |
 |------|--------|
 | 摘要 | `abstract_template.md` (5 段式) |
-| §3 假设 | `workspace/output/q*/assumptions.md` |
-| §4 符号 | `workspace/output/q*/notation.md` |
+| §3 假设 | `workspace/output/q*/review_packet.md` |
+| §4 符号 | `workspace/output/q*/review_packet.md` 与 Stage 7 unified notation register |
 | §5 结果 | `workspace/output/q*/q*_summary.md` 与 `workspace/output/final/final_results.md` |
 | §6 灵敏度 | `workspace/output/q*/sensitivity.md` |
 | 全文证据链 | `workspace/output/final/traceability.md` |

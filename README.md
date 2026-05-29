@@ -50,7 +50,6 @@ Active CUMCM 层：
 ```text
 competitions/cumcm/
 templates/latex/cumcm/cumcmthesis/
-templates/workspace/
 ```
 
 历史 MCM / Diangong 材料已移动到 `legacy/`，仅作为历史或未来扩展材料，不属于当前 active workflow。
@@ -61,7 +60,7 @@ templates/workspace/
 |---|---|---|
 | Workflow control layer | 固定路径、阶段顺序、Manual/AP 模式、产物生命周期 | `SKILL.md`; `references/workspace_protocol.md`; `references/workflow.md`; `references/modes_ap_manual.md`; `references/stage_00...stage_09...` |
 | Modeling and quality layer | 建模目录、rubric、反馈层、traceability、quality gate | `references/model_catalog.md`; `references/rubrics.md`; `references/feedback_layer1_critic.md`; `references/feedback_layer2_backtrack.md`; `references/feedback_layer3_panel.md`; `references/feedback_layer4_calibration.md`; `references/result_traceability.md`; `references/quality_gate.md` |
-| CUMCM competition and output layer | CUMCM 写作质量材料、正式 LaTeX 资产、workspace artifact contract | `competitions/cumcm/`; `templates/latex/cumcm/cumcmthesis/`; `templates/workspace/` |
+| CUMCM competition and rendering layer | CUMCM 写作质量材料、正式 LaTeX 资产 | `competitions/cumcm/`; `templates/latex/cumcm/cumcmthesis/` |
 
 ## 主流程
 
@@ -88,16 +87,18 @@ Stage 8  Paper Generation
 Stage 9  Final Review
 ```
 
-每个阶段运行前读取对应 `references/stage_*.md`，并按 `references/workflow.md` 中列出的 knowledge layer、templates/assets 和 outputs 执行。
+每个阶段运行前读取对应 `references/stage_*.md`，并按 `references/workflow.md` 中列出的 knowledge layer、必要资产和 outputs 执行。workspace 输出契约由 stage reference 直接定义，不再使用 `templates/workspace/`。
 
 ## 默认模式
 
 默认 Manual 模式。
 
-- Stage 2 每个 `q*` Plan 完成后暂停，用户审阅后进入 Build。
-- Stage 2 暂停前必须生成 `workspace/output/q*/solution_plan.md`，作为统一审阅入口。
+- 每个 `q*` Stage 2 Plan 完成后，必须生成 `workspace/output/q*/review_packet.md`，暂停并等待用户同意后才能进入 Stage 3 Build。
+- 每个 `q*` 完成 Build、Verification、Sensitivity、Figures/Tables 和 Summary 后，必须再次暂停，等待用户同意后才能进入下一问。
+- 暂停时只返回审查材料路径，不复述完整方案。
+- 每次返工后必须在 `review_note.md` 写明本轮改进了什么、影响哪些结论、仍保留哪些限制、审查材料位置。
 - Stage 7 完成后暂停，用户审阅 `final_results.md`、`traceability.md`、`final_figures_index.md`、`final_tables_index.md` 后进入 Paper Generation。
-- AP 模式只在用户明确要求自动推进时启用。
+- AP 模式只在用户明确要求自动推进时启用；AP 只跳过人工确认，不跳过 Plan、Build、Verification、Sensitivity、Summary、traceability 或 review notes。
 
 ## 证据规则
 
@@ -117,4 +118,26 @@ workspace/output/final/traceability.md
 
 `legacy/` 是开发迁移档案，不属于 active workflow。
 `maintenance/` 是离线维护材料，不属于用户建模运行时 workflow。
-`scripts/` 当前没有必需 active runtime scripts。
+`scripts/` contains active Stage 8/9 helpers.
+
+## Stage 8/9 Helpers
+
+The formal CUMCM LaTeX template is:
+
+```text
+templates/latex/cumcm/cumcmthesis/
+```
+
+Stage 8 uses:
+
+```bash
+python scripts/render_workspace_paper.py <workspace>
+```
+
+Stage 9 uses:
+
+```bash
+python scripts/validate_workspace.py <workspace> --strict
+```
+
+若正式 LaTeX 资产不可用，Stage 8 helper 可生成内部临时 LaTeX 草稿并在 `render_report.json` 记录原因；不得把临时草稿当作正式 CUMCM 模板。

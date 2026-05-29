@@ -2,23 +2,16 @@
 
 ## Purpose
 
-按 Stage 2 已确认的 Plan，为每个 `q*` 实现求解、运行计算，并生成结果关口。
+按 Stage 2 已确认的 `review_packet.md`，为当前 `q*` 实现求解、运行计算，并生成结果关口。不得在当前问题完成 Stage 6 前开始下一个问题。
 
-本阶段不是重新选模型，而是把 `model.md`、`assumptions.md`、`notation.md`、`data_recon.md` 落地为可审计代码、`run.log` 和符合 schema 语义的 `result.json`。所有 solve、verify-prep、figure-prep、data-processing code 必须使用锁定实现语言。
+本阶段不是重新选模型，而是把 `review_packet.md` 中的模型规格、假设、符号、数据计划和 toy demo 落地为可审计代码、`run.log` 和符合 schema 语义的 `result.json`。所有 solve、verify-prep、figure-prep、data-processing code 必须使用锁定实现语言。
 
 ## Required Inputs
 
 ```text
-workspace/output/q*/analysis.md
-workspace/output/q*/solution_plan.md
-workspace/output/q*/candidates.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/data_recon.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/warnings.md        # if exists
 workspace/output/q*/review_note.md     # if exists
-templates/workspace/q/results/result.schema.json
 references/model_catalog.md
 references/rubrics.md
 references/feedback_layer1_critic.md
@@ -29,6 +22,8 @@ references/feedback_layer1_critic.md
 ```text
 workspace/output/q*/results/result.json
 workspace/output/q*/q*_summary.md
+workspace/output/q*/validation.md
+workspace/output/q*/sensitivity.md
 ```
 
 ## Required Outputs
@@ -41,13 +36,9 @@ workspace/output/q*/warnings.md        # if new warnings appear
 workspace/output/q*/review_note.md     # if L1 critic finds issues
 ```
 
-## Templates
+## Optional Code Starters
 
 ```text
-templates/workspace/q/code/README.md
-templates/workspace/q/results/result.schema.json
-templates/workspace/q/results/result.example.json
-templates/workspace/q/results/run_log.md
 templates/shared/code_starter/result_io.py
 templates/shared/code_starter/optimization.py
 templates/shared/code_starter/prediction.py
@@ -56,7 +47,7 @@ templates/shared/code_starter/classification.py
 templates/shared/code_starter/simulation.py
 ```
 
-根据 `model.md` 的任务类型选择 code starter：
+根据 `review_packet.md` 的任务类型选择 code starter：
 
 | 任务类型 | 优先 code starter |
 |---|---|
@@ -66,17 +57,16 @@ templates/shared/code_starter/simulation.py
 | 分类、识别、风险等级 | `templates/shared/code_starter/classification.py` |
 | 仿真、Monte Carlo、系统动力学、机理演化 | `templates/shared/code_starter/simulation.py` |
 
-如果没有完全匹配的 starter，选择最接近的模板并在 `run.log` 中说明适配原因。
+如果没有完全匹配的 starter，选择最接近的 starter 或自行实现，并在 `run.log` 中说明适配原因。
 
 复制任一 starter 时，同时复制或等价实现 `templates/shared/code_starter/result_io.py`，以统一写入 `result.json` 和 `run.log`。
 
 ## Entry Conditions
 
-- Stage 2 Plan exists for the current `q*`。
-- `solution_plan.md` 存在并锁定 `implementation_language: python`。
+- Stage 2 `review_packet.md` exists for the current `q*`。
+- `review_packet.md` 锁定 `implementation_language: python`。
 - Manual mode 已收到用户确认，或 AP mode 已写入 `review_note.md`。
-- `data_recon.md` 已记录必要数据路径和预处理决策。
-- `model.md` 已定义预期 `result.json` 字段和 toy demo / 最小可行性检查。
+- `review_packet.md` 已记录必要数据路径、预处理决策、预期 `result.json` 字段和 toy demo / 最小可行性检查。
 - 阻塞级 `warnings.md` 不存在，或已被用户接受为 limited route。
 
 ## Procedure
@@ -100,21 +90,21 @@ templates/shared/code_starter/simulation.py
 
 2. 模型完整化。
 
-   编码前检查 `model.md`：
+   编码前检查 `review_packet.md`：
 
    - 变量是否都有单位、域、shape；
    - 参数是否有来源或估计方式；
    - 目标函数、评价指标、控制方程、约束是否可计算；
-   - 输入输出是否与 `analysis.md` 一致；
+   - 输入输出是否与 question card 一致；
    - 预期 `result.json` 字段是否足以支撑后续 summary 和 traceability；
    - toy demo 是否能触发核心逻辑。
-   - `solution_plan.md` 是否与详细 Plan 文件一致，并确认 implementation language 为 Python。
+   - Build entry checklist 是否通过，并确认 implementation language 为 Python。
 
-   如发现模型不完整，先 patch `model.md`、`notation.md` 或 `assumptions.md`；不得在代码中引入隐藏假设。
+   如发现模型不完整，先修正 `review_packet.md` 或记录 visible limitation；不得在代码中引入隐藏假设。
 
 3. 公式到代码的落地规则。
 
-   - 每个公式中的变量必须能对应到 `notation.md` 和代码变量；
+   - 每个公式中的变量必须能对应到 `review_packet.md` 的符号表和代码变量；
    - 目标函数或评价指标应封装成清楚函数；
    - 约束检查应保留为可重复调用的函数或输出表；
    - 单位转换集中处理，不散落在多个计算段；
@@ -135,7 +125,7 @@ templates/shared/code_starter/simulation.py
 
 5. 实现数据预处理。
 
-   只读取 `data_recon.md` 和 `material_index.md` 中记录的材料：
+   只读取 `review_packet.md` 和 `material_index.md` 中记录的材料：
 
    - 文件读取路径必须可复核；
    - 记录 cleaning、filtering、unit conversion、normalization；
@@ -172,7 +162,7 @@ templates/shared/code_starter/simulation.py
    - 输出字段能写入 `result.json` 结构；
    - 结果量级有基本解释。
 
-   toy demo 失败时，先修代码或模型 plan；若失败说明路线不可行，转 fallback 或标记 blocked。
+   toy demo 失败时，先修代码或 `review_packet.md` 中的模型 plan；若失败说明路线不可行，转 fallback 或标记 blocked。
 
 8. 执行完整求解实现。
 
@@ -242,19 +232,13 @@ templates/shared/code_starter/simulation.py
 
 12. 写 `workspace/output/q*/results/result.json`。
 
-   `result.json` 必须与以下 schema 在语义上对齐：
-
-   ```text
-   templates/workspace/q/results/result.schema.json
-   ```
-
-   要求：
+   `result.json` 必须满足本文件的 Result JSON Contract。要求：
 
    - `status` 必须是 `pass`、`partial` 或 `fail`；
    - hard numbers 进入结构化字段；
    - 单位、来源命令、输入文件、输出文件可追踪；
    - `warnings` 和 `limitations` 反映 partial/fail 风险；
-   - 字段名与 `model.md` 的 expected result fields 对齐；
+   - 字段名与 `review_packet.md` 的 expected result fields 对齐；
    - 论文可能使用的数字必须先出现在 `result.json`。
 
 13. 执行 L1 自评。
@@ -264,8 +248,8 @@ templates/shared/code_starter/simulation.py
    - `run.log` 是否足够复现；
    - `result.json` 是否包含所有硬数字；
    - 结果状态是否与证据匹配；
-   - 代码公式是否匹配 `model.md`；
-   - 单位是否匹配 `notation.md`；
+   - 代码公式是否匹配 `review_packet.md`；
+   - 单位是否匹配 `review_packet.md` 的符号与单位表；
    - 隐含假设是否已回写；
    - failure 是否可见。
 
@@ -309,11 +293,30 @@ toy demo result
 interpretation notes
 ```
 
-`workspace/output/q*/results/result.json` 必须在概念上符合：
+`workspace/output/q*/results/result.json` 必须至少包含：
 
 ```text
-templates/workspace/q/results/result.schema.json
+question_id
+status: pass | partial | fail
+model_name
+implementation_language
+inputs
+outputs
+main_result
+metrics
+figures
+tables
+source_command
+source_files
+validation_hooks
+warnings
+limitations
+paper_claims
+trace
+created_at
 ```
+
+字段可以按问题扩展，但不得删除 `status`、`metrics`、`warnings`、`limitations` 和 `paper_claims`。
 
 论文使用的 hard numbers 必须先进入 `result.json`，之后才能进入 summary、traceability 或 final paper。
 
@@ -324,10 +327,10 @@ templates/workspace/q/results/result.schema.json
 - code path 存在且可审计；
 - 已根据任务类型接入或说明 code starter；
 - implementation language 为 Python，且 solve、verify-prep、figure-prep、data-processing code 未混用其他语言；
-- preprocessing 遵循 `data_recon.md`；
+- preprocessing 遵循 `review_packet.md` 的 data reconstruction plan；
 - 异常数据处理可见；
-- 代码公式匹配 `model.md`；
-- 单位匹配 `notation.md`；
+- 代码公式匹配 `review_packet.md`；
+- 单位匹配 `review_packet.md`；
 - 实现所需假设已记录；
 - toy demo 或最小可行性检查已运行或说明不可行；
 - `run.log` 说明成功或失败；
@@ -337,7 +340,7 @@ templates/workspace/q/results/result.schema.json
 
 ## Exit Conditions
 
-- `result.json` 存在，并在语义上符合 `templates/workspace/q/results/result.schema.json`。
+- `result.json` 存在，并在语义上符合本文件的 Result JSON Contract。
 - `result.json.status` 是 `pass`、`partial` 或 `fail`。
 - `run.log` 说明结果如何产生，或为何失败。
 - 如果结果是 `partial` 或 `fail`，限制已写入 `warnings.md` 或 `review_note.md`。
@@ -347,7 +350,7 @@ templates/workspace/q/results/result.schema.json
 - 如果执行失败，写 `run.log`，设置 `result.json.status` 为 `fail` 或 `partial`，保留诊断信息。
 - 如果 toy demo 失败，先修模型/代码；无法修复时启用 fallback 或阻塞。
 - 如果完整运行失败但基线可运行，可把主模型标为 `fail`，基线结果作为 limited result，但必须在 `result.json` 中明确。
-- 如果数据预处理改变建模路线，回到 Stage 2 修 Plan，或在 `review_note.md` 写 visible limitation。
+- 如果数据预处理改变建模路线，回到 Stage 2 修 `review_packet.md`，或在 `review_note.md` 写 visible limitation。
 - 如果 code starter 不适配，记录不适配原因和替代实现方式。
 - 如果 hard number 不在 `result.json`，不得提升到论文侧产物。
 - 如果出现 schema mismatch，优先修 `result.json` 结构；不能修复时标记 `partial` 或 `fail`。

@@ -19,12 +19,7 @@ Layer 4 不是奖项预测器。它不得伪造分位、奖项或排名判断，
 ## 读取文件
 
 ```text
-workspace/output/q*/analysis.md
-workspace/output/q*/candidates.md
-workspace/output/q*/model.md
-workspace/output/q*/assumptions.md
-workspace/output/q*/notation.md
-workspace/output/q*/data_recon.md
+workspace/output/q*/review_packet.md
 workspace/output/q*/results/result.json
 workspace/output/q*/validation.md
 workspace/output/q*/sensitivity.md

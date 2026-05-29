@@ -2,7 +2,7 @@
 
 ## Purpose
 
-定义固定输入、固定输出和模板契约。Agent 执行任何阶段前都必须遵守本协议。
+定义固定输入、固定输出和 stage artifact 契约。Agent 执行任何阶段前都必须遵守本协议。
 
 ## Fixed Input
 
@@ -46,11 +46,11 @@ workspace/output/
 - 用户明确要求核对 PDF。
 - 最终 review 发现题意依据不足。
 
-## Templates Are Contracts
+## Stage References Are Contracts
 
-`templates/workspace/` 是输出文件契约库。生成 `workspace/output/` 文件时，应按对应模板的字段、表格和追溯要求填写。
+`workspace/output/` 的文件结构、字段、表格和追溯要求由 `references/stage_*.md` 直接定义。
 
-模板不是可选示例。若某阶段无法满足模板必填字段，必须在该阶段输出中说明失败原因或限制。
+不再使用 `templates/workspace/` 作为运行时模板或契约库。若某阶段无法满足 stage reference 的必填字段，必须在该阶段输出中说明失败原因或限制，并写入对应的 `warnings.md`、`review_note.md` 或 final review 文件。
 
 ## Material Indexing
 

@@ -204,8 +204,8 @@
 - 修复: Stage 7 先完成 `final_results.md` 与 `traceability.md`, Stage 8 只使用可追溯 claim
 
 ### J2. 建模路线摇摆
-- 现象: `model.md` 选定一种路线, Build 或论文中又换成另一种路线
-- 修复: 路线变化必须回写 `candidates.md`、`model.md`、`review_note.md`, 并同步更新结果和 traceability
+- 现象: `review_packet.md` 选定一种路线, Build 或论文中又换成另一种路线
+- 修复: 路线变化必须回写 `review_packet.md`、`review_note.md`, 并同步更新结果和 traceability
 
 ### J3. 写作留到最后一天
 - 现象: 前两天全在算,第三天 24h 写不完
