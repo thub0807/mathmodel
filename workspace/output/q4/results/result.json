@@ -1,0 +1,455 @@
+{
+  "question_id": "q4",
+  "status": "pass",
+  "model_name": "结构簇-可信域联合验证模型",
+  "implementation_language": "python",
+  "inputs": {
+    "source_problem": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/problem.md",
+    "source_q2_oof": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/oof_predictions.csv",
+    "source_q2_result": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/result.json"
+  },
+  "outputs": {
+    "result_json": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/result.json",
+    "run_log": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/run.log",
+    "trust_region_table": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/trust_region_table.csv",
+    "cluster_error_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/cluster_error_summary.csv",
+    "cluster_holdout_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/cluster_holdout_summary.csv",
+    "trust_tier_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/trust_tier_summary.csv"
+  },
+  "main_result": {
+    "cluster_validation": {
+      "cluster_count": 4,
+      "worst_random_oof_cluster": 0,
+      "worst_random_oof_target": "conductivity",
+      "worst_random_oof_ratio": 1.8710973254846637,
+      "worst_holdout_cluster": 2,
+      "worst_holdout_target": "conductivity",
+      "worst_holdout_mae": 25.986434101031346
+    },
+    "trust_tier_summary": [
+      {
+        "trust_tier": "high",
+        "sample_count": 160.0,
+        "mean_PI_mae": 0.023178844341775934,
+        "mean_conductivity_mae": 6.720853530074805,
+        "mean_density": 2.5185257121093065
+      },
+      {
+        "trust_tier": "low",
+        "sample_count": 45.0,
+        "mean_PI_mae": 0.05965925540382335,
+        "mean_conductivity_mae": 9.556713182272711,
+        "mean_density": 8.806483143067416
+      },
+      {
+        "trust_tier": "medium",
+        "sample_count": 46.0,
+        "mean_PI_mae": 0.05019031936891914,
+        "mean_conductivity_mae": 10.143610590810695,
+        "mean_density": 5.002898435093592
+      }
+    ],
+    "trust_region_counts": {
+      "high": 160,
+      "medium": 46,
+      "low": 45
+    },
+    "cluster_error_table": [
+      {
+        "cluster_id": 0,
+        "target": "conductivity",
+        "sample_count": 59,
+        "mae": 14.700374874891185,
+        "mae_ratio_vs_global": 1.8710973254846637,
+        "mean_pi": 0.7635301399262175,
+        "rare_ratio": 0.06779661016949153
+      },
+      {
+        "cluster_id": 1,
+        "target": "conductivity",
+        "sample_count": 86,
+        "mae": 3.0413449998525386,
+        "mae_ratio_vs_global": 0.38710934540996617,
+        "mean_pi": 0.7255451983896006,
+        "rare_ratio": 0.046511627906976744
+      },
+      {
+        "cluster_id": 2,
+        "target": "conductivity",
+        "sample_count": 40,
+        "mae": 7.146030073760765,
+        "mae_ratio_vs_global": 0.9095630467005839,
+        "mean_pi": 0.5915222635935832,
+        "rare_ratio": 0.15
+      },
+      {
+        "cluster_id": 3,
+        "target": "conductivity",
+        "sample_count": 66,
+        "mae": 8.443572039927332,
+        "mae_ratio_vs_global": 1.0747171548958245,
+        "mean_pi": 0.6516757248929643,
+        "rare_ratio": 0.18181818181818182
+      },
+      {
+        "cluster_id": 0,
+        "target": "pH",
+        "sample_count": 59,
+        "mae": 0.29150083822711836,
+        "mae_ratio_vs_global": 1.6752872606470965,
+        "mean_pi": 0.7635301399262175,
+        "rare_ratio": 0.06779661016949153
+      },
+      {
+        "cluster_id": 1,
+        "target": "pH",
+        "sample_count": 86,
+        "mae": 0.05965430305030545,
+        "mae_ratio_vs_global": 0.34283981669065644,
+        "mean_pi": 0.7255451983896006,
+        "rare_ratio": 0.046511627906976744
+      },
+      {
+        "cluster_id": 2,
+        "target": "pH",
+        "sample_count": 40,
+        "mae": 0.17837887444248593,
+        "mae_ratio_vs_global": 1.0251629386027057,
+        "mean_pi": 0.5915222635935832,
+        "rare_ratio": 0.15
+      },
+      {
+        "cluster_id": 3,
+        "target": "pH",
+        "sample_count": 66,
+        "mae": 0.21530535736657253,
+        "mae_ratio_vs_global": 1.2373834824593435,
+        "mean_pi": 0.6516757248929643,
+        "rare_ratio": 0.18181818181818182
+      },
+      {
+        "cluster_id": 0,
+        "target": "W_1",
+        "sample_count": 59,
+        "mae": 0.057502682418332715,
+        "mae_ratio_vs_global": 1.2977425419176771,
+        "mean_pi": 0.7635301399262175,
+        "rare_ratio": 0.06779661016949153
+      },
+      {
+        "cluster_id": 1,
+        "target": "W_1",
+        "sample_count": 86,
+        "mae": 0.02395409147213945,
+        "mae_ratio_vs_global": 0.5406051030842353,
+        "mean_pi": 0.7255451983896006,
+        "rare_ratio": 0.046511627906976744
+      },
+      {
+        "cluster_id": 2,
+        "target": "W_1",
+        "sample_count": 40,
+        "mae": 0.07727624298143723,
+        "mae_ratio_vs_global": 1.743999823643117,
+        "mean_pi": 0.5915222635935832,
+        "rare_ratio": 0.15
+      },
+      {
+        "cluster_id": 3,
+        "target": "W_1",
+        "sample_count": 66,
+        "mae": 0.03906051721816295,
+        "mae_ratio_vs_global": 0.8815327002407298,
+        "mean_pi": 0.6516757248929643,
+        "rare_ratio": 0.18181818181818182
+      },
+      {
+        "cluster_id": 0,
+        "target": "R_W",
+        "sample_count": 59,
+        "mae": 0.01708038083856163,
+        "mae_ratio_vs_global": 1.0937421044959308,
+        "mean_pi": 0.7635301399262175,
+        "rare_ratio": 0.06779661016949153
+      },
+      {
+        "cluster_id": 1,
+        "target": "R_W",
+        "sample_count": 86,
+        "mae": 0.007553137453806626,
+        "mae_ratio_vs_global": 0.4836651203714721,
+        "mean_pi": 0.7255451983896006,
+        "rare_ratio": 0.046511627906976744
+      },
+      {
+        "cluster_id": 2,
+        "target": "R_W",
+        "sample_count": 40,
+        "mae": 0.026303868194826864,
+        "mae_ratio_vs_global": 1.6843680728032444,
+        "mean_pi": 0.5915222635935832,
+        "rare_ratio": 0.15
+      },
+      {
+        "cluster_id": 3,
+        "target": "R_W",
+        "sample_count": 66,
+        "mae": 0.01833734354944701,
+        "mae_ratio_vs_global": 1.1742317056161167,
+        "mean_pi": 0.6516757248929643,
+        "rare_ratio": 0.18181818181818182
+      },
+      {
+        "cluster_id": 0,
+        "target": "PI",
+        "sample_count": 59,
+        "mae": 0.0542561926838794,
+        "mae_ratio_vs_global": 1.56495605480172,
+        "mean_pi": 0.7635301399262175,
+        "rare_ratio": 0.06779661016949153
+      },
+      {
+        "cluster_id": 1,
+        "target": "PI",
+        "sample_count": 86,
+        "mae": 0.00965305763358154,
+        "mae_ratio_vs_global": 0.27843109226335133,
+        "mean_pi": 0.7255451983896006,
+        "rare_ratio": 0.046511627906976744
+      },
+      {
+        "cluster_id": 2,
+        "target": "PI",
+        "sample_count": 40,
+        "mae": 0.045673105889223194,
+        "mae_ratio_vs_global": 1.3173870127488139,
+        "mean_pi": 0.5915222635935832,
+        "rare_ratio": 0.15
+      },
+      {
+        "cluster_id": 3,
+        "target": "PI",
+        "sample_count": 66,
+        "mae": 0.043088389673040246,
+        "mae_ratio_vs_global": 1.2428339139711782,
+        "mean_pi": 0.6516757248929643,
+        "rare_ratio": 0.18181818181818182
+      }
+    ],
+    "cluster_holdout_table": [
+      {
+        "cluster_id": 0,
+        "target": "conductivity",
+        "mae": 20.34521767582962,
+        "rmse": 31.558513838490626,
+        "r2": 0.15474743550986825,
+        "cluster_size": 59
+      },
+      {
+        "cluster_id": 0,
+        "target": "pH",
+        "mae": 0.7266588070882459,
+        "rmse": 0.9256059517794221,
+        "r2": -0.5383585261843926,
+        "cluster_size": 59
+      },
+      {
+        "cluster_id": 0,
+        "target": "W_1",
+        "mae": 0.17771936963234586,
+        "rmse": 0.20294156855463205,
+        "r2": -0.8447686275944741,
+        "cluster_size": 59
+      },
+      {
+        "cluster_id": 0,
+        "target": "R_W",
+        "mae": 0.019582222130033418,
+        "rmse": 0.027323050549465915,
+        "r2": 0.04520559584998285,
+        "cluster_size": 59
+      },
+      {
+        "cluster_id": 0,
+        "target": "PI",
+        "mae": 0.08917091840125653,
+        "rmse": 0.10839031029596703,
+        "r2": -0.33294036963423057,
+        "cluster_size": 59
+      },
+      {
+        "cluster_id": 1,
+        "target": "conductivity",
+        "mae": 17.428734756865584,
+        "rmse": 19.875530981279443,
+        "r2": 0.328277513809754,
+        "cluster_size": 86
+      },
+      {
+        "cluster_id": 1,
+        "target": "pH",
+        "mae": 0.1723779615971246,
+        "rmse": 0.20526400355314436,
+        "r2": -0.1978045972898892,
+        "cluster_size": 86
+      },
+      {
+        "cluster_id": 1,
+        "target": "W_1",
+        "mae": 0.09582737696376155,
+        "rmse": 0.10591632639519218,
+        "r2": -0.8735741385193949,
+        "cluster_size": 86
+      },
+      {
+        "cluster_id": 1,
+        "target": "R_W",
+        "mae": 0.03270861620493512,
+        "rmse": 0.03415758533977995,
+        "r2": -3.0778612485825736,
+        "cluster_size": 86
+      },
+      {
+        "cluster_id": 1,
+        "target": "PI",
+        "mae": 0.08099186128404078,
+        "rmse": 0.08914546527329549,
+        "r2": -0.34239454537046954,
+        "cluster_size": 86
+      },
+      {
+        "cluster_id": 2,
+        "target": "conductivity",
+        "mae": 25.986434101031346,
+        "rmse": 36.93836251560867,
+        "r2": 0.08201763375847126,
+        "cluster_size": 40
+      },
+      {
+        "cluster_id": 2,
+        "target": "pH",
+        "mae": 0.33924780150789036,
+        "rmse": 0.44821001876207656,
+        "r2": 0.8419042804755776,
+        "cluster_size": 40
+      },
+      {
+        "cluster_id": 2,
+        "target": "W_1",
+        "mae": 0.13247815190827641,
+        "rmse": 0.17506186477272503,
+        "r2": 0.2830042407148352,
+        "cluster_size": 40
+      },
+      {
+        "cluster_id": 2,
+        "target": "R_W",
+        "mae": 0.03855862240578649,
+        "rmse": 0.04914244882650129,
+        "r2": -0.23767511829458554,
+        "cluster_size": 40
+      },
+      {
+        "cluster_id": 2,
+        "target": "PI",
+        "mae": 0.08865968794345469,
+        "rmse": 0.1412185659386762,
+        "r2": 0.2274551886579782,
+        "cluster_size": 40
+      },
+      {
+        "cluster_id": 3,
+        "target": "conductivity",
+        "mae": 18.027232004614234,
+        "rmse": 23.58910919790807,
+        "r2": 0.14121223452740173,
+        "cluster_size": 66
+      },
+      {
+        "cluster_id": 3,
+        "target": "pH",
+        "mae": 0.6003168834392609,
+        "rmse": 0.7306805503159336,
+        "r2": 0.011870191727861301,
+        "cluster_size": 66
+      },
+      {
+        "cluster_id": 3,
+        "target": "W_1",
+        "mae": 0.3895973315626359,
+        "rmse": 0.4472788803867747,
+        "r2": -0.8842410132155138,
+        "cluster_size": 66
+      },
+      {
+        "cluster_id": 3,
+        "target": "R_W",
+        "mae": 0.05216978817498611,
+        "rmse": 0.06561694789588389,
+        "r2": -0.8009353042029073,
+        "cluster_size": 66
+      },
+      {
+        "cluster_id": 3,
+        "target": "PI",
+        "mae": 0.09612047526184683,
+        "rmse": 0.13103793428086105,
+        "r2": -0.3856861142902306,
+        "cluster_size": 66
+      }
+    ]
+  },
+  "metrics": {
+    "high_tier_pi_mae": 0.023178844341775934,
+    "low_tier_pi_mae": 0.05965925540382335,
+    "pi_mae_gap_low_vs_high": 2.5738666917184334,
+    "low_tier_ratio": 0.17928286852589642
+  },
+  "figures": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/figures/figure_q4_cluster_map.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/figures/figure_q4_cluster_error_heatmap.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/figures/figure_q4_trust_tier_error.png"
+  ],
+  "tables": [
+    "workspace/output/q4/tables/table_q4_cluster_error_summary.csv",
+    "workspace/output/q4/tables/table_q4_cluster_holdout_summary.csv",
+    "workspace/output/q4/tables/table_q4_trust_tier_summary.csv"
+  ],
+  "source_command": "python D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/code/q4_build.py",
+  "source_files": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/code/q4_build.py",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/common/copilot_support.py"
+  ],
+  "validation_hooks": [
+    "比较随机 OOF 与结构簇 holdout 的误差差异",
+    "比较 high / medium / low trust 三层的 PI 误差",
+    "检查稀有模式是否系统性落入低可信区"
+  ],
+  "warnings": [
+    "q4 的可信域仍然来自有限样本上的结构聚类与 OOF 误差，不代表真实工艺边界。",
+    "如果新配方远离现有 8 种组分体系，当前 high/medium/low trust 划分将失效。",
+    "涉及 `R_W` 的区域可信度仍然最弱，不能把 low-trust 区域的 `R_W` 预测写成强结论。"
+  ],
+  "limitations": [
+    "聚类数当前固定为 4，是为了形成可解释的结构区，而不是全局最优聚类数。",
+    "leave-one-cluster-out 仍然建立在同一组分库内，尚未覆盖真正的全新组分外推。"
+  ],
+  "paper_claims": [
+    "随机训练/测试切分不足以全面评价模型可用性，因为不同结构区域的误差存在显著异质性。",
+    "基于结构簇、局部密度与 uncertainty hook 的可信域划分，可以把样本分成 high / medium / low trust 三层。",
+    "高可信区域更适合做候选开发，低可信区域更适合被视作探索区或风险区。"
+  ],
+  "trace": {
+    "worst_random_oof_ratio": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/result.json",
+      "source_field": "main_result.cluster_validation.worst_random_oof_ratio",
+      "validation_status": "pending"
+    },
+    "pi_mae_gap_low_vs_high": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/result.json",
+      "source_field": "metrics.pi_mae_gap_low_vs_high",
+      "validation_status": "pending"
+    }
+  },
+  "created_at": "2026-05-29T09:59:56.369111+00:00"
+}

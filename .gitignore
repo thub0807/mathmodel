@@ -1,9 +1,9 @@
 # 用户运行时产物
-workspace/output/
-workspace/**/*.aux
-workspace/**/*.log
-workspace/**/*.out
-workspace/**/*.toc
+# workspace/output/
+# workspace/**/*.aux
+# workspace/**/*.log
+# workspace/**/*.out
+# workspace/**/*.toc
 /results/
 /figures/
 /paper_workspace/

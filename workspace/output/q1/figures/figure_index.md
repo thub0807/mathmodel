@@ -1,0 +1,7 @@
+# q1 Figure Index
+
+| visual id | type | q* | artifact path | title or caption | supported claim | source file | source field | generation code or manual source | validation status | result status | intended paper section | body citation location | limitations or notes | include in paper |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `Q1-F1` | data figure | `q1` | `workspace/output/q1/figures/figure_q1_score_vs_conductivity.png` | 图 1: 电导率与综合性能分数的对应关系 | 多指标综合评价与单纯电导率排序显著不同，高分样本不等于高电导样本 | `workspace/output/q1/results/indicator_table.csv` | `columns: conductivity, PI, rank_PI` | `workspace/output/q1/code/q1_build.py` | PASS | pass | `5.1.3 结果分析` | 结果分析段第 1 次引图 | 图内标签为英文，但图题和正文解释使用中文 | yes |
+| `Q1-F2` | diagnostic figure | `q1` | `workspace/output/q1/figures/figure_q1_weight_comparison.png` | 图 2: 主路线与对照权重方案比较 | `W_1` 在当前数据中贡献最高，且主路线并未只依赖单一权重口径 | `workspace/output/q1/results/result.json` | `main_result.weight_scheme.critic_weights`, `main_result.weight_scheme.pca_abs_loading_weights` | `workspace/output/q1/code/q1_build.py` | PASS | pass | `5.1.2 模型构造与赋权` | 模型建立段第 1 次引图 | 用于解释权重而非直接给出最终结论 | yes |
+| `Q1-F3` | diagnostic figure | `q1` | `workspace/output/q1/figures/figure_q1_sensitivity_overlap.png` | 图 3: 扰动情景下 Top10 与基准方案的重合度 | 精确 Top10 名单对 pH 区间敏感，但对权重混合系数不敏感 | `workspace/output/q1/tables/table_q1_sensitivity_summary.csv` | `columns: scenario, top10_overlap_with_baseline` | `workspace/output/q1/code/q1_build.py` | PARTIAL | pass | `6.1 灵敏度分析` | 灵敏度段第 1 次引图 | 该图支撑的是“条件稳定”而非“绝对稳定”结论 | yes |

@@ -1,0 +1,272 @@
+{
+  "question_id": "q6",
+  "status": "pass",
+  "model_name": "候选配方邻域稳健性判别模型",
+  "implementation_language": "python",
+  "inputs": {
+    "source_problem": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/problem.md",
+    "source_q5_candidates": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q5/results/recommended_top10.csv",
+    "source_q4_trust": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q4/results/trust_region_table.csv"
+  },
+  "outputs": {
+    "result_json": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/results/result.json",
+    "run_log": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/results/run.log",
+    "neighborhood_samples": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/results/neighborhood_samples.csv",
+    "robustness_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/results/robustness_summary.csv",
+    "candidate_robustness": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/results/candidate_robustness.csv",
+    "radius_compare": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/results/radius_compare.csv"
+  },
+  "main_result": {
+    "robustness_overview": {
+      "candidate_count": 10,
+      "stable_basin_count": 0,
+      "isolated_peak_count": 5,
+      "best_robust_guid": "q5cand_0252",
+      "best_robust_score": 0.7420086880589231
+    },
+    "candidate_robustness": [
+      {
+        "GUID": "q5cand_0235",
+        "radius": 0.1,
+        "center_pred_PI": 0.834126137860029,
+        "neighbor_count": 14,
+        "mean_pred_PI": 0.800046343151193,
+        "min_pred_PI": 0.7238030108988736,
+        "std_pred_PI": 0.034542485225002334,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.2857142857142857,
+        "robustness_score": 0.7315365057763277,
+        "robustness_class": "isolated_peak"
+      },
+      {
+        "GUID": "q5cand_0238",
+        "radius": 0.1,
+        "center_pred_PI": 0.8345400902768993,
+        "neighbor_count": 21,
+        "mean_pred_PI": 0.7945958390830377,
+        "min_pred_PI": 0.7046660789934108,
+        "std_pred_PI": 0.03636386771976566,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.2857142857142857,
+        "robustness_score": 0.714853453551195,
+        "robustness_class": "isolated_peak"
+      },
+      {
+        "GUID": "q5cand_0252",
+        "radius": 0.1,
+        "center_pred_PI": 0.832443963039279,
+        "neighbor_count": 21,
+        "mean_pred_PI": 0.801404239736298,
+        "min_pred_PI": 0.7225843308597609,
+        "std_pred_PI": 0.032367883770234245,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.42857142857142855,
+        "robustness_score": 0.7420086880589231,
+        "robustness_class": "conditional_candidate"
+      },
+      {
+        "GUID": "q5cand_0229",
+        "radius": 0.1,
+        "center_pred_PI": 0.7999317506058478,
+        "neighbor_count": 21,
+        "mean_pred_PI": 0.7911070352542521,
+        "min_pred_PI": 0.7118275180843924,
+        "std_pred_PI": 0.03441623686341641,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.14285714285714285,
+        "robustness_score": 0.7266647866456484,
+        "robustness_class": "conditional_candidate"
+      },
+      {
+        "GUID": "q5cand_0226",
+        "radius": 0.1,
+        "center_pred_PI": 0.8007217971398203,
+        "neighbor_count": 21,
+        "mean_pred_PI": 0.7865116724453391,
+        "min_pred_PI": 0.716259319819072,
+        "std_pred_PI": 0.028885864702879183,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.0,
+        "robustness_score": 0.7211717420226617,
+        "robustness_class": "conditional_candidate"
+      },
+      {
+        "GUID": "q5cand_0236",
+        "radius": 0.1,
+        "center_pred_PI": 0.8338255312313442,
+        "neighbor_count": 14,
+        "mean_pred_PI": 0.7997747360429174,
+        "min_pred_PI": 0.7243460779549911,
+        "std_pred_PI": 0.03412636808562058,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.2857142857142857,
+        "robustness_score": 0.7320196292219585,
+        "robustness_class": "isolated_peak"
+      },
+      {
+        "GUID": "q5cand_0237",
+        "radius": 0.1,
+        "center_pred_PI": 0.8341730664361963,
+        "neighbor_count": 21,
+        "mean_pred_PI": 0.7943258774404498,
+        "min_pred_PI": 0.7043434037693737,
+        "std_pred_PI": 0.03650025930821597,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.2857142857142857,
+        "robustness_score": 0.71449655294618,
+        "robustness_class": "isolated_peak"
+      },
+      {
+        "GUID": "q5cand_0249",
+        "radius": 0.1,
+        "center_pred_PI": 0.833487591253634,
+        "neighbor_count": 14,
+        "mean_pred_PI": 0.801655323190957,
+        "min_pred_PI": 0.7232003507129717,
+        "std_pred_PI": 0.03249818855281786,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.2857142857142857,
+        "robustness_score": 0.7347988663640858,
+        "robustness_class": "isolated_peak"
+      },
+      {
+        "GUID": "q5cand_0240",
+        "radius": 0.1,
+        "center_pred_PI": 0.8010041067721644,
+        "neighbor_count": 21,
+        "mean_pred_PI": 0.7903360695370208,
+        "min_pred_PI": 0.7226581977065241,
+        "std_pred_PI": 0.02585442019962974,
+        "pH_ok_rate": 1.0,
+        "high_trust_rate": 0.0,
+        "robustness_score": 0.7304795788444969,
+        "robustness_class": "conditional_candidate"
+      },
+      {
+        "GUID": "q5cand_0231",
+        "radius": 0.1,
+        "center_pred_PI": 0.8148329735453603,
+        "neighbor_count": 21,
+        "mean_pred_PI": 0.7888849145698923,
+        "min_pred_PI": 0.7047219053259305,
+        "std_pred_PI": 0.0352173201119474,
+        "pH_ok_rate": 0.9523809523809523,
+        "high_trust_rate": 0.14285714285714285,
+        "robustness_score": 0.7127983815134766,
+        "robustness_class": "conditional_candidate"
+      }
+    ],
+    "radius_compare": [
+      {
+        "GUID": "q5cand_0226",
+        "mean_pred_PI_r01": 0.7865116724453391,
+        "mean_pred_PI_r02": 0.7847838508338005,
+        "drop_r02_minus_r01": -0.0017278216115386158
+      },
+      {
+        "GUID": "q5cand_0229",
+        "mean_pred_PI_r01": 0.7911070352542521,
+        "mean_pred_PI_r02": 0.7758381129250298,
+        "drop_r02_minus_r01": -0.015268922329222279
+      },
+      {
+        "GUID": "q5cand_0231",
+        "mean_pred_PI_r01": 0.7888849145698923,
+        "mean_pred_PI_r02": 0.7743516454782846,
+        "drop_r02_minus_r01": -0.014533269091607681
+      },
+      {
+        "GUID": "q5cand_0235",
+        "mean_pred_PI_r01": 0.800046343151193,
+        "mean_pred_PI_r02": 0.7874447211204453,
+        "drop_r02_minus_r01": -0.012601622030747772
+      },
+      {
+        "GUID": "q5cand_0236",
+        "mean_pred_PI_r01": 0.7997747360429174,
+        "mean_pred_PI_r02": 0.7951826077932534,
+        "drop_r02_minus_r01": -0.004592128249663929
+      },
+      {
+        "GUID": "q5cand_0237",
+        "mean_pred_PI_r01": 0.7943258774404498,
+        "mean_pred_PI_r02": 0.7834192231812762,
+        "drop_r02_minus_r01": -0.010906654259173587
+      },
+      {
+        "GUID": "q5cand_0238",
+        "mean_pred_PI_r01": 0.7945958390830377,
+        "mean_pred_PI_r02": 0.7880200953369454,
+        "drop_r02_minus_r01": -0.006575743746092266
+      },
+      {
+        "GUID": "q5cand_0240",
+        "mean_pred_PI_r01": 0.7903360695370208,
+        "mean_pred_PI_r02": 0.7902440418761901,
+        "drop_r02_minus_r01": -9.2027660830718e-05
+      },
+      {
+        "GUID": "q5cand_0249",
+        "mean_pred_PI_r01": 0.801655323190957,
+        "mean_pred_PI_r02": 0.7971754932586486,
+        "drop_r02_minus_r01": -0.004479829932308443
+      },
+      {
+        "GUID": "q5cand_0252",
+        "mean_pred_PI_r01": 0.801404239736298,
+        "mean_pred_PI_r02": 0.7963407914240702,
+        "drop_r02_minus_r01": -0.005063448312227825
+      }
+    ]
+  },
+  "metrics": {
+    "stable_basin_ratio": 0.0,
+    "isolated_peak_ratio": 0.5,
+    "mean_radius_drop": -0.007584146722341312
+  },
+  "figures": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/figures/figure_q6_robustness_scatter.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/figures/figure_q6_radius_drop.png"
+  ],
+  "tables": [
+    "workspace/output/q6/tables/table_q6_candidate_robustness.csv",
+    "workspace/output/q6/tables/table_q6_radius_compare.csv"
+  ],
+  "source_command": "python D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/code/q6_build.py",
+  "source_files": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/code/q6_build.py",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/common/copilot_support.py"
+  ],
+  "validation_hooks": [
+    "比较候选在半径 0.1 与 0.2 邻域中的均值和最小值",
+    "区分 stable basin / isolated peak / conditional candidate",
+    "检查 pH 可接受率与 trust tier 是否支持开发结论"
+  ],
+  "warnings": [
+    "q6 的稳健性仍然是模型预测意义上的局部稳健性，不等于真实工艺鲁棒性。",
+    "如果候选处于 medium/low trust 区，其稳健性分数应视为更保守的参考而不是定论。",
+    "稳定性相关结果仍继承短时 proxy 口径。"
+  ],
+  "limitations": [
+    "当前扰动只考虑 0.1/0.2 体积转移，没有覆盖更复杂的制备误差模式。",
+    "邻域预测使用的是 q2 模型的全数据拟合版本，因此更适合作为排序工具，而不是绝对真值。"
+  ],
+  "paper_claims": [
+    "推荐候选中既存在稳定高分盆地，也存在对小幅扰动敏感的孤立高分点。",
+    "候选评估不能只看中心点预测分数，还要看邻域最小值、方差与 pH 可接受率。",
+    "半径从 0.1 放大到 0.2 后的性能衰减差异，可以帮助区分更适合开发的候选与更适合探索的候选。"
+  ],
+  "trace": {
+    "stable_basin_ratio": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/results/result.json",
+      "source_field": "metrics.stable_basin_ratio",
+      "validation_status": "pending"
+    },
+    "best_robust_score": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q6/results/result.json",
+      "source_field": "main_result.robustness_overview.best_robust_score",
+      "validation_status": "pending"
+    }
+  },
+  "created_at": "2026-05-29T10:08:08.514111+00:00"
+}

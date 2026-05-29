@@ -1,0 +1,8 @@
+# q2 Figure Index
+
+| visual id | type | q* | title or caption | supported claim | source file | source field | generation code or manual source | validation status | result status | intended paper section | body citation location | limitations or notes | include in paper |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `q2-fig-01` | final paper figure | `q2` | 关键目标的 OOF MAE 模型比较图 | 简单树融合在 `conductivity`、`pH`、`PI` 上优于单树和线性对照 | `workspace/output/q2/results/model_probe.csv` | `target in {conductivity,pH,PI}` | `workspace/output/q2/code/q2_build.py` -> `save_figures()` | PASS | `pass` | 问题二结果比较 | `q2_summary.md` 主结果段 | `conductivity` 只是在 MAE 上优于线性基线，不能据此宣称所有误差指标都占优 | yes |
+| `q2-fig-02` | diagnostic figure | `q2` | `PI` 直接头与重构头的 parity 对照 | `PI` 可以作为统一目标量，但 direct 与 recon 并不完全等价 | `workspace/output/q2/results/oof_predictions.csv` | `pred_PI`, `pred_PI_recon`, `PI` | `workspace/output/q2/code/q2_build.py` -> `save_figures()` | PASS | `pass` | 问题二模型诊断 | `q2_summary.md` 验证段 | 用于诊断一致性，不应被误读为 direct/recon 可互相替代 | yes |
+| `q2-fig-03` | final paper figure | `q2` | 不同切片相对整体误差倍率热图 | 低 `PI` 区域与稀有模式区域更难预测，模型可信度具有空间异质性 | `workspace/output/q2/results/slice_error_summary.csv` | `mae_ratio_vs_overall` | `workspace/output/q2/code/q2_build.py` -> `save_figures()` | PASS | `pass` | 问题二误差分析 / `q4` 接口 | `q2_summary.md` 验证与灵敏度段 | 颜色表示相对倍率，不表示绝对误差大小 | yes |
+| `q2-fig-04` | final paper figure | `q2` | 目标自适应路线的 permutation importance 热图 | 不同目标受不同配方因子主导，如 `ionic_strength_proxy`、`lithium_ratio`、`NaBr` 相关特征 | `workspace/output/q2/results/feature_importance_summary.csv` | `importance_mean` | `workspace/output/q2/code/q2_build.py` -> `save_figures()` | PARTIAL | `pass` | 问题二解释接口 / `q3` 接口 | `q2_summary.md` 结果段 | 仅是数据驱动解释入口，不是严格机理证明 | yes |

@@ -1,0 +1,9 @@
+# q2 Table Index
+
+| visual id | type | q* | title or caption | supported claim | source file | source field | generation code or manual source | validation status | result status | intended paper section | body citation location | limitations or notes | include in paper |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `q2-tab-01` | final answer table | `q2` | 各目标最终选用路线与主指标汇总表 | `conductivity/pH/W_1/PI` 采用 `Blend_Tree3`，`R_W` 采用 `RandomForest` | `workspace/output/q2/results/final_model_summary.csv` | all rows | `workspace/output/q2/code/q2_build.py` -> `save_tables()` | PASS | `pass` | 问题二核心结果 | `q2_summary.md` 主结果段 | `route_weights` 说明的是固定简单融合，不是测试折回填权重 | yes |
+| `q2-tab-02` | validation table | `q2` | 主路线与候选模型的 OOF 比较表 | 树路线相对 `ElasticNet` / `PLS` 的总体收益可追溯 | `workspace/output/q2/results/model_probe.csv` | key rows for `ElasticNet`, `PLS`, tree routes | `workspace/output/q2/code/q2_build.py` -> `save_tables()` | PASS | `pass` | 问题二验证与对照 | `validation.md` Baseline Comparison | 表格较大，更适合正文压缩后使用或作为附表 | no |
+| `q2-tab-03` | sensitivity table | `q2` | 不同切片的误差汇总表 | 低 `PI` 区域、稀有模式和异常 `R_W` 切片误差更高 | `workspace/output/q2/results/slice_error_summary.csv` | all rows | `workspace/output/q2/code/q2_build.py` -> `save_tables()` | PASS | `pass` | 问题二误差异质性 | `q2_summary.md` 验证与灵敏度段 | 需要结合切片样本数阅读 | yes |
+| `q2-tab-04` | validation table | `q2` | `PI` direct vs recon 一致性汇总表 | `PI` 双路径总体一致，但极端切片存在偏差 | `workspace/output/q2/results/pi_consistency_summary.csv` | all rows | `workspace/output/q2/code/q2_build.py` -> `save_tables()` | PASS | `pass` | 问题二一致性诊断 | `q2_summary.md` 验证段 | 更适合作为正文中的诊断/限制说明 | yes |
+| `q2-tab-05` | result table | `q2` | 目标自适应路线的前五重要特征表 | 为 `q3` 提供“哪些因素重要”的入口 | `workspace/output/q2/results/feature_importance_summary.csv` | top rows by target | `workspace/output/q2/code/q2_build.py` -> `save_tables()` | PARTIAL | `pass` | 问题二解释接口 | `q2_summary.md` 主结果段 | importance 只能解释关联强度，不能直接替代因果结论 | yes |

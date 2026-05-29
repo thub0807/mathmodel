@@ -1,0 +1,961 @@
+{
+  "question_id": "q2",
+  "status": "pass",
+  "model_name": "配方结构增强的目标自适应受限加权树集成预测模型",
+  "implementation_language": "python",
+  "inputs": {
+    "source_problem": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/problem.md",
+    "source_data": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/attachments/A_data.json",
+    "source_readme": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/attachments/README.txt",
+    "source_q1_indicator": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/indicator_table.csv",
+    "source_q1_result": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/result.json"
+  },
+  "outputs": {
+    "result_json": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/result.json",
+    "run_log": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/run.log",
+    "feature_table": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/feature_table.csv",
+    "target_table": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/target_table.csv",
+    "model_probe": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/model_probe.csv",
+    "oof_predictions": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/oof_predictions.csv",
+    "slice_error_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/slice_error_summary.csv",
+    "pi_consistency_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/pi_consistency_summary.csv",
+    "sensitivity_probe": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/sensitivity_probe.csv",
+    "feature_importance_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/feature_importance_summary.csv"
+  },
+  "main_result": {
+    "feature_schema": {
+      "n_records": 251,
+      "n_features": 73,
+      "feature_blocks": {
+        "ratio_features": 8,
+        "presence_features": 8,
+        "proxy_features": 16,
+        "pattern_dummies": 24,
+        "global_features": 17
+      },
+      "structural_zero_rule": "missing composition entries are written as 0.0 structural zero rather than imputed missing values"
+    },
+    "target_list": [
+      "conductivity",
+      "pH",
+      "W_1",
+      "R_W",
+      "PI"
+    ],
+    "target_model_selection": {
+      "conductivity": {
+        "selected_route": "Blend_Tree3",
+        "selected_mae": 7.856552769687381,
+        "selected_rmse": 17.678394745763228,
+        "selected_r2": 0.726425434079174,
+        "best_single_tree_mae": 8.422545463464035,
+        "elasticnet_mae": 8.030295471040386,
+        "pls_mae": 8.958519361133757,
+        "gain_vs_elasticnet_mae": 0.17374270135300485,
+        "gain_vs_best_single_tree_mae": 0.5659926937766535
+      },
+      "pH": {
+        "selected_route": "Blend_Tree3",
+        "selected_mae": 0.1740005102853365,
+        "selected_rmse": 0.29563435808582833,
+        "selected_r2": 0.919029447798488,
+        "best_single_tree_mae": 0.18223030350630498,
+        "elasticnet_mae": 0.19519710620784744,
+        "pls_mae": 0.23072306515942687,
+        "gain_vs_elasticnet_mae": 0.02119659592251094,
+        "gain_vs_best_single_tree_mae": 0.008229793220968479
+      },
+      "W_1": {
+        "selected_route": "Blend_Tree3",
+        "selected_mae": 0.044309776832437725,
+        "selected_rmse": 0.06532467727679109,
+        "selected_r2": 0.9594676427174124,
+        "best_single_tree_mae": 0.04592579103978782,
+        "elasticnet_mae": 0.051258845154239584,
+        "pls_mae": 0.055770004857674055,
+        "gain_vs_elasticnet_mae": 0.006949068321801859,
+        "gain_vs_best_single_tree_mae": 0.0016160142073500944
+      },
+      "R_W": {
+        "selected_route": "RandomForest",
+        "selected_mae": 0.01561646092653021,
+        "selected_rmse": 0.023514300903799107,
+        "selected_r2": 0.7006109833388664,
+        "best_single_tree_mae": 0.01561646092653021,
+        "elasticnet_mae": 0.019226732049770132,
+        "pls_mae": 0.019932901501752916,
+        "gain_vs_elasticnet_mae": 0.0036102711232399217,
+        "gain_vs_best_single_tree_mae": 0.0
+      },
+      "PI": {
+        "selected_route": "Blend_Tree3",
+        "selected_mae": 0.03466946724632064,
+        "selected_rmse": 0.05854133316910532,
+        "selected_r2": 0.7729531795193874,
+        "best_single_tree_mae": 0.03606144971782988,
+        "elasticnet_mae": 0.045727629554852975,
+        "pls_mae": 0.047970245732178805,
+        "gain_vs_elasticnet_mae": 0.011058162308532335,
+        "gain_vs_best_single_tree_mae": 0.0013919824715092413
+      }
+    },
+    "base_model_cv_summary": [
+      {
+        "target": "PI",
+        "model": "Blend_Tree3",
+        "mae": 0.03466946724632064,
+        "rmse": 0.05854133316910532,
+        "r2": 0.7729531795193874,
+        "bias": 0.0020885133448320897,
+        "spearman": 0.8966662872320242,
+        "residual_std": 0.058504066535794326
+      },
+      {
+        "target": "PI",
+        "model": "Blend_RF_ET",
+        "mae": 0.035878418442439185,
+        "rmse": 0.059217824586820844,
+        "r2": 0.7676754492634181,
+        "bias": 0.002611410347891044,
+        "spearman": 0.8995128059191804,
+        "residual_std": 0.059160217078628195
+      },
+      {
+        "target": "PI",
+        "model": "ExtraTrees",
+        "mae": 0.03606144971782988,
+        "rmse": 0.05901442728446976,
+        "r2": 0.7692686531511598,
+        "bias": 0.002327249121890758,
+        "spearman": 0.8956478846518687,
+        "residual_std": 0.05896852159617559
+      },
+      {
+        "target": "PI",
+        "model": "RandomForest",
+        "mae": 0.0367039914560676,
+        "rmse": 0.06021037884366777,
+        "r2": 0.7598221641803475,
+        "bias": 0.0028955715738913346,
+        "spearman": 0.8988267880857522,
+        "residual_std": 0.060140713212918154
+      },
+      {
+        "target": "PI",
+        "model": "HistGB",
+        "mae": 0.036897827699313435,
+        "rmse": 0.06169967298965244,
+        "r2": 0.7477936992608449,
+        "bias": 0.0010427193387141929,
+        "spearman": 0.8742682602921646,
+        "residual_std": 0.061690861425422794
+      },
+      {
+        "target": "PI",
+        "model": "ElasticNet",
+        "mae": 0.045727629554852975,
+        "rmse": 0.06751705290608848,
+        "r2": 0.6979928937355033,
+        "bias": 0.0013025979241215934,
+        "spearman": 0.8524029595902106,
+        "residual_std": 0.06750448630847897
+      },
+      {
+        "target": "PI",
+        "model": "PLS",
+        "mae": 0.047970245732178805,
+        "rmse": 0.0708933299977822,
+        "r2": 0.6670331783352452,
+        "bias": 0.0009874368610996657,
+        "spearman": 0.8361039650920129,
+        "residual_std": 0.07088645291323149
+      },
+      {
+        "target": "R_W",
+        "model": "RandomForest",
+        "mae": 0.01561646092653021,
+        "rmse": 0.023514300903799107,
+        "r2": 0.7006109833388664,
+        "bias": 0.0005669183249600064,
+        "spearman": 0.8462819199392905,
+        "residual_std": 0.023507465848262587
+      },
+      {
+        "target": "R_W",
+        "model": "Blend_Tree3",
+        "mae": 0.015647427634957932,
+        "rmse": 0.023690427909645904,
+        "r2": 0.6961092146085255,
+        "bias": 0.0007653425225248516,
+        "spearman": 0.8430392714854865,
+        "residual_std": 0.02367806211169624
+      },
+      {
+        "target": "R_W",
+        "model": "HistGB",
+        "mae": 0.015968764003749372,
+        "rmse": 0.024152787702127622,
+        "r2": 0.6841315501480172,
+        "bias": 0.0012848518792425284,
+        "spearman": 0.8269747275330936,
+        "residual_std": 0.024118588462686916
+      },
+      {
+        "target": "R_W",
+        "model": "Blend_RF_ET",
+        "mae": 0.01598783860192304,
+        "rmse": 0.02415331813390401,
+        "r2": 0.6841176760971364,
+        "bias": 0.0005055878441660084,
+        "spearman": 0.8400478087649401,
+        "residual_std": 0.02414802596092293
+      },
+      {
+        "target": "R_W",
+        "model": "ExtraTrees",
+        "mae": 0.016606438041897723,
+        "rmse": 0.02513956078973116,
+        "r2": 0.6577944152812814,
+        "bias": 0.0004442573633720042,
+        "spearman": 0.8308078163536331,
+        "residual_std": 0.025135635104283287
+      },
+      {
+        "target": "R_W",
+        "model": "ElasticNet",
+        "mae": 0.019226732049770132,
+        "rmse": 0.027760866891595303,
+        "r2": 0.5827102006188583,
+        "bias": 0.0009750439341118159,
+        "spearman": 0.7996539556061467,
+        "residual_std": 0.02774373839084099
+      },
+      {
+        "target": "R_W",
+        "model": "PLS",
+        "mae": 0.019932901501752916,
+        "rmse": 0.028362969447513837,
+        "r2": 0.5644127939182809,
+        "bias": 0.0011179593285850485,
+        "spearman": 0.7767748055397458,
+        "residual_std": 0.028340928051498827
+      },
+      {
+        "target": "W_1",
+        "model": "Blend_Tree3",
+        "mae": 0.044309776832437725,
+        "rmse": 0.06532467727679109,
+        "r2": 0.9594676427174124,
+        "bias": 0.005548464441836148,
+        "spearman": 0.9441130715234302,
+        "residual_std": 0.06508861654432814
+      },
+      {
+        "target": "W_1",
+        "model": "HistGB",
+        "mae": 0.04592579103978782,
+        "rmse": 0.06703604343529938,
+        "r2": 0.9573161029409528,
+        "bias": 0.005608251640786557,
+        "spearman": 0.9422467455381518,
+        "residual_std": 0.06680103766404352
+      },
+      {
+        "target": "W_1",
+        "model": "RandomForest",
+        "mae": 0.04687640761835372,
+        "rmse": 0.06817646099383685,
+        "r2": 0.9558514724579779,
+        "bias": 0.00543021050856293,
+        "spearman": 0.9406033010813888,
+        "residual_std": 0.06795986056104626
+      },
+      {
+        "target": "W_1",
+        "model": "Blend_RF_ET",
+        "mae": 0.04696922489834497,
+        "rmse": 0.06828563366958873,
+        "r2": 0.9557099669631036,
+        "bias": 0.005518570842360944,
+        "spearman": 0.9427129576930374,
+        "residual_std": 0.0680622739960627
+      },
+      {
+        "target": "W_1",
+        "model": "ExtraTrees",
+        "mae": 0.047901301969053005,
+        "rmse": 0.0706554095630866,
+        "r2": 0.9525825545960267,
+        "bias": 0.005606931176158969,
+        "spearman": 0.9438914816922784,
+        "residual_std": 0.07043258637387473
+      },
+      {
+        "target": "W_1",
+        "model": "ElasticNet",
+        "mae": 0.051258845154239584,
+        "rmse": 0.06991552851405872,
+        "r2": 0.9535704358927872,
+        "bias": 0.0004788999784239944,
+        "spearman": 0.9339700246632516,
+        "residual_std": 0.06991388833565776
+      },
+      {
+        "target": "W_1",
+        "model": "PLS",
+        "mae": 0.055770004857674055,
+        "rmse": 0.07667586018011849,
+        "r2": 0.9441575286572645,
+        "bias": -0.0013561123419285278,
+        "spearman": 0.9215837601973058,
+        "residual_std": 0.07666386693662894
+      },
+      {
+        "target": "conductivity",
+        "model": "Blend_Tree3",
+        "mae": 7.856552769687381,
+        "rmse": 17.678394745763228,
+        "r2": 0.726425434079174,
+        "bias": -0.5307739421485383,
+        "spearman": 0.931709718671279,
+        "residual_std": 17.670425003642812
+      },
+      {
+        "target": "conductivity",
+        "model": "ElasticNet",
+        "mae": 8.030295471040386,
+        "rmse": 17.30500241206648,
+        "r2": 0.7378599410088387,
+        "bias": 0.29701694734552075,
+        "spearman": 0.9306192141990898,
+        "residual_std": 17.302453277342384
+      },
+      {
+        "target": "conductivity",
+        "model": "Blend_RF_ET",
+        "mae": 8.418130264281377,
+        "rmse": 17.612333390586752,
+        "r2": 0.7284662233485659,
+        "bias": -0.3541493548879134,
+        "spearman": 0.9332119132451824,
+        "residual_std": 17.608772407399943
+      },
+      {
+        "target": "conductivity",
+        "model": "RandomForest",
+        "mae": 8.422545463464035,
+        "rmse": 17.8740906513208,
+        "r2": 0.7203350908234092,
+        "bias": -0.4918128580408925,
+        "spearman": 0.9331219864672046,
+        "residual_std": 17.867323154974816
+      },
+      {
+        "target": "conductivity",
+        "model": "ExtraTrees",
+        "mae": 8.611941687314111,
+        "rmse": 17.602447201220475,
+        "r2": 0.7287709735324104,
+        "bias": -0.2164858517349333,
+        "spearman": 0.9277426956174376,
+        "residual_std": 17.60111591200266
+      },
+      {
+        "target": "conductivity",
+        "model": "HistGB",
+        "mae": 8.671805198313118,
+        "rmse": 19.211830704056133,
+        "r2": 0.6769069869618003,
+        "bias": -0.8840231166697894,
+        "spearman": 0.9050977708091622,
+        "residual_std": 19.19148097804095
+      },
+      {
+        "target": "conductivity",
+        "model": "PLS",
+        "mae": 8.958519361133757,
+        "rmse": 18.066042665143225,
+        "r2": 0.7142961270964144,
+        "bias": 0.10744804003907285,
+        "spearman": 0.9025343605045705,
+        "residual_std": 18.06572313796121
+      },
+      {
+        "target": "pH",
+        "model": "Blend_Tree3",
+        "mae": 0.1740005102853365,
+        "rmse": 0.29563435808582833,
+        "r2": 0.919029447798488,
+        "bias": 0.009669682873574904,
+        "spearman": 0.9246051279284968,
+        "residual_std": 0.295476176559032
+      },
+      {
+        "target": "pH",
+        "model": "Blend_RF_ET",
+        "mae": 0.18084431554589017,
+        "rmse": 0.30480320853467313,
+        "r2": 0.9139290971445854,
+        "bias": 0.008333892748408239,
+        "spearman": 0.9234698041217559,
+        "residual_std": 0.30468925508571754
+      },
+      {
+        "target": "pH",
+        "model": "ExtraTrees",
+        "mae": 0.18223030350630498,
+        "rmse": 0.3067332282823561,
+        "r2": 0.9128356409706385,
+        "bias": 0.006476981358461288,
+        "spearman": 0.9221155358509474,
+        "residual_std": 0.30666483666210925
+      },
+      {
+        "target": "pH",
+        "model": "RandomForest",
+        "mae": 0.18469464686938494,
+        "rmse": 0.3086809836355026,
+        "r2": 0.911725139295833,
+        "bias": 0.01019080413835515,
+        "spearman": 0.9212955376068408,
+        "residual_std": 0.3085127180023461
+      },
+      {
+        "target": "pH",
+        "model": "HistGB",
+        "mae": 0.1914061713220783,
+        "rmse": 0.3179065351598063,
+        "r2": 0.9063697460265123,
+        "bias": 0.012341263123908196,
+        "spearman": 0.9058004075494751,
+        "residual_std": 0.317666898372839
+      },
+      {
+        "target": "pH",
+        "model": "ElasticNet",
+        "mae": 0.19519710620784744,
+        "rmse": 0.3061258601639331,
+        "r2": 0.9131804907181162,
+        "bias": 0.00604413400745994,
+        "spearman": 0.9001630331131844,
+        "residual_std": 0.30606618680476255
+      },
+      {
+        "target": "pH",
+        "model": "PLS",
+        "mae": 0.23072306515942687,
+        "rmse": 0.3371318652251942,
+        "r2": 0.8947027821018966,
+        "bias": 0.003615594468489303,
+        "spearman": 0.8724367713368613,
+        "residual_std": 0.3371124768187288
+      }
+    ],
+    "ensemble_weight_summary": {
+      "guardrail": "pre-fixed simple fusion is used to avoid test-fold weight leakage",
+      "blend_rf_et": {
+        "RandomForest": 0.5,
+        "ExtraTrees": 0.5
+      },
+      "blend_tree3": {
+        "RandomForest": 0.3333333333333333,
+        "ExtraTrees": 0.3333333333333333,
+        "HistGB": 0.3333333333333333
+      }
+    },
+    "cv_summary": {
+      "outer_cv": "5-fold shuffled KFold",
+      "seed": 42,
+      "selected_routes": {
+        "conductivity": "Blend_Tree3",
+        "pH": "Blend_Tree3",
+        "W_1": "Blend_Tree3",
+        "R_W": "RandomForest",
+        "PI": "Blend_Tree3"
+      },
+      "top_PI_overlap_actual_vs_pred": 7
+    },
+    "slice_error_summary": {
+      "high_PI_top10_conductivity_mae": 6.78637042619455,
+      "low_PI_bottom10_conductivity_mae": 14.93109677220287,
+      "rare_pattern_PI_mae": 0.053119634792156825
+    },
+    "pi_consistency_summary": {
+      "direct_mae_vs_actual": 0.03466946724632064,
+      "recon_mae_vs_actual": 0.039108143964865186,
+      "direct_vs_recon_spearman": 0.9661642952001518,
+      "mean_abs_gap": 0.034270314920867635,
+      "q90_abs_gap": 0.07327439416803472
+    },
+    "uncertainty_hooks": {
+      "description": "tree-prediction dispersion is combined with nearest-neighbor distance in feature space as a heuristic uncertainty hook",
+      "correlation_snapshot": {
+        "conductivity": {
+          "dispersion_error_spearman": 0.45114247770821475,
+          "density_error_spearman": 0.5364856763422501,
+          "combined_hook_error_spearman": 0.5973782690146489
+        },
+        "pH": {
+          "dispersion_error_spearman": 0.42803566685638395,
+          "density_error_spearman": 0.4623274520963763,
+          "combined_hook_error_spearman": 0.49810992292334816
+        },
+        "PI": {
+          "dispersion_error_spearman": 0.4387228229937393,
+          "density_error_spearman": 0.45742970973249863,
+          "combined_hook_error_spearman": 0.5179543638245678
+        }
+      }
+    },
+    "special_samples": [
+      {
+        "GUID": "{96991FD3-F267-6D61-C5B4-38C478B999A8}",
+        "conductivity": 164.2,
+        "pH": 5.93,
+        "W_1": 2.344142,
+        "R_W": 0.8870156569213111,
+        "PI": 0.6115313228317762,
+        "pred_PI": 0.6812634575612257,
+        "pred_PI_recon": 0.6547673143241366,
+        "pattern_key": "NaNO3"
+      },
+      {
+        "GUID": "{C63CBD5C-8473-BCA6-D4FD-8AAB75705D4A}",
+        "conductivity": 178.4,
+        "pH": 5.75,
+        "W_1": 1.6190060000000002,
+        "R_W": 0.9564986724863792,
+        "PI": 0.5019261119894536,
+        "pred_PI": 0.5208881134567793,
+        "pred_PI_recon": 0.5391801787522894,
+        "pattern_key": "NaBr"
+      },
+      {
+        "GUID": "{4DBDD753-959C-5410-5451-DF8D0BD4439E}",
+        "conductivity": 159.9,
+        "pH": 5.86,
+        "W_1": 1.748761,
+        "R_W": 0.9763729014744744,
+        "PI": 0.5183183272491982,
+        "pred_PI": 0.5625329728691217,
+        "pred_PI_recon": 0.4483324152555665,
+        "pattern_key": "Na2SO4+NaBr+NaClO4+NaNO3"
+      },
+      {
+        "GUID": "{B594CEB8-BF5E-6554-9C41-6EA8B9E532E3}",
+        "conductivity": 194.7,
+        "pH": 5.64,
+        "W_1": 1.669511,
+        "R_W": 0.9619375986346856,
+        "PI": 0.5003287681671618,
+        "pred_PI": 0.6158941200330225,
+        "pred_PI_recon": 0.5744034750939424,
+        "pattern_key": "Na2SO4+NaBr+NaClO4+NaNO3"
+      },
+      {
+        "GUID": "{876EA0D9-AAD4-8A68-2935-77D86857E180}",
+        "conductivity": 163.8,
+        "pH": 5.21,
+        "W_1": 2.335923,
+        "R_W": 0.8643339487968861,
+        "PI": 0.4666273345628912,
+        "pred_PI": 0.6240843543721023,
+        "pred_PI_recon": 0.5508099602040676,
+        "pattern_key": "Na2SO4+NaNO3"
+      },
+      {
+        "GUID": "{05E750A3-9390-1E77-B244-BCB4C8EAAD86}",
+        "conductivity": 168.8,
+        "pH": 5.43,
+        "W_1": 1.762046,
+        "R_W": 0.9763379969524866,
+        "PI": 0.4364366580630392,
+        "pred_PI": 0.5411796478642641,
+        "pred_PI_recon": 0.4006644115601552,
+        "pattern_key": "Na2SO4+NaBr+NaNO3"
+      },
+      {
+        "GUID": "{50FFE408-E076-2747-9DE8-322DD621E8A6}",
+        "conductivity": 164.5,
+        "pH": 5.86,
+        "W_1": 2.407579,
+        "R_W": 0.896645742515628,
+        "PI": 0.5894670756699116,
+        "pred_PI": 0.6137098115482061,
+        "pred_PI_recon": 0.518976299146033,
+        "pattern_key": "Na2SO4+NaClO4+NaNO3"
+      },
+      {
+        "GUID": "{BE253A5B-9DDB-9264-28A5-1A5AD173B9A2}",
+        "conductivity": 187.7,
+        "pH": 5.75,
+        "W_1": 1.62437,
+        "R_W": 0.9610525151180423,
+        "PI": 0.5161562163487114,
+        "pred_PI": 0.5622289525397054,
+        "pred_PI_recon": 0.4880318824526276,
+        "pattern_key": "Na2SO4+NaBr+NaClO4+NaNO3"
+      }
+    ],
+    "sensitivity_probe_summary": [
+      {
+        "scenario": "baseline_main_route",
+        "target": "conductivity",
+        "mae": 7.85655276968738,
+        "rmse": 17.678394745763228,
+        "r2": 0.726425434079174,
+        "bias": -0.5307739421485385,
+        "spearman": 0.931709718671279,
+        "residual_std": 17.67042500364281
+      },
+      {
+        "scenario": "baseline_main_route",
+        "target": "pH",
+        "mae": 0.1740005102853365,
+        "rmse": 0.29563435808582833,
+        "r2": 0.919029447798488,
+        "bias": 0.009669682873574907,
+        "spearman": 0.9246051279284968,
+        "residual_std": 0.295476176559032
+      },
+      {
+        "scenario": "baseline_main_route",
+        "target": "W_1",
+        "mae": 0.04430977683243774,
+        "rmse": 0.06532467727679112,
+        "r2": 0.9594676427174124,
+        "bias": 0.0055484644418361245,
+        "spearman": 0.9441130715234302,
+        "residual_std": 0.06508861654432815
+      },
+      {
+        "scenario": "baseline_main_route",
+        "target": "R_W",
+        "mae": 0.015616460926530216,
+        "rmse": 0.02351430090379912,
+        "r2": 0.7006109833388661,
+        "bias": 0.0005669183249600156,
+        "spearman": 0.8462819199392905,
+        "residual_std": 0.023507465848262604
+      },
+      {
+        "scenario": "baseline_main_route",
+        "target": "PI",
+        "mae": 0.03466946724632064,
+        "rmse": 0.058541333169105314,
+        "r2": 0.7729531795193874,
+        "bias": 0.002088513344832094,
+        "spearman": 0.8966662872320242,
+        "residual_std": 0.058504066535794326
+      },
+      {
+        "scenario": "drop_proxy_block",
+        "target": "conductivity",
+        "mae": 9.517887930673272,
+        "rmse": 18.478047055944373,
+        "r2": 0.7011163198922281,
+        "bias": -0.27709616139653276,
+        "spearman": 0.910469544925899,
+        "residual_std": 18.475969276848073
+      },
+      {
+        "scenario": "drop_proxy_block",
+        "target": "pH",
+        "mae": 0.17941449874976897,
+        "rmse": 0.3028744032645963,
+        "r2": 0.9150149698334912,
+        "bias": 0.007189631334588565,
+        "spearman": 0.9214917148822702,
+        "residual_std": 0.30278905752050883
+      },
+      {
+        "scenario": "drop_proxy_block",
+        "target": "W_1",
+        "mae": 0.04742222248671492,
+        "rmse": 0.06907482242585476,
+        "r2": 0.9546803162376697,
+        "bias": 0.004955085764968391,
+        "spearman": 0.9355074938341871,
+        "residual_std": 0.06889686653415507
+      },
+      {
+        "scenario": "drop_proxy_block",
+        "target": "R_W",
+        "mae": 0.016206340804322972,
+        "rmse": 0.024372296885584493,
+        "r2": 0.6783640088041452,
+        "bias": 0.0005283381697489644,
+        "spearman": 0.8410768355150824,
+        "residual_std": 0.024366569603812883
+      },
+      {
+        "scenario": "drop_proxy_block",
+        "target": "PI",
+        "mae": 0.03764601223392438,
+        "rmse": 0.06072791737513489,
+        "r2": 0.7556755202657627,
+        "bias": 0.002743518642389886,
+        "spearman": 0.8909520015177387,
+        "residual_std": 0.06066591344552613
+      },
+      {
+        "scenario": "cv_seed_7",
+        "target": "conductivity",
+        "mae": 7.688462478476627,
+        "rmse": 16.95577629901515,
+        "r2": 0.7483334932794913,
+        "bias": -0.23970560064971136,
+        "spearman": 0.9413561679393629,
+        "residual_std": 16.95408184264961
+      },
+      {
+        "scenario": "cv_seed_7",
+        "target": "pH",
+        "mae": 0.17743794750756184,
+        "rmse": 0.30271118302984085,
+        "r2": 0.9151065427018592,
+        "bias": -0.0040816045107680094,
+        "spearman": 0.920697898905097,
+        "residual_std": 0.3026836646334643
+      },
+      {
+        "scenario": "cv_seed_7",
+        "target": "W_1",
+        "mae": 0.04505581903769311,
+        "rmse": 0.06582326205236197,
+        "r2": 0.9588465623508803,
+        "bias": 0.0034462389092126513,
+        "spearman": 0.942454942136217,
+        "residual_std": 0.06573298460129849
+      },
+      {
+        "scenario": "cv_seed_7",
+        "target": "R_W",
+        "mae": 0.015858347834068063,
+        "rmse": 0.023331843978909136,
+        "r2": 0.7052391173874042,
+        "bias": 0.00024068100007914984,
+        "spearman": 0.8480940997913109,
+        "residual_std": 0.02333060256642248
+      },
+      {
+        "scenario": "cv_seed_7",
+        "target": "PI",
+        "mae": 0.035750541522843994,
+        "rmse": 0.05830278582131777,
+        "r2": 0.7747997745320965,
+        "bias": 0.0023705368933708026,
+        "spearman": 0.9054949724909884,
+        "residual_std": 0.05825457397804588
+      }
+    ]
+  },
+  "metrics": {
+    "selected_route_metrics": {
+      "conductivity": {
+        "mae": 7.856552769687381,
+        "rmse": 17.678394745763228,
+        "r2": 0.726425434079174,
+        "bias": -0.5307739421485383,
+        "spearman": 0.931709718671279,
+        "residual_std": 17.670425003642812
+      },
+      "pH": {
+        "mae": 0.1740005102853365,
+        "rmse": 0.29563435808582833,
+        "r2": 0.919029447798488,
+        "bias": 0.009669682873574904,
+        "spearman": 0.9246051279284968,
+        "residual_std": 0.295476176559032
+      },
+      "W_1": {
+        "mae": 0.044309776832437725,
+        "rmse": 0.06532467727679109,
+        "r2": 0.9594676427174124,
+        "bias": 0.005548464441836148,
+        "spearman": 0.9441130715234302,
+        "residual_std": 0.06508861654432814
+      },
+      "R_W": {
+        "mae": 0.01561646092653021,
+        "rmse": 0.023514300903799107,
+        "r2": 0.7006109833388664,
+        "bias": 0.0005669183249600064,
+        "spearman": 0.8462819199392905,
+        "residual_std": 0.023507465848262587
+      },
+      "PI": {
+        "mae": 0.03466946724632064,
+        "rmse": 0.05854133316910532,
+        "r2": 0.7729531795193874,
+        "bias": 0.0020885133448320897,
+        "spearman": 0.8966662872320242,
+        "residual_std": 0.058504066535794326
+      }
+    },
+    "baseline_metrics": {
+      "conductivity": {
+        "mae": 8.030295471040386,
+        "rmse": 17.30500241206648,
+        "r2": 0.7378599410088387,
+        "bias": 0.29701694734552075,
+        "spearman": 0.9306192141990898,
+        "residual_std": 17.302453277342384
+      },
+      "pH": {
+        "mae": 0.19519710620784744,
+        "rmse": 0.3061258601639331,
+        "r2": 0.9131804907181162,
+        "bias": 0.00604413400745994,
+        "spearman": 0.9001630331131844,
+        "residual_std": 0.30606618680476255
+      },
+      "W_1": {
+        "mae": 0.051258845154239584,
+        "rmse": 0.06991552851405872,
+        "r2": 0.9535704358927872,
+        "bias": 0.0004788999784239944,
+        "spearman": 0.9339700246632516,
+        "residual_std": 0.06991388833565776
+      },
+      "R_W": {
+        "mae": 0.019226732049770132,
+        "rmse": 0.027760866891595303,
+        "r2": 0.5827102006188583,
+        "bias": 0.0009750439341118159,
+        "spearman": 0.7996539556061467,
+        "residual_std": 0.02774373839084099
+      },
+      "PI": {
+        "mae": 0.045727629554852975,
+        "rmse": 0.06751705290608848,
+        "r2": 0.6979928937355033,
+        "bias": 0.0013025979241215934,
+        "spearman": 0.8524029595902106,
+        "residual_std": 0.06750448630847897
+      }
+    },
+    "pls_metrics": {
+      "conductivity": {
+        "mae": 8.958519361133757,
+        "rmse": 18.066042665143225,
+        "r2": 0.7142961270964144,
+        "bias": 0.10744804003907285,
+        "spearman": 0.9025343605045705,
+        "residual_std": 18.06572313796121
+      },
+      "pH": {
+        "mae": 0.23072306515942687,
+        "rmse": 0.3371318652251942,
+        "r2": 0.8947027821018966,
+        "bias": 0.003615594468489303,
+        "spearman": 0.8724367713368613,
+        "residual_std": 0.3371124768187288
+      },
+      "W_1": {
+        "mae": 0.055770004857674055,
+        "rmse": 0.07667586018011849,
+        "r2": 0.9441575286572645,
+        "bias": -0.0013561123419285278,
+        "spearman": 0.9215837601973058,
+        "residual_std": 0.07666386693662894
+      },
+      "R_W": {
+        "mae": 0.019932901501752916,
+        "rmse": 0.028362969447513837,
+        "r2": 0.5644127939182809,
+        "bias": 0.0011179593285850485,
+        "spearman": 0.7767748055397458,
+        "residual_std": 0.028340928051498827
+      },
+      "PI": {
+        "mae": 0.047970245732178805,
+        "rmse": 0.0708933299977822,
+        "r2": 0.6670331783352452,
+        "bias": 0.0009874368610996657,
+        "spearman": 0.8361039650920129,
+        "residual_std": 0.07088645291323149
+      }
+    },
+    "toy_demo": {
+      "n_rows": 60,
+      "contains_nan": false,
+      "pi_blend3_mae": 0.05198621653247547,
+      "pi_elastic_mae": 0.06045902600049386,
+      "ph_blend3_mae": 0.25272616085845834,
+      "ph_elastic_mae": 0.3790430299111166,
+      "conductivity_pred_min": 89.09808401119948,
+      "toy_success": true
+    },
+    "pi_direct_vs_recon_spearman": 0.9661642952001518,
+    "predicted_pH_range": {
+      "min": 5.712733809940061,
+      "max": 8.947326171230124
+    }
+  },
+  "figures": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/figures/figure_q2_model_mae_comparison.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/figures/figure_q2_pi_parity_and_recon.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/figures/figure_q2_slice_error_ratio.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/figures/figure_q2_feature_importance_heatmap.png"
+  ],
+  "tables": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/tables/table_q2_main_model_summary.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/tables/table_q2_model_probe_core.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/tables/table_q2_slice_error_summary.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/tables/table_q2_pi_consistency_summary.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/tables/table_q2_feature_importance_top.csv"
+  ],
+  "source_command": "python D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/code/q2_build.py",
+  "source_files": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/code/q2_build.py",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/code/result_io.py"
+  ],
+  "validation_hooks": [
+    "比较主路线与 ElasticNet / PLS 的 OOF MAE、RMSE、R^2",
+    "检查高 PI 区、低 PI 区、稀有模式区和高电导低 PI 区的误差差异",
+    "比较 PI 直接头与 PI 重构头的一致性",
+    "检验 uncertainty hook 与绝对误差的相关性",
+    "做 proxy block 消融和 CV seed 扰动测试"
+  ],
+  "warnings": [
+    "`PI`、`W_1`、`R_W` 仍然继承自 `q1` 的短时稳定性 proxy 口径，不能写成长期寿命预测。",
+    "稀有配方模式与低 `PI` 区域的预测误差明显高于整体平均水平，下游使用时必须附带低可信区域说明。",
+    "`PI` 直接头与重构头总体相关较高，但两者并不完全等价；若下游需要更强可解释性，应优先同时引用两条路径。",
+    "为避免信息泄漏，树融合采用预先固定的简单融合而非测试折回填权重；因此当前结果偏向稳健实现而非最激进调参。"
+  ],
+  "limitations": [
+    "当前数据仅覆盖 251 条样本与约 23 类主组合结构，模型对稀有结构和远离已见区域的外推能力有限。",
+    "`R_W` 的可预测性与物理解释性都弱于 `conductivity`、`pH`、`W_1` 和 `PI`，因此涉及 `R_W` 的结论应降级为有限证据。",
+    "特征重要性来自 permutation importance 的数据驱动估计，只能作为 `q3` 的解释入口，而不是严格机理证明。"
+  ],
+  "paper_claims": [
+    "配方结构增强的树集成主路线在 `conductivity`、`pH`、`W_1`、`R_W` 和 `PI` 五个目标上均优于线性基线 `ElasticNet`。",
+    "`Blend_Tree3` 在 `conductivity`、`pH`、`PI` 三个关键目标上的 OOF 表现优于单树候选，说明简单树融合具有稳定收益。",
+    "`PI` 直接预测与由预测的 `conductivity/pH/W_1/R_W` 重构得到的 `PI_recon` 保持较高相关性，因此 `PI` 可作为后续问题的统一目标量，但需保留可解释性限制。",
+    "误差在低 `PI` 区域和稀有模式区域显著增大，因此模型适用范围并非全空间均匀一致。"
+  ],
+  "trace": {
+    "conductivity_main_mae": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/result.json",
+      "source_field": "main_result.target_model_selection.conductivity.selected_mae",
+      "validation_status": "pending"
+    },
+    "PI_main_mae": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/result.json",
+      "source_field": "main_result.target_model_selection.PI.selected_mae",
+      "validation_status": "pending"
+    },
+    "PI_direct_vs_recon_spearman": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/result.json",
+      "source_field": "main_result.pi_consistency_summary.direct_vs_recon_spearman",
+      "validation_status": "pending"
+    },
+    "rare_pattern_PI_mae": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/result.json",
+      "source_field": "main_result.slice_error_summary.rare_pattern_PI_mae",
+      "validation_status": "pending"
+    }
+  },
+  "created_at": "2026-05-29T09:11:14.273268+00:00"
+}

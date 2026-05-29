@@ -1,0 +1,474 @@
+{
+  "question_id": "q1",
+  "status": "pass",
+  "model_name": "门槛约束-CRITIC-TOPSIS 综合评价模型",
+  "implementation_language": "python",
+  "inputs": {
+    "source_problem": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/problem.md",
+    "source_data": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/attachments/A_data.json",
+    "source_readme": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/attachments/README.txt"
+  },
+  "outputs": {
+    "result_json": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/result.json",
+    "run_log": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/run.log",
+    "indicator_table": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/indicator_table.csv",
+    "top_formula_snapshot": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/top_formula_snapshot.csv"
+  },
+  "main_result": {
+    "metric_definitions": {
+      "kappa": "conductivity",
+      "S_pH": "piecewise suitability score with full score on [6.5, 8.5] and linear decay outside",
+      "W_T": "TAFEL CATHODE V - TAFEL ANODE V",
+      "W_1": "1mA/cm^2 CATHODE V - 1mA/cm^2 ANODE V",
+      "R_W": "W_1 / W_T",
+      "PI": "CRITIC-weighted TOPSIS score on [conductivity, S_pH, W_1, R_W]"
+    },
+    "weight_scheme": {
+      "method": "CRITIC + TOPSIS",
+      "critic_weights": {
+        "conductivity": 0.22539720217303855,
+        "S_pH": 0.27027244770030356,
+        "W_1": 0.33060091924090257,
+        "R_W": 0.17372943088575518
+      },
+      "equal_weights": {
+        "conductivity": 0.25,
+        "S_pH": 0.25,
+        "W_1": 0.25,
+        "R_W": 0.25
+      },
+      "pca_abs_loading_weights": {
+        "conductivity": 0.24310337009327412,
+        "S_pH": 0.19588763257082925,
+        "W_1": 0.3185779219718776,
+        "R_W": 0.24243107536401895
+      },
+      "pca_explained_variance_ratio": 0.4106121279519331
+    },
+    "indicator_summary": {
+      "conductivity": {
+        "min": 11.32,
+        "q25": 115.25,
+        "median": 142.4,
+        "q75": 155.75,
+        "max": 199.5
+      },
+      "pH": {
+        "min": 5.21,
+        "q25": 6.655,
+        "median": 8.21,
+        "q75": 8.47,
+        "max": 9.59
+      },
+      "W_T": {
+        "min": 1.6248019999999999,
+        "q25": 2.517685,
+        "median": 2.669972,
+        "q75": 2.7307249999999996,
+        "max": 3.0315849999999998
+      },
+      "W_1": {
+        "min": 1.486424,
+        "q25": 2.1366994999999998,
+        "median": 2.433795,
+        "q75": 2.5128744999999997,
+        "max": 2.783795
+      },
+      "R_W": {
+        "min": 0.7669202427241615,
+        "q25": 0.8977664681752989,
+        "median": 0.9214846650970974,
+        "q75": 0.9315498532285917,
+        "max": 1.0725719393004425
+      },
+      "PI": {
+        "min": 0.17808389636794408,
+        "q25": 0.6330488378933183,
+        "median": 0.7108422038981489,
+        "q75": 0.7956443043329267,
+        "max": 0.8671434755796817
+      }
+    },
+    "overall_score_summary": {
+      "n_records": 251,
+      "top_PI_guid": "{C728CD3D-8F64-3AC1-255C-2BDE9394431E}",
+      "top_PI_score": 0.8671434755796817,
+      "median_PI_score": 0.7108422038981489
+    },
+    "baseline_comparison": {
+      "spearman_cond_vs_PI": 0.41537899680035023,
+      "top10_overlap_count": 0,
+      "top10_overlap_guids": [],
+      "top10_overlap_ratio": 0.0,
+      "spearman_PI_vs_PCA": 0.8796478846518686,
+      "top10_overlap_with_PCA": 4
+    },
+    "stability_indicator_summary": {
+      "W_1": {
+        "min": 1.486424,
+        "q25": 2.1366994999999998,
+        "median": 2.433795,
+        "q75": 2.5128744999999997,
+        "max": 2.783795
+      },
+      "R_W": {
+        "min": 0.7669202427241615,
+        "q25": 0.8977664681752989,
+        "median": 0.9214846650970974,
+        "q75": 0.9315498532285917,
+        "max": 1.0725719393004425
+      }
+    },
+    "top_formulations": [
+      {
+        "GUID": "{C728CD3D-8F64-3AC1-255C-2BDE9394431E}",
+        "conductivity": 170.5,
+        "pH": 7.54,
+        "W_1": 2.546404,
+        "R_W": 0.9132601478271193,
+        "S_pH": 1.0,
+        "PI": 0.8671434755796817,
+        "rank_PI": 1,
+        "rank_cond": 16,
+        "recipe": "NaNO3:5.00; NaClO4:1.00"
+      },
+      {
+        "GUID": "{A0A3756C-1996-1342-9DE2-C26476ED0DC2}",
+        "conductivity": 165.7,
+        "pH": 7.62,
+        "W_1": 2.5798810000000003,
+        "R_W": 0.9163025557496377,
+        "S_pH": 1.0,
+        "PI": 0.8601818023972836,
+        "rank_PI": 2,
+        "rank_cond": 28,
+        "recipe": "NaNO3:6.00; NaClO4:1.00"
+      },
+      {
+        "GUID": "{04C73CE4-61A8-3342-122D-D22EA0A71248}",
+        "conductivity": 167.4,
+        "pH": 7.66,
+        "W_1": 2.514971,
+        "R_W": 0.9125733741038806,
+        "S_pH": 1.0,
+        "PI": 0.8552102819076631,
+        "rank_PI": 3,
+        "rank_cond": 23,
+        "recipe": "NaNO3:3.00; NaClO4:2.00"
+      },
+      {
+        "GUID": "{645BD932-12A7-7EB5-2273-429204318D55}",
+        "conductivity": 163.7,
+        "pH": 8.06,
+        "W_1": 2.536943,
+        "R_W": 0.9212048919003318,
+        "S_pH": 1.0,
+        "PI": 0.8503957420585112,
+        "rank_PI": 4,
+        "rank_cond": 39,
+        "recipe": "LiNO3:0.10; Li2SO4:0.20; NaNO3:5.60; NaClO4:0.50"
+      },
+      {
+        "GUID": "{67331D49-137E-D1B2-D46A-5FCFCD96A9A0}",
+        "conductivity": 162.8,
+        "pH": 7.79,
+        "W_1": 2.546115,
+        "R_W": 0.9046381752858044,
+        "S_pH": 1.0,
+        "PI": 0.8470858629974295,
+        "rank_PI": 5,
+        "rank_cond": 41,
+        "recipe": "NaNO3:2.00; NaClO4:3.00"
+      },
+      {
+        "GUID": "{8A3E9C29-D21C-D40C-AB83-54338FEAE662}",
+        "conductivity": 164.2,
+        "pH": 7.93,
+        "W_1": 2.488244,
+        "R_W": 0.9083675519704678,
+        "S_pH": 1.0,
+        "PI": 0.8431751101092744,
+        "rank_PI": 6,
+        "rank_cond": 34,
+        "recipe": "NaNO3:1.00; NaClO4:3.00"
+      },
+      {
+        "GUID": "{CE55911B-3494-64C3-A826-217B9E49902D}",
+        "conductivity": 157.7,
+        "pH": 7.79,
+        "W_1": 2.623823,
+        "R_W": 0.9115123719054603,
+        "S_pH": 1.0,
+        "PI": 0.8428711138807207,
+        "rank_PI": 7,
+        "rank_cond": 51,
+        "recipe": "NaNO3:5.00; NaClO4:2.00"
+      },
+      {
+        "GUID": "{24BDD1EA-13A7-6CEA-5F04-66F921E7C42B}",
+        "conductivity": 162.9,
+        "pH": 8.18,
+        "W_1": 2.4811389999999998,
+        "R_W": 0.8969660314386876,
+        "S_pH": 1.0,
+        "PI": 0.8375644875313631,
+        "rank_PI": 8,
+        "rank_cond": 40,
+        "recipe": "Na2SO4:0.30; LiNO3:1.30; Li2SO4:0.10; NaNO3:4.60; NaClO4:0.30"
+      },
+      {
+        "GUID": "{FDA7B14C-8341-4BFB-BA54-DD53B589C923}",
+        "conductivity": 161.8,
+        "pH": 7.84,
+        "W_1": 2.471036,
+        "R_W": 0.9285660871261128,
+        "S_pH": 1.0,
+        "PI": 0.8373529167484454,
+        "rank_PI": 9,
+        "rank_cond": 44,
+        "recipe": "NaClO4:4.00"
+      },
+      {
+        "GUID": "{BD7B1593-D933-6EDE-9F11-A13C49C66AE9}",
+        "conductivity": 157.0,
+        "pH": 7.92,
+        "W_1": 2.576955,
+        "R_W": 0.9055005639712006,
+        "S_pH": 1.0,
+        "PI": 0.8357470232743641,
+        "rank_PI": 10,
+        "rank_cond": 53,
+        "recipe": "NaNO3:1.00; NaClO4:4.00"
+      }
+    ],
+    "counterexamples": [
+      {
+        "GUID": "{83FCD7E1-5719-A916-5389-56A69EECD69D}",
+        "conductivity": 194.5,
+        "pH": 5.6,
+        "W_1": 1.648803,
+        "R_W": 0.9436538705877909,
+        "PI": 0.4886393192904468,
+        "rank_cond": 3,
+        "rank_PI": 237,
+        "rank_gap": -234,
+        "recipe": "Na2SO4:0.80; NaNO3:2.10; NaBr:4.00; NaClO4:0.10"
+      },
+      {
+        "GUID": "{B594CEB8-BF5E-6554-9C41-6EA8B9E532E3}",
+        "conductivity": 194.7,
+        "pH": 5.64,
+        "W_1": 1.669511,
+        "R_W": 0.9619375986346856,
+        "PI": 0.5003287681671618,
+        "rank_cond": 2,
+        "rank_PI": 233,
+        "rank_gap": -231,
+        "recipe": "Na2SO4:1.10; NaNO3:1.00; NaBr:4.30; NaClO4:0.60"
+      },
+      {
+        "GUID": "{CEB19E2A-E477-6A44-B58A-3252D455EEBA}",
+        "conductivity": 184.8,
+        "pH": 5.73,
+        "W_1": 1.621807,
+        "R_W": 0.9465674384074295,
+        "PI": 0.5058262915342546,
+        "rank_cond": 6,
+        "rank_PI": 229,
+        "rank_gap": -223,
+        "recipe": "Na2SO4:0.40; NaNO3:0.50; NaBr:2.90"
+      },
+      {
+        "GUID": "{C63CBD5C-8473-BCA6-D4FD-8AAB75705D4A}",
+        "conductivity": 178.4,
+        "pH": 5.75,
+        "W_1": 1.6190060000000002,
+        "R_W": 0.9564986724863793,
+        "PI": 0.5019261119894536,
+        "rank_cond": 9,
+        "rank_PI": 232,
+        "rank_gap": -223,
+        "recipe": "NaBr:3.00"
+      },
+      {
+        "GUID": "{BE253A5B-9DDB-9264-28A5-1A5AD173B9A2}",
+        "conductivity": 187.7,
+        "pH": 5.75,
+        "W_1": 1.62437,
+        "R_W": 0.9610525151180423,
+        "PI": 0.5161562163487114,
+        "rank_cond": 5,
+        "rank_PI": 227,
+        "rank_gap": -222,
+        "recipe": "Na2SO4:0.20; NaNO3:0.20; NaBr:3.20; NaClO4:0.10"
+      },
+      {
+        "GUID": "{05E750A3-9390-1E77-B244-BCB4C8EAAD86}",
+        "conductivity": 168.8,
+        "pH": 5.43,
+        "W_1": 1.762046,
+        "R_W": 0.9763379969524866,
+        "PI": 0.4364366580630392,
+        "rank_cond": 20,
+        "rank_PI": 242,
+        "rank_gap": -222,
+        "recipe": "Na2SO4:1.20; NaNO3:4.70; NaBr:0.20"
+      },
+      {
+        "GUID": "{34384ED5-BD17-FC2A-DABB-79FD349A6EC5}",
+        "conductivity": 169.9,
+        "pH": 5.75,
+        "W_1": 1.729725,
+        "R_W": 0.9516915016943351,
+        "PI": 0.4973990735827409,
+        "rank_cond": 17,
+        "rank_PI": 234,
+        "rank_gap": -217,
+        "recipe": "Na2SO4:1.50; NaNO3:4.10; NaBr:0.70; NaClO4:0.20"
+      },
+      {
+        "GUID": "{5D7BEDB7-62D3-FDA8-B73D-02AAC1833468}",
+        "conductivity": 189.9,
+        "pH": 5.84,
+        "W_1": 1.6643819999999998,
+        "R_W": 0.9518303660274547,
+        "PI": 0.5487088069027729,
+        "rank_cond": 4,
+        "rank_PI": 214,
+        "rank_gap": -210,
+        "recipe": "NaNO3:2.90; NaBr:3.50; NaClO4:0.40"
+      }
+    ],
+    "sensitivity_snapshot": [
+      {
+        "scenario": "baseline",
+        "ph_interval": "[6.5, 8.5]",
+        "blend_alpha": 1.0,
+        "feature_mode": "baseline",
+        "top10_overlap_with_baseline": 10,
+        "rank_spearman_vs_baseline": 1.0,
+        "top_guid": "{C728CD3D-8F64-3AC1-255C-2BDE9394431E}"
+      },
+      {
+        "scenario": "ph_6_8",
+        "ph_interval": "[6.0, 8.0]",
+        "blend_alpha": 1.0,
+        "feature_mode": "baseline",
+        "top10_overlap_with_baseline": 6,
+        "rank_spearman_vs_baseline": 0.6936034907987099,
+        "top_guid": "{B6BBEE56-6A44-E2C5-A640-FE532DF4CF73}"
+      },
+      {
+        "scenario": "ph_7_9",
+        "ph_interval": "[7.0, 9.0]",
+        "blend_alpha": 1.0,
+        "feature_mode": "baseline",
+        "top10_overlap_with_baseline": 9,
+        "rank_spearman_vs_baseline": 0.8385968506924681,
+        "top_guid": "{C728CD3D-8F64-3AC1-255C-2BDE9394431E}"
+      },
+      {
+        "scenario": "blend_0_8",
+        "ph_interval": "[6.5, 8.5]",
+        "blend_alpha": 0.8,
+        "feature_mode": "baseline",
+        "top10_overlap_with_baseline": 9,
+        "rank_spearman_vs_baseline": 0.9982804022007207,
+        "top_guid": "{C728CD3D-8F64-3AC1-255C-2BDE9394431E}"
+      },
+      {
+        "scenario": "blend_0_6",
+        "ph_interval": "[6.5, 8.5]",
+        "blend_alpha": 0.6,
+        "feature_mode": "baseline",
+        "top10_overlap_with_baseline": 9,
+        "rank_spearman_vs_baseline": 0.9944822614304686,
+        "top_guid": "{C728CD3D-8F64-3AC1-255C-2BDE9394431E}"
+      },
+      {
+        "scenario": "w1_only",
+        "ph_interval": "[6.5, 8.5]",
+        "blend_alpha": 1.0,
+        "feature_mode": "w1_only",
+        "top10_overlap_with_baseline": 7,
+        "rank_spearman_vs_baseline": 0.9797890343388351,
+        "top_guid": "{C728CD3D-8F64-3AC1-255C-2BDE9394431E}"
+      }
+    ]
+  },
+  "metrics": {
+    "n_records": 251,
+    "toy_demo_n_records": 5,
+    "toy_demo_rank_difference_exists": true,
+    "missing_value_counts": {
+      "conductivity": 0,
+      "pH": 0,
+      "W_T": 0,
+      "W_1": 0,
+      "R_W": 0,
+      "S_pH": 0,
+      "PI": 0
+    },
+    "positive_window_rate": 1.0,
+    "rw_within_unit_interval_rate": 0.9800796812749004,
+    "score_bounds": {
+      "S_pH_min": 0.0,
+      "S_pH_max": 1.0,
+      "PI_min": 0.17808389636794408,
+      "PI_max": 0.8671434755796817
+    }
+  },
+  "figures": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/figures/figure_q1_score_vs_conductivity.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/figures/figure_q1_weight_comparison.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/figures/figure_q1_sensitivity_overlap.png"
+  ],
+  "tables": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/tables/table_q1_indicator_weights.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/tables/table_q1_top10_formulations.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/tables/table_q1_counterexamples.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/tables/table_q1_sensitivity_summary.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/indicator_table.csv",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/top_formula_snapshot.csv"
+  ],
+  "source_command": "python D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/code/q1_build.py",
+  "source_files": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/code/q1_build.py",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/code/result_io.py"
+  ],
+  "validation_hooks": [
+    "检查 W_T 和 W_1 是否保持正值",
+    "比较 conductivity 排序与 PI 排序的 Spearman 相关与 Top10 重叠度",
+    "扰动 pH 区间、权重混合系数和稳定性指标组合"
+  ],
+  "warnings": [
+    "稳定性相关指标仅能表征基于 fast_assessment 电化学曲线的短时稳定性 proxy，不能外推为长期循环寿命结论。",
+    "pH 适宜区间默认设为 [6.5, 8.5]，后续需通过灵敏度分析检验排序稳健性。"
+  ],
+  "limitations": [
+    "综合性能分数依赖于现有 251 条样本和短时电化学派生量，不代表所有水系电解液体系的通用最优标准。",
+    "PCA 对照用于检验权重稳健性，但其物理可解释性弱于 CRITIC-TOPSIS 主路线。"
+  ],
+  "paper_claims": [
+    "综合性能评价需要同时考虑电导率、pH 适宜性和短时稳定性 proxy，单独使用电导率会遗漏一部分高稳定性或近中性样本。",
+    "基于 CRITIC-TOPSIS 的综合性能分数可以为后续预测与候选筛选提供统一目标量。"
+  ],
+  "trace": {
+    "baseline_comparison.spearman_cond_vs_PI": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/result.json",
+      "source_field": "main_result.baseline_comparison.spearman_cond_vs_PI",
+      "validation_status": "pending"
+    },
+    "baseline_comparison.top10_overlap_count": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/result.json",
+      "source_field": "main_result.baseline_comparison.top10_overlap_count",
+      "validation_status": "pending"
+    },
+    "overall_score_summary.top_PI_score": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/result.json",
+      "source_field": "main_result.overall_score_summary.top_PI_score",
+      "validation_status": "pending"
+    }
+  },
+  "created_at": "2026-05-29T07:53:21.061214+00:00"
+}

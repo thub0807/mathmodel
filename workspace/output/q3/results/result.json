@@ -1,0 +1,433 @@
+{
+  "question_id": "q3",
+  "status": "pass",
+  "model_name": "关键组分与交互作用的分区解释模型",
+  "implementation_language": "python",
+  "inputs": {
+    "source_problem": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/problem.md",
+    "source_data": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/problem/attachments/A_data.json",
+    "source_q1_result": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q1/results/result.json",
+    "source_q2_result": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/result.json",
+    "source_q2_importance": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q2/results/feature_importance_summary.csv"
+  },
+  "outputs": {
+    "result_json": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/result.json",
+    "run_log": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/run.log",
+    "driver_ranking": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/driver_ranking.csv",
+    "interaction_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/interaction_summary.csv",
+    "region_effects": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/region_effects.csv",
+    "stability_summary": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/stability_summary.csv"
+  },
+  "main_result": {
+    "driver_summary": {
+      "conductivity_top_feature": "ionic_strength_proxy",
+      "conductivity_top_importance": 7.097268345982627,
+      "PI_top_feature": "ionic_strength_proxy",
+      "PI_top_importance": 0.0260452623079417
+    },
+    "interaction_summary": {
+      "top_interaction_target": "PI",
+      "top_interaction_pair": [
+        "ionic_strength_proxy",
+        "weighted_density"
+      ],
+      "top_interaction_score": 0.05632130745658431,
+      "top_interaction_q90": 0.12252083422512229
+    },
+    "stability_summary": {
+      "stable_feature_target_pairs": 6,
+      "conditional_feature_target_pairs": 4,
+      "rare_pattern_count": 26
+    },
+    "key_driver_table": [
+      {
+        "target": "PI",
+        "rank": 1,
+        "feature": "ionic_strength_proxy",
+        "importance_mean": 0.0260452623079417,
+        "importance_std": 0.0019833584579185
+      },
+      {
+        "target": "PI",
+        "rank": 2,
+        "feature": "ratio_NaBr",
+        "importance_mean": 0.0094819614946934,
+        "importance_std": 0.0009166988785565
+      },
+      {
+        "target": "PI",
+        "rank": 3,
+        "feature": "lithium_ratio",
+        "importance_mean": 0.0093358752370481,
+        "importance_std": 0.0006081682266225
+      },
+      {
+        "target": "PI",
+        "rank": 4,
+        "feature": "perchlorate_ratio",
+        "importance_mean": 0.0090144060733998,
+        "importance_std": 0.0006810975957366
+      },
+      {
+        "target": "W_1",
+        "rank": 1,
+        "feature": "ratio_NaBr",
+        "importance_mean": 0.0835884558214111,
+        "importance_std": 0.0046228887308728
+      },
+      {
+        "target": "W_1",
+        "rank": 2,
+        "feature": "present_NaBr",
+        "importance_mean": 0.0317061946262538,
+        "importance_std": 0.0018326827492006
+      },
+      {
+        "target": "W_1",
+        "rank": 3,
+        "feature": "ionic_strength_proxy",
+        "importance_mean": 0.0160555821697911,
+        "importance_std": 0.001070831095442
+      },
+      {
+        "target": "W_1",
+        "rank": 4,
+        "feature": "mol_proxy_NaBr",
+        "importance_mean": 0.0148729084138573,
+        "importance_std": 0.0005969926059809
+      },
+      {
+        "target": "conductivity",
+        "rank": 1,
+        "feature": "ionic_strength_proxy",
+        "importance_mean": 7.097268345982627,
+        "importance_std": 0.5962342381425713
+      },
+      {
+        "target": "conductivity",
+        "rank": 2,
+        "feature": "ratio_Li2SO4",
+        "importance_mean": 3.637946182961509,
+        "importance_std": 0.2099608227160818
+      },
+      {
+        "target": "conductivity",
+        "rank": 3,
+        "feature": "weighted_density",
+        "importance_mean": 2.37533590999208,
+        "importance_std": 0.1453975556172149
+      },
+      {
+        "target": "conductivity",
+        "rank": 4,
+        "feature": "ratio_LiNO3",
+        "importance_mean": 1.80673010231368,
+        "importance_std": 0.2734424015024655
+      },
+      {
+        "target": "pH",
+        "rank": 1,
+        "feature": "lithium_ratio",
+        "importance_mean": 0.4074137069044319,
+        "importance_std": 0.0328908832337683
+      },
+      {
+        "target": "pH",
+        "rank": 2,
+        "feature": "ratio_NaClO4",
+        "importance_mean": 0.1024448026935436,
+        "importance_std": 0.0023377925422485
+      },
+      {
+        "target": "pH",
+        "rank": 3,
+        "feature": "present_LiNO3",
+        "importance_mean": 0.0502716086127999,
+        "importance_std": 0.0051979217610059
+      },
+      {
+        "target": "pH",
+        "rank": 4,
+        "feature": "ratio_NaNO3",
+        "importance_mean": 0.0459100402878569,
+        "importance_std": 0.004465227693818
+      }
+    ],
+    "top_interaction_table": [
+      {
+        "target": "PI",
+        "feature_x": "ionic_strength_proxy",
+        "feature_y": "weighted_density",
+        "pair_score": 0.05632130745658431,
+        "pair_q90": 0.12252083422512229,
+        "cell_count": 16
+      },
+      {
+        "target": "PI",
+        "feature_x": "lithium_ratio",
+        "feature_y": "weighted_density",
+        "pair_score": 0.049041494038567855,
+        "pair_q90": 0.08479537939060688,
+        "cell_count": 12
+      },
+      {
+        "target": "PI",
+        "feature_x": "ionic_strength_proxy",
+        "feature_y": "ratio_NaNO3",
+        "pair_score": 0.04796185935746448,
+        "pair_q90": 0.09470979992287791,
+        "cell_count": 12
+      },
+      {
+        "target": "PI",
+        "feature_x": "ionic_strength_proxy",
+        "feature_y": "lithium_ratio",
+        "pair_score": 0.04363993236824814,
+        "pair_q90": 0.08902486903792628,
+        "cell_count": 12
+      },
+      {
+        "target": "PI",
+        "feature_x": "weighted_density",
+        "feature_y": "ratio_NaClO4",
+        "pair_score": 0.03844401814312539,
+        "pair_q90": 0.06884981664322776,
+        "cell_count": 12
+      },
+      {
+        "target": "PI",
+        "feature_x": "lithium_ratio",
+        "feature_y": "ratio_NaClO4",
+        "pair_score": 0.036379765989671756,
+        "pair_q90": 0.08053042450998424,
+        "cell_count": 9
+      },
+      {
+        "target": "W_1",
+        "feature_x": "ionic_strength_proxy",
+        "feature_y": "weighted_density",
+        "pair_score": 0.12794555401960048,
+        "pair_q90": 0.23128708222635286,
+        "cell_count": 16
+      },
+      {
+        "target": "W_1",
+        "feature_x": "lithium_ratio",
+        "feature_y": "ratio_NaClO4",
+        "pair_score": 0.12050117237700977,
+        "pair_q90": 0.23003109916611156,
+        "cell_count": 9
+      },
+      {
+        "target": "W_1",
+        "feature_x": "weighted_density",
+        "feature_y": "ratio_NaClO4",
+        "pair_score": 0.11509740657993905,
+        "pair_q90": 0.24200524429540213,
+        "cell_count": 12
+      },
+      {
+        "target": "W_1",
+        "feature_x": "ratio_NaClO4",
+        "feature_y": "ratio_NaNO3",
+        "pair_score": 0.11306161684212285,
+        "pair_q90": 0.2792503176646015,
+        "cell_count": 9
+      },
+      {
+        "target": "W_1",
+        "feature_x": "perchlorate_ratio",
+        "feature_y": "ratio_NaClO4",
+        "pair_score": 0.11293107201166747,
+        "pair_q90": 0.20520085288548298,
+        "cell_count": 12
+      },
+      {
+        "target": "W_1",
+        "feature_x": "lithium_ratio",
+        "feature_y": "ratio_NaNO3",
+        "pair_score": 0.11226520388863971,
+        "pair_q90": 0.18913678152159746,
+        "cell_count": 9
+      },
+      {
+        "target": "conductivity",
+        "feature_x": "ionic_strength_proxy",
+        "feature_y": "ratio_NaClO4",
+        "pair_score": 14.079318676999785,
+        "pair_q90": 18.62977333261271,
+        "cell_count": 12
+      },
+      {
+        "target": "conductivity",
+        "feature_x": "weighted_density",
+        "feature_y": "ratio_NaClO4",
+        "pair_score": 13.933751778719586,
+        "pair_q90": 27.82429790541521,
+        "cell_count": 12
+      },
+      {
+        "target": "conductivity",
+        "feature_x": "perchlorate_ratio",
+        "feature_y": "weighted_density",
+        "pair_score": 12.960945822427401,
+        "pair_q90": 29.46882278527518,
+        "cell_count": 16
+      },
+      {
+        "target": "conductivity",
+        "feature_x": "ratio_NaClO4",
+        "feature_y": "ratio_NaNO3",
+        "pair_score": 11.921977001517511,
+        "pair_q90": 14.829111551496553,
+        "cell_count": 9
+      },
+      {
+        "target": "conductivity",
+        "feature_x": "lithium_ratio",
+        "feature_y": "ratio_LiNO3",
+        "pair_score": 11.60560366853555,
+        "pair_q90": 21.96094912248925,
+        "cell_count": 6
+      },
+      {
+        "target": "conductivity",
+        "feature_x": "lithium_ratio",
+        "feature_y": "weighted_density",
+        "pair_score": 11.009495719035318,
+        "pair_q90": 19.9590194407522,
+        "cell_count": 12
+      }
+    ],
+    "region_stability_table": [
+      {
+        "feature": "ionic_strength_proxy",
+        "target": "conductivity",
+        "regions_covered": 3,
+        "direction_consistency": "stable",
+        "mean_effect": 25.55001803751803
+      },
+      {
+        "feature": "ionic_strength_proxy",
+        "target": "PI",
+        "regions_covered": 3,
+        "direction_consistency": "stable",
+        "mean_effect": 0.09766251660542123
+      },
+      {
+        "feature": "ratio_NaBr",
+        "target": "conductivity",
+        "regions_covered": 3,
+        "direction_consistency": "stable",
+        "mean_effect": 16.029152750234832
+      },
+      {
+        "feature": "ratio_NaBr",
+        "target": "PI",
+        "regions_covered": 3,
+        "direction_consistency": "conditional",
+        "mean_effect": -0.03517050641102348
+      },
+      {
+        "feature": "lithium_ratio",
+        "target": "conductivity",
+        "regions_covered": 3,
+        "direction_consistency": "stable",
+        "mean_effect": -20.986627594627592
+      },
+      {
+        "feature": "lithium_ratio",
+        "target": "PI",
+        "regions_covered": 3,
+        "direction_consistency": "conditional",
+        "mean_effect": 0.054771458905715
+      },
+      {
+        "feature": "perchlorate_ratio",
+        "target": "conductivity",
+        "regions_covered": 3,
+        "direction_consistency": "conditional",
+        "mean_effect": -2.6319302919302885
+      },
+      {
+        "feature": "perchlorate_ratio",
+        "target": "PI",
+        "regions_covered": 3,
+        "direction_consistency": "stable",
+        "mean_effect": 0.10183094416200911
+      },
+      {
+        "feature": "present_NaBr",
+        "target": "conductivity",
+        "regions_covered": 3,
+        "direction_consistency": "stable",
+        "mean_effect": 12.059921981004061
+      },
+      {
+        "feature": "present_NaBr",
+        "target": "PI",
+        "regions_covered": 3,
+        "direction_consistency": "conditional",
+        "mean_effect": -0.043016515803890175
+      }
+    ]
+  },
+  "metrics": {
+    "selected_feature_count": 12,
+    "interaction_pairs_scored": 198,
+    "stable_pair_ratio": 0.6,
+    "q2_pi_mae_reference": 0.03466946724632064
+  },
+  "figures": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/figures/figure_q3_driver_bars.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/figures/figure_q3_interaction_heatmap.png",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/figures/figure_q3_region_effects.png"
+  ],
+  "tables": [
+    "workspace/output/q3/tables/table_q3_driver_ranking.csv",
+    "workspace/output/q3/tables/table_q3_interaction_summary.csv",
+    "workspace/output/q3/tables/table_q3_stability_summary.csv"
+  ],
+  "source_command": "python D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/code/q3_build.py",
+  "source_files": [
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/code/q3_build.py",
+    "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/common/copilot_support.py"
+  ],
+  "validation_hooks": [
+    "检查关键驱动因子是否直接来自 q2 的通过验证模型",
+    "比较交互作用在 conductivity / PI / W_1 上的相对强度",
+    "检查主流区域与稀有模式区的作用方向是否一致"
+  ],
+  "warnings": [
+    "q3 的解释证据建立在 q2 已验证的预测模型与 permutation importance 上，因此属于数据驱动解释，而不是严格机理定律。",
+    "稀有配方模式样本较少，若某些作用方向只在 rare_pattern 区域成立，正文必须降级为条件结论。",
+    "涉及稳定性的解释仍然继承 q1/q2 的短时 proxy 口径，不能写成寿命机理。"
+  ],
+  "limitations": [
+    "交互作用强度来自分箱后的非加性统计量，适合排序比较，不适合解释为精确反应级数。",
+    "如果未来加入新的母液体系或极端比例，当前关键因子排序可能发生漂移。"
+  ],
+  "paper_claims": [
+    "导电率与综合性能并不是由同一组因素完全主导；离子强度 proxy、硫酸盐/高氯酸盐比例和锂钠体系平衡共同塑造了结果。",
+    "高氯酸盐比例与投料强度 proxy 之间存在可见交互作用，说明题面中的协同效应可以被数据驱动证据捕捉到。",
+    "关键规律在主流高分区和中位区大体稳定，但在稀有模式区会减弱，因此不应把局部规律包装成全空间定律。"
+  ],
+  "trace": {
+    "top_conductivity_driver": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/result.json",
+      "source_field": "main_result.driver_summary.conductivity_top_feature",
+      "validation_status": "pending"
+    },
+    "top_interaction_score": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/result.json",
+      "source_field": "main_result.interaction_summary.top_interaction_score",
+      "validation_status": "pending"
+    },
+    "stable_pair_ratio": {
+      "source_file": "D:/postgraduate/Paper/mathmodel-md-copilot-build/mathmodel-md-copilot/workspace/output/q3/results/result.json",
+      "source_field": "metrics.stable_pair_ratio",
+      "validation_status": "pending"
+    }
+  },
+  "created_at": "2026-05-29T09:55:54.249634+00:00"
+}

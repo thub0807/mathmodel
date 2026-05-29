@@ -1,0 +1,11 @@
+# q2 Warnings
+
+| issue id | severity | verdict impact | artifact | finding | required fix | downstream impact | status |
+|---|---|---|---|---|---|---|---|
+| `Q2-W01` | Medium | `PARTIAL` if hidden | `review_packet.md`, `result.json`, `validation.md` | `PI`、`W_1`、`R_W` 的标签都继承自 `q1`，其中稳定性部分仍然只代表短时 proxy，不能外推为长期寿命或长期稳定性。 | Build、summary 和 final traceability 中必须保留“short-term proxy”措辞。 | 影响 `q2`、`q3`、`q5`、`q6` 的标签解释强度。 | open-limitation |
+| `Q2-W02` | Medium | `PARTIAL` for sparse regions | `result.json`, `validation.md`, `sensitivity.md` | 数据只有 `251` 条记录，但主组合结构约 `23` 类；稀有模式区域的误差高于整体均值，例如 `PI` 在 `rare_pattern` 切片上的 MAE 为 `0.0531`，约为整体的 `1.53` 倍。 | `q4` 和 `q5` 必须使用 `oof_predictions.csv` 中的稀有模式标记、局部密度和 uncertainty hook 做可信区划分。 | 直接影响 `q4` 的可信区分析与 `q5` 的候选筛选。 | open-limitation |
+| `Q2-W03` | Medium | `PARTIAL` if overclaimed | `result.json`, `validation.md`, `sensitivity.md` | `PI` 直接头与由预测的 `conductivity/pH/W_1/R_W` 重构得到的 `PI_recon` 总体相关较高（Spearman `0.9662`），但在高/低 `PI` 切片上仍存在可见偏差。 | Stage 4 及后续摘要必须同时保留“direct vs recon”一致性检查结果；若下游更强调可解释性，应优先引用 `PI_recon`。 | 影响 `PI` 作为统一目标量时的解释强度。 | open-limitation |
+| `Q2-W04` | Low | `PASS` with note | `run.log`, `result.json` | 结构零填补是必要操作，但必须与真实缺测区分。当前实现将“未出现组分”统一写为 `0.0 structural zero`，而不是普通缺失补值。 | 在 `run.log`、`validation.md` 和后续 final traceability 中保持 structural zero 说明。 | 影响线性模型、PLS 和下游可审计性。 | noted |
+| `Q2-W05` | Medium | `FAIL` if violated | `review_packet.md`, `result.json`, `run.log` | 树融合权重若根据全量 OOF 或测试折表现回填，会造成信息泄漏并夸大主路线收益。 | 当前 Build 已退化为预先固定的简单融合（`Blend_RF_ET` / `Blend_Tree3`）；后续若重训，不得看测试折调权。 | 直接影响 `q2` 结果可信度与 `q4` 验证结论。 | guarded |
+| `Q2-W06` | Medium | `PARTIAL` for `R_W` claims | `result.json`, `validation.md` | `R_W` 头是当前五个目标中最弱的一头，整体 `R^2 = 0.7006`，且在 `R_W > 1` 的异常切片上 MAE 达 `0.0465`，约为整体的 `2.98` 倍。 | 涉及 `R_W` 的论文结论必须降级为有限证据；下游若直接用 `R_W` 排序，应结合 `uncertainty_hook_R_W`。 | 影响 `q3` 对稳定性特征的解释力度，以及 `q6` 的稳健性判断。 | open-limitation |
+| `Q2-W07` | Medium | `PARTIAL` for universal claims | `slice_error_summary.csv`, `validation.md`, `sensitivity.md` | 低 `PI` 区域对所有目标都更难预测，例如 `PI` 自身在 `low_PI_bottom10` 切片上的 MAE 为 `0.1042`，约为整体的 `3.01` 倍；`conductivity` 在同切片上的 MAE 也升到 `14.93`。 | 后续不得把 `q2` 写成“全空间均匀可信”的模型，应明确区分高可信区与应谨慎使用的低分区。 | 影响 `q4` 可信域、`q5` 候选探索策略和 `q6` 稳健性结论。 | open-limitation |

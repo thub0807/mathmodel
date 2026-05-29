@@ -1,0 +1,6 @@
+﻿target,selected_route,route_weights,n_features
+conductivity,Blend_Tree3,"{""RandomForest"": 0.3333333333333333, ""ExtraTrees"": 0.3333333333333333, ""HistGB"": 0.3333333333333333}",73
+pH,Blend_Tree3,"{""RandomForest"": 0.3333333333333333, ""ExtraTrees"": 0.3333333333333333, ""HistGB"": 0.3333333333333333}",73
+W_1,Blend_Tree3,"{""RandomForest"": 0.3333333333333333, ""ExtraTrees"": 0.3333333333333333, ""HistGB"": 0.3333333333333333}",73
+R_W,RandomForest,"{""RandomForest"": 1.0}",73
+PI,Blend_Tree3,"{""RandomForest"": 0.3333333333333333, ""ExtraTrees"": 0.3333333333333333, ""HistGB"": 0.3333333333333333}",73
